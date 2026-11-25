@@ -1,0 +1,10 @@
+# Expressao Neural - dependencias de execucao
+# Versoes fixadas para garantir reprodutibilidade na apresentacao.
+# A inferencia ONNX e feita pelo proprio OpenCV (cv2.dnn):
+# TensorFlow, PyTorch e onnxruntime NAO sao necessarios.
+opencv-python==4.12.0.88
+numpy==2.2.6
+pillow==11.3.0
+
+# Testes automatizados
+pytest==8.4.2

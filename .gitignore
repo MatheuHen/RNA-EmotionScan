@@ -1,0 +1,60 @@
+# ---------------------------------------------------------- ambiente virtual
+.venv/
+venv/
+env/
+
+# ------------------------------------------------------------ cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# ------------------------------------------- modelos neurais (obtidos por script)
+# Apache 2.0, ~5 MB, baixados e verificados por SHA-256 em configurar.bat.
+# Nao versionados para manter o repositorio leve e a procedencia na fonte oficial.
+models/*.onnx
+
+# ------------------------------------------------- configuracao pessoal / segredos
+config.local.json
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+!scripts/windows-ca-bundle.pem.example
+secrets/
+
+# O bundle de CAs e gerado localmente a partir do repositorio de certificados
+# da maquina; nao deve ser versionado.
+scripts/windows-ca-bundle.pem
+
+# ------------------------------------------------------- imagens privadas
+# Fotos de voluntarios e capturas com pessoas reais NUNCA devem ser versionadas.
+privado/
+fotos/
+voluntarios/
+evidencias/privado/
+
+# ------------------------------------------------------------------- logs
+*.log
+!evidencias/execucao_prolongada.log
+
+# -------------------------------------------------------------- temporarios
+*.tmp
+*.part
+*.bak
+~$*
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ------------------------------------------------------------------- editor
+.vscode/
+.idea/
+*.swp
