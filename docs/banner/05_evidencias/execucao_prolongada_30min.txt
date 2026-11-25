@@ -1,0 +1,4 @@
+﻿
+    30 min | 95811 ciclos | primeira metade 18.5 ms | segunda metade 19.1 ms | trilhas vivas 1
+.
+1 passed in 1800.20s (0:30:00)

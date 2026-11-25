@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="330" viewBox="0 0 900 330" font-family="Segoe UI, Calibri, Arial, sans-serif">
+  <rect width="900" height="330" fill="#ffffff"/>
+  <text x="26" y="32" font-size="17" fill="#101418" font-weight="700" text-anchor="start">Estabilidade em execução prolongada</text>
+  <text x="26" y="52" font-size="12" fill="#55606e" font-weight="400" text-anchor="start">95.811 ciclos de inferência em 30 minutos contínuos</text>
+  <line x1="26" y1="64" x2="874" y2="64" stroke="#c3cad4"/>
+  <rect x="90" y="149.83318288499729" width="128" height="84.16681711500271" fill="#1f4e79" stroke="none"/>
+  <text x="154.0" y="137.83318288499729" font-size="14" fill="#1f4e79" font-weight="700" text-anchor="middle">18,5 ms</text>
+  <text x="154.0" y="256" font-size="11.5" fill="#101418" font-weight="600" text-anchor="middle">Primeira metade</text>
+  <text x="154.0" y="271" font-size="11.5" fill="#101418" font-weight="600" text-anchor="middle">(0–15 min)</text>
+  <rect x="338" y="147.10344827586206" width="128" height="86.89655172413794" fill="#5b3a8e" stroke="none"/>
+  <text x="402.0" y="135.10344827586206" font-size="14" fill="#5b3a8e" font-weight="700" text-anchor="middle">19,1 ms</text>
+  <text x="402.0" y="256" font-size="11.5" fill="#101418" font-weight="600" text-anchor="middle">Segunda metade</text>
+  <text x="402.0" y="271" font-size="11.5" fill="#101418" font-weight="600" text-anchor="middle">(15–30 min)</text>
+  <line x1="60" y1="234" x2="490" y2="234" stroke="#c3cad4"/>
+  <text x="690" y="150" font-size="34" fill="#1e6b3a" font-weight="700" text-anchor="middle">+3,2%</text>
+  <text x="690" y="174" font-size="12.5" fill="#55606e" font-weight="400" text-anchor="middle">de variação</text>
+  <text x="690" y="206" font-size="11.5" fill="#55606e" font-weight="400" text-anchor="middle">1 trilha de rosto viva</text>
+  <text x="690" y="224" font-size="11.5" fill="#55606e" font-weight="400" text-anchor="middle">ao final (sem vazamento)</text>
+  <text x="26" y="312" font-size="11" fill="#55606e" font-weight="400" text-anchor="start">Sem degradação progressiva e sem crescimento de memória: ~93 MB estáveis durante toda a execução.</text>
+</svg>

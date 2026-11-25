@@ -1,0 +1,295 @@
+{
+  "gerado_em": "2026-11-25T20:05:24",
+  "hardware_de_teste": {
+    "processador": "AMD Ryzen 7 7435HS",
+    "clock_atual_mhz": 2496,
+    "clock_maximo_mhz": 3100,
+    "carga_percent": 2,
+    "nucleos_logicos": 16,
+    "memoria_total_gb": 7.8,
+    "gpu_utilizada": "nenhuma — inferência somente em CPU (DNN_TARGET_CPU)",
+    "sistema": "Windows 10"
+  },
+  "ambiente_de_software": {
+    "python": "3.11.9",
+    "opencv": "4.12.0",
+    "numpy": "2.2.6",
+    "motor_de_inferencia": "cv2.dnn (OpenCV DNN) — sem TensorFlow/PyTorch/onnxruntime"
+  },
+  "modelos": [
+    {
+      "chave": "detector",
+      "nome": "YuNet (face_detection_yunet_2023mar)",
+      "arquivo": "face_detection_yunet_2023mar.onnx",
+      "sha256": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
+      "tamanho_bytes": 232589,
+      "licenca": "Apache License 2.0 (OpenCV Zoo)",
+      "origem": "OpenCV Zoo / Hugging Face — opencv/face_detection_yunet",
+      "pre_treinado": true
+    },
+    {
+      "chave": "classificador",
+      "nome": "Progressive Teacher / MobileFaceNet (facial_expression_recognition_mobilefacenet_2022july)",
+      "arquivo": "facial_expression_recognition_mobilefacenet_2022july.onnx",
+      "sha256": "4f61307602fc089ce20488a31d4e4614e3c9753a7d6c41578c854858b183e1a9",
+      "tamanho_bytes": 4791892,
+      "licenca": "Apache License 2.0 (OpenCV Zoo)",
+      "origem": "OpenCV Zoo / Hugging Face — opencv/facial_expression_recognition",
+      "pre_treinado": true
+    }
+  ],
+  "classes": {
+    "quantidade": 7,
+    "modelo": [
+      "angry",
+      "disgust",
+      "fearful",
+      "happy",
+      "neutral",
+      "sad",
+      "surprised"
+    ],
+    "interface": [
+      "Raiva",
+      "Nojo",
+      "Medo",
+      "Alegria",
+      "Neutra",
+      "Tristeza",
+      "Surpresa"
+    ]
+  },
+  "inicializacao": {
+    "carregamento_dos_modelos_ms": 119.2,
+    "aquecimento_da_rede_ms": 88.53
+  },
+  "testes_automatizados": {
+    "total": 119,
+    "aprovados": 119,
+    "reprovados": 0,
+    "ignorados": 0,
+    "duracao_s": 19.01,
+    "codigo_saida": 0,
+    "por_arquivo": [
+      {
+        "arquivo": "test_integracao.py",
+        "quantidade": 29,
+        "cobre": "integração, condições adversas, desempenho"
+      },
+      {
+        "arquivo": "test_imagem_e_suavizacao.py",
+        "quantidade": 27,
+        "cobre": "validação de imagem e estabilidade temporal"
+      },
+      {
+        "arquivo": "test_inferencia.py",
+        "quantidade": 19,
+        "cobre": "pré-processamento, classes, softmax, inferência real"
+      },
+      {
+        "arquivo": "test_camera.py",
+        "quantidade": 11,
+        "cobre": "ciclo de vida da captura e liberação de recursos"
+      },
+      {
+        "arquivo": "test_interface.py",
+        "quantidade": 11,
+        "cobre": "tema, componentes, janela e encerramento"
+      },
+      {
+        "arquivo": "test_modelos.py",
+        "quantidade": 11,
+        "cobre": "dependências, integridade SHA-256, carregamento"
+      },
+      {
+        "arquivo": "test_robustez.py",
+        "quantidade": 11,
+        "cobre": "regressões da auditoria de segurança"
+      }
+    ],
+    "usa_modelos_reais": true,
+    "observacao": "Mocks são usados apenas no ciclo de vida da câmera; toda inferência nos testes usa os modelos ONNX reais."
+  },
+  "desempenho": {
+    "ciclo_completo": {
+      "media_ms": 26.19,
+      "mediana_ms": 26.58,
+      "minimo_ms": 18.04,
+      "maximo_ms": 33.1,
+      "desvio_padrao_ms": 3.45,
+      "amostras": 150
+    },
+    "deteccao": {
+      "media_ms": 20.29,
+      "mediana_ms": 20.54,
+      "minimo_ms": 13.55,
+      "maximo_ms": 25.82,
+      "desvio_padrao_ms": 2.67,
+      "amostras": 150
+    },
+    "classificacao": {
+      "media_ms": 4.83,
+      "mediana_ms": 4.79,
+      "minimo_ms": 3.05,
+      "maximo_ms": 7.74,
+      "desvio_padrao_ms": 0.91,
+      "amostras": 150
+    },
+    "fps_equivalente_1_rosto": 38.2
+  },
+  "memoria_processo_mb": 78.0,
+  "condicoes": [
+    {
+      "condicao": "Iluminação muito reduzida",
+      "detectou": true,
+      "classe": "Neutra",
+      "confianca": 0.9105,
+      "soma_probabilidades": 1.0,
+      "erro": null
+    },
+    {
+      "condicao": "Iluminação reduzida",
+      "detectou": true,
+      "classe": "Neutra",
+      "confianca": 0.7862,
+      "soma_probabilidades": 1.0,
+      "erro": null
+    },
+    {
+      "condicao": "Iluminação normal (referência)",
+      "detectou": true,
+      "classe": "Neutra",
+      "confianca": 0.6195,
+      "soma_probabilidades": 1.0,
+      "erro": null
+    },
+    {
+      "condicao": "Iluminação elevada",
+      "detectou": true,
+      "classe": "Alegria",
+      "confianca": 0.5827,
+      "soma_probabilidades": 1.0,
+      "erro": null
+    },
+    {
+      "condicao": "Iluminação excessiva (estouro)",
+      "detectou": true,
+      "classe": "Neutra",
+      "confianca": 0.9723,
+      "soma_probabilidades": 1.0,
+      "erro": null
+    },
+    {
+      "condicao": "Rosto distante (escala 0,35×)",
+      "detectou": true,
+      "classe": "Surpresa",
+      "confianca": 0.7746,
+      "soma_probabilidades": 1.0,
+      "erro": null
+    },
+    {
+      "condicao": "Rosto afastado (escala 0,50×)",
+      "detectou": true,
+      "classe": "Neutra",
+      "confianca": 0.8915,
+      "soma_probabilidades": 1.0,
+      "erro": null
+    },
+    {
+      "condicao": "Rosto próximo (escala 1,50×)",
+      "detectou": true,
+      "classe": "Neutra",
+      "confianca": 0.6737,
+      "soma_probabilidades": 1.0,
+      "erro": null
+    },
+    {
+      "condicao": "Cabeça inclinada −20°",
+      "detectou": true,
+      "classe": "Neutra",
+      "confianca": 0.8955,
+      "soma_probabilidades": 1.0,
+      "erro": null
+    },
+    {
+      "condicao": "Cabeça inclinada +20°",
+      "detectou": true,
+      "classe": "Alegria",
+      "confianca": 0.5048,
+      "soma_probabilidades": 1.0,
+      "erro": null
+    },
+    {
+      "condicao": "Ruído de sensor",
+      "detectou": true,
+      "classe": "Surpresa",
+      "confianca": 0.7056,
+      "soma_probabilidades": 1.0,
+      "erro": null
+    },
+    {
+      "condicao": "Desfoque de movimento",
+      "detectou": true,
+      "classe": "Neutra",
+      "confianca": 0.5922,
+      "soma_probabilidades": 1.0,
+      "erro": null
+    },
+    {
+      "condicao": "Oclusão dos olhos (óculos escuros)",
+      "detectou": false,
+      "classe": null,
+      "confianca": 0.0,
+      "soma_probabilidades": null,
+      "erro": null
+    },
+    {
+      "condicao": "Ausência de rosto (ruído puro)",
+      "detectou": false,
+      "classe": null,
+      "confianca": 0.0,
+      "soma_probabilidades": null,
+      "erro": null
+    }
+  ],
+  "resumo_condicoes": {
+    "total": 14,
+    "detectaram_rosto": 12,
+    "mudaram_de_classe": 4,
+    "classe_de_referencia": "Neutra",
+    "houve_erro_ou_valor_invalido": false,
+    "todas_distribuicoes_somam_um": true
+  },
+  "execucao_prolongada": {
+    "executado": true,
+    "duracao_min": 30,
+    "ciclos": 95811,
+    "primeira_metade_ms": 18.5,
+    "segunda_metade_ms": 19.1,
+    "degradacao_percent": 3.2,
+    "trilhas_vivas_final": 1,
+    "memoria_mb": 93,
+    "aprovado": true
+  },
+  "funcionamento_offline": {
+    "chamadas_de_rede_em_src": 0,
+    "verificado_por": "auditoria de código (grep por urllib/requests/socket/http)",
+    "modelos_locais": true,
+    "teste_com_rede_desligada": "NÃO EXECUTADO — depende de validação manual"
+  },
+  "metricas_de_classificacao": {
+    "acuracia": "não avaliada",
+    "precisao": "não avaliada",
+    "recall": "não avaliada",
+    "f1_score": "não avaliada",
+    "matriz_de_confusao": "não avaliada",
+    "motivo": "Não há conjunto de imagens rotuladas disponível neste projeto. Métricas de classificação exigem rótulo verdadeiro por amostra, que só pode ser obtido com voluntários e consentimento registrado.",
+    "como_obter": "Execute scripts/avaliar_metricas.py apontando para uma pasta com subpastas nomeadas pelas 7 classes. O script calcula acurácia, precisão, recall, F1 e matriz de confusão reais.",
+    "acuracia_do_modelo_original": {
+      "valor": "88,27%",
+      "conjunto": "RAF-DB",
+      "fonte": "README oficial do OpenCV Zoo",
+      "atencao": "Este número pertence ao modelo pré-treinado, NÃO ao sistema aqui desenvolvido, e foi obtido em condições controladas."
+    }
+  }
+}

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="322" viewBox="0 0 1180 322" font-family="Segoe UI, Calibri, Arial, sans-serif">
+  <defs>
+    <marker id="seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#55606e"/>
+    </marker>
+  </defs>
+  <rect width="1180" height="322" fill="#ffffff"/>
+  <text x="24" y="30" font-size="17" font-weight="700" fill="#101418">Expressão Neural — fluxo de processamento</text>
+  <line x1="24" y1="42" x2="1156" y2="42" stroke="#c3cad4"/>
+  <rect x="24" y="78" width="150" height="92" rx="6" fill="#f4f6f8" stroke="#55606e" stroke-width="2"/>
+  <text x="99.0" y="100" text-anchor="middle" font-size="15" font-weight="600" fill="#55606e">Webcam</text>
+  <text x="99.0" y="120" text-anchor="middle" font-size="12.5" fill="#55606e">OpenCV VideoCapture</text>
+  <text x="99.0" y="137" text-anchor="middle" font-size="12.5" fill="#55606e">640×480 @ 30 FPS</text>
+  <text x="99.0" y="154" text-anchor="middle" font-size="12.5" fill="#55606e">thread dedicada</text>
+  <rect x="212" y="78" width="190" height="92" rx="6" fill="#eaf0f7" stroke="#1f4e79" stroke-width="2"/>
+  <text x="307.0" y="100" text-anchor="middle" font-size="15" font-weight="600" fill="#1f4e79">Detecção facial</text>
+  <text x="307.0" y="120" text-anchor="middle" font-size="12.5" fill="#55606e">YuNet (ONNX)</text>
+  <text x="307.0" y="137" text-anchor="middle" font-size="12.5" fill="#55606e">cv2.FaceDetectorYN</text>
+  <text x="307.0" y="154" text-anchor="middle" font-size="12.5" fill="#55606e">caixa + 5 pontos</text>
+  <rect x="440" y="78" width="186" height="92" rx="6" fill="#f0eaf8" stroke="#5b3a8e" stroke-width="2"/>
+  <text x="533.0" y="100" text-anchor="middle" font-size="15" font-weight="600" fill="#5b3a8e">Alinhamento</text>
+  <text x="533.0" y="120" text-anchor="middle" font-size="12.5" fill="#55606e">similaridade não reflexiva</text>
+  <text x="533.0" y="137" text-anchor="middle" font-size="12.5" fill="#55606e">(mínimos quadrados)</text>
+  <text x="533.0" y="154" text-anchor="middle" font-size="12.5" fill="#55606e">recorte 112×112 RGB</text>
+  <rect x="664" y="78" width="196" height="92" rx="6" fill="#e8f3ec" stroke="#1e6b3a" stroke-width="2"/>
+  <text x="762.0" y="100" text-anchor="middle" font-size="15" font-weight="600" fill="#1e6b3a">Classificação</text>
+  <text x="762.0" y="120" text-anchor="middle" font-size="12.5" fill="#55606e">MobileFaceNet /</text>
+  <text x="762.0" y="137" text-anchor="middle" font-size="12.5" fill="#55606e">Progressive Teacher</text>
+  <text x="762.0" y="154" text-anchor="middle" font-size="12.5" fill="#55606e">(ONNX) → 7 logits</text>
+  <rect x="898" y="78" width="150" height="92" rx="6" fill="#fbf0e2" stroke="#9c5a10" stroke-width="2"/>
+  <text x="973.0" y="100" text-anchor="middle" font-size="15" font-weight="600" fill="#9c5a10">Softmax</text>
+  <text x="973.0" y="120" text-anchor="middle" font-size="12.5" fill="#55606e">7 probabilidades</text>
+  <text x="973.0" y="137" text-anchor="middle" font-size="12.5" fill="#55606e">que somam 1,0</text>
+  <line x1="178" y1="124.0" x2="206" y2="124.0" stroke="#55606e" stroke-width="2" marker-end="url(#seta)"/>
+  <line x1="406" y1="124.0" x2="434" y2="124.0" stroke="#55606e" stroke-width="2" marker-end="url(#seta)"/>
+  <line x1="630" y1="124.0" x2="658" y2="124.0" stroke="#55606e" stroke-width="2" marker-end="url(#seta)"/>
+  <line x1="864" y1="124.0" x2="892" y2="124.0" stroke="#55606e" stroke-width="2" marker-end="url(#seta)"/>
+  <rect x="330" y="208" width="250" height="70" rx="6" fill="#faf8fe" stroke="#5b3a8e" stroke-width="2"/>
+  <text x="455.0" y="230" text-anchor="middle" font-size="15" font-weight="600" fill="#5b3a8e">Estabilidade temporal</text>
+  <text x="455.0" y="250" text-anchor="middle" font-size="12.5" fill="#55606e">média móvel exponencial</text>
+  <text x="455.0" y="267" text-anchor="middle" font-size="12.5" fill="#55606e">por rosto acompanhado</text>
+  <rect x="640" y="208" width="360" height="70" rx="6" fill="#f4f6f8" stroke="#101418" stroke-width="2"/>
+  <text x="820.0" y="230" text-anchor="middle" font-size="15" font-weight="600" fill="#101418">Interface (Tkinter)</text>
+  <text x="820.0" y="250" text-anchor="middle" font-size="12.5" fill="#55606e">vídeo anotado · gráfico das 7 classes</text>
+  <text x="820.0" y="267" text-anchor="middle" font-size="12.5" fill="#55606e">confiança · FPS · tempos de inferência</text>
+  <line x1="973" y1="172" x2="973" y2="180" stroke="#55606e" stroke-width="2"/>
+  <line x1="973" y1="180" x2="455" y2="180" stroke="#55606e" stroke-width="2"/>
+  <line x1="455" y1="180" x2="455" y2="202" stroke="#55606e" stroke-width="2" marker-end="url(#seta)"/>
+  <line x1="580" y1="243.0" x2="636" y2="243.0" stroke="#55606e" stroke-width="2" marker-end="url(#seta)"/>
+  <text x="24" y="308" font-size="12" fill="#55606e">Inferência ONNX executada por cv2.dnn somente em CPU — sem GPU dedicada, sem acesso à rede, 100% local</text>
+</svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="570" viewBox="0 0 760 570" font-family="Segoe UI, Calibri, Arial, sans-serif">
+  <rect width="760" height="570" fill="#ffffff"/>
+  <text x="26" y="32" font-size="17" fill="#101418" font-weight="700" text-anchor="start">Comportamento sob variações controladas da mesma imagem</text>
+  <text x="26" y="52" font-size="12" fill="#55606e" font-weight="400" text-anchor="start">Confiança da classe vencedora. Verifica estabilidade, não acurácia.</text>
+  <line x1="26" y1="64" x2="734" y2="64" stroke="#c3cad4"/>
+  <text x="26" y="106" font-size="12" fill="#101418" font-weight="600" text-anchor="start">Iluminação muito reduzida</text>
+  <rect x="330" y="95" width="260" height="20" fill="#eef1f5" stroke="none"/>
+  <rect x="330" y="95" width="236.73" height="20" fill="#1e6b3a" stroke="none"/>
+  <text x="600" y="110" font-size="11.5" fill="#1e6b3a" font-weight="600" text-anchor="start">Neutra · 91%</text>
+  <text x="26" y="135" font-size="12" fill="#101418" font-weight="600" text-anchor="start">Iluminação reduzida</text>
+  <rect x="330" y="124" width="260" height="20" fill="#eef1f5" stroke="none"/>
+  <rect x="330" y="124" width="204.412" height="20" fill="#1e6b3a" stroke="none"/>
+  <text x="600" y="139" font-size="11.5" fill="#1e6b3a" font-weight="600" text-anchor="start">Neutra · 79%</text>
+  <text x="26" y="164" font-size="12" fill="#101418" font-weight="600" text-anchor="start">Iluminação normal (referência)</text>
+  <rect x="330" y="153" width="260" height="20" fill="#eef1f5" stroke="none"/>
+  <rect x="330" y="153" width="161.07000000000002" height="20" fill="#1e6b3a" stroke="none"/>
+  <text x="600" y="168" font-size="11.5" fill="#1e6b3a" font-weight="600" text-anchor="start">Neutra · 62%</text>
+  <text x="26" y="193" font-size="12" fill="#101418" font-weight="600" text-anchor="start">Iluminação elevada</text>
+  <rect x="330" y="182" width="260" height="20" fill="#eef1f5" stroke="none"/>
+  <rect x="330" y="182" width="151.502" height="20" fill="#1e6b3a" stroke="none"/>
+  <text x="600" y="197" font-size="11.5" fill="#1e6b3a" font-weight="600" text-anchor="start">Alegria · 58%</text>
+  <text x="26" y="222" font-size="12" fill="#101418" font-weight="600" text-anchor="start">Iluminação excessiva (estouro)</text>
+  <rect x="330" y="211" width="260" height="20" fill="#eef1f5" stroke="none"/>
+  <rect x="330" y="211" width="252.798" height="20" fill="#1e6b3a" stroke="none"/>
+  <text x="600" y="226" font-size="11.5" fill="#1e6b3a" font-weight="600" text-anchor="start">Neutra · 97%</text>
+  <text x="26" y="251" font-size="12" fill="#101418" font-weight="600" text-anchor="start">Rosto distante (escala 0,35×)</text>
+  <rect x="330" y="240" width="260" height="20" fill="#eef1f5" stroke="none"/>
+  <rect x="330" y="240" width="201.396" height="20" fill="#1e6b3a" stroke="none"/>
+  <text x="600" y="255" font-size="11.5" fill="#1e6b3a" font-weight="600" text-anchor="start">Surpresa · 77%</text>
+  <text x="26" y="280" font-size="12" fill="#101418" font-weight="600" text-anchor="start">Rosto afastado (escala 0,50×)</text>
+  <rect x="330" y="269" width="260" height="20" fill="#eef1f5" stroke="none"/>
+  <rect x="330" y="269" width="231.79" height="20" fill="#1e6b3a" stroke="none"/>
+  <text x="600" y="284" font-size="11.5" fill="#1e6b3a" font-weight="600" text-anchor="start">Neutra · 89%</text>
+  <text x="26" y="309" font-size="12" fill="#101418" font-weight="600" text-anchor="start">Rosto próximo (escala 1,50×)</text>
+  <rect x="330" y="298" width="260" height="20" fill="#eef1f5" stroke="none"/>
+  <rect x="330" y="298" width="175.16199999999998" height="20" fill="#1e6b3a" stroke="none"/>
+  <text x="600" y="313" font-size="11.5" fill="#1e6b3a" font-weight="600" text-anchor="start">Neutra · 67%</text>
+  <text x="26" y="338" font-size="12" fill="#101418" font-weight="600" text-anchor="start">Cabeça inclinada −20°</text>
+  <rect x="330" y="327" width="260" height="20" fill="#eef1f5" stroke="none"/>
+  <rect x="330" y="327" width="232.82999999999998" height="20" fill="#1e6b3a" stroke="none"/>
+  <text x="600" y="342" font-size="11.5" fill="#1e6b3a" font-weight="600" text-anchor="start">Neutra · 90%</text>
+  <text x="26" y="367" font-size="12" fill="#101418" font-weight="600" text-anchor="start">Cabeça inclinada +20°</text>
+  <rect x="330" y="356" width="260" height="20" fill="#eef1f5" stroke="none"/>
+  <rect x="330" y="356" width="131.24800000000002" height="20" fill="#1e6b3a" stroke="none"/>
+  <text x="600" y="371" font-size="11.5" fill="#1e6b3a" font-weight="600" text-anchor="start">Alegria · 50%</text>
+  <text x="26" y="396" font-size="12" fill="#101418" font-weight="600" text-anchor="start">Ruído de sensor</text>
+  <rect x="330" y="385" width="260" height="20" fill="#eef1f5" stroke="none"/>
+  <rect x="330" y="385" width="183.456" height="20" fill="#1e6b3a" stroke="none"/>
+  <text x="600" y="400" font-size="11.5" fill="#1e6b3a" font-weight="600" text-anchor="start">Surpresa · 71%</text>
+  <text x="26" y="425" font-size="12" fill="#101418" font-weight="600" text-anchor="start">Desfoque de movimento</text>
+  <rect x="330" y="414" width="260" height="20" fill="#eef1f5" stroke="none"/>
+  <rect x="330" y="414" width="153.97199999999998" height="20" fill="#1e6b3a" stroke="none"/>
+  <text x="600" y="429" font-size="11.5" fill="#1e6b3a" font-weight="600" text-anchor="start">Neutra · 59%</text>
+  <text x="26" y="454" font-size="12" fill="#101418" font-weight="600" text-anchor="start">Oclusão dos olhos (óculos escuros)</text>
+  <rect x="330" y="443" width="260" height="20" fill="#eef1f5" stroke="none"/>
+  <text x="600" y="458" font-size="11.5" fill="#9c5a10" font-weight="600" text-anchor="start">rosto não detectado</text>
+  <text x="26" y="483" font-size="12" fill="#101418" font-weight="600" text-anchor="start">Ausência de rosto (ruído puro)</text>
+  <rect x="330" y="472" width="260" height="20" fill="#eef1f5" stroke="none"/>
+  <text x="600" y="487" font-size="11.5" fill="#9c5a10" font-weight="600" text-anchor="start">rosto não detectado</text>
+  <text x="26" y="534" font-size="11" fill="#55606e" font-weight="400" text-anchor="start">Em nenhuma condição houve erro ou valor inválido: todas as distribuições somaram 1,0.</text>
+  <text x="26" y="552" font-size="11" fill="#55606e" font-weight="400" text-anchor="start">A classe vencedora mudou em 4 de 14 condições — motivo pelo qual a interface exibe sempre as 7 pontuações.</text>
+</svg>
