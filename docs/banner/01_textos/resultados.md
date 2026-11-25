@@ -15,11 +15,11 @@ apresentação em tela cheia.
 
 ## Desempenho (CPU, sem GPU dedicada)
 
-Em AMD Ryzen 7 7435HS, com 150 amostras consecutivas sobre um rosto, o ciclo
-completo de detecção e classificação levou em média **27,6 ms**, equivalente a
-cerca de **36 inferências por segundo**. A detecção consome aproximadamente
-três quartos desse tempo: o gargalo é localizar o rosto, não reconhecer a
-expressão. Os modelos carregam em cerca de 130 ms.
+Em AMD Ryzen 7 7435HS, com 150 amostras consecutivas sobre um rosto, o
+ciclo completo de detecção e classificação levou em média **26,2 ms**,
+equivalente a cerca de **38 inferências por segundo**. A detecção consome
+aproximadamente quatro quintos desse tempo: o gargalo é localizar o rosto, não
+reconhecer a expressão. Os modelos carregam em cerca de 120 ms.
 
 ## Verificação automatizada
 

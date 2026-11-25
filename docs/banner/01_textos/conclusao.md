@@ -6,7 +6,7 @@
 O objetivo geral foi alcançado: o **Expressão Neural** é uma aplicação funcional
 que classifica expressões faciais em tempo real por meio de duas redes neurais
 convolucionais reais, executando integralmente em CPU e sem conexão com a
-internet, com desempenho de 27,6 ms por ciclo — folga confortável para vídeo
+internet, com desempenho de 26,2 ms por ciclo — folga confortável para vídeo
 fluido em demonstração presencial. A verificação automatizada de 119 testes e o
 ensaio de 30 minutos contínuos comprovam estabilidade e ausência de vazamento de
 recursos.
