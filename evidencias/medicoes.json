@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-25T16:03:30",
+  "gerado_em": "2026-11-25T19:44:06",
   "ambiente": {
     "sistema": "Windows 10",
     "processador": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
@@ -8,6 +8,14 @@
     "opencv": "4.12.0",
     "numpy": "2.2.6",
     "aceleracao": "CPU (cv2.dnn, DNN_TARGET_CPU)"
+  },
+  "estado_da_cpu_na_medicao": {
+    "processador": "AMD Ryzen 7 7435HS",
+    "clock_atual_mhz": 2496,
+    "clock_maximo_mhz": 3100,
+    "carga_cpu_percent": 11,
+    "nucleos_logicos": 16,
+    "fracao_do_clock_maximo": 0.805
   },
   "modelos": [
     {
@@ -27,8 +35,8 @@
       "pre_treinado": true
     }
   ],
-  "carregamento_modelos_ms": 66.8,
-  "aquecimento_ms": 47.86,
+  "carregamento_modelos_ms": 134.0,
+  "aquecimento_ms": 98.38,
   "imagem_referencia": {
     "arquivo": "lena.jpg",
     "dimensoes": "512x512",
@@ -52,30 +60,30 @@
   },
   "desempenho": {
     "ciclo_completo": {
-      "media_ms": 17.15,
-      "mediana_ms": 17.03,
-      "minimo_ms": 15.31,
-      "maximo_ms": 21.32,
-      "desvio_padrao_ms": 1.0,
+      "media_ms": 31.18,
+      "mediana_ms": 30.96,
+      "minimo_ms": 27.62,
+      "maximo_ms": 42.13,
+      "desvio_padrao_ms": 2.45,
       "amostras": 120
     },
     "deteccao": {
-      "media_ms": 13.52,
-      "mediana_ms": 13.4,
-      "minimo_ms": 11.84,
-      "maximo_ms": 17.35,
-      "desvio_padrao_ms": 0.83,
+      "media_ms": 23.23,
+      "mediana_ms": 23.07,
+      "minimo_ms": 20.39,
+      "maximo_ms": 28.58,
+      "desvio_padrao_ms": 1.86,
       "amostras": 120
     },
     "classificacao": {
-      "media_ms": 2.87,
-      "mediana_ms": 2.77,
-      "minimo_ms": 2.48,
-      "maximo_ms": 3.63,
-      "desvio_padrao_ms": 0.3,
+      "media_ms": 6.67,
+      "mediana_ms": 6.42,
+      "minimo_ms": 5.94,
+      "maximo_ms": 12.4,
+      "desvio_padrao_ms": 0.89,
       "amostras": 120
     },
-    "quadros_por_segundo_equivalente": 58.3
+    "quadros_por_segundo_equivalente": 32.1
   },
   "captura_interface_gerada": true
 }

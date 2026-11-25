@@ -191,6 +191,32 @@ proporcional ao tamanho do rosto. Uma trilha não pode ser reivindicada duas
 vezes no mesmo quadro. Trilhas ausentes por mais de 5 quadros são descartadas,
 o que impede vazamento de memória e garante o requisito RF10.
 
+### 4.8 Serialização do acesso aos modelos
+
+`cv2.dnn.Net` e `cv2.FaceDetectorYN` **não são thread-safe**: `setInput`/`forward`
+e `setInputSize`/`detect` são pares não atômicos, e o OpenCV libera o GIL durante
+a execução. Como a análise de imagem estática roda na thread do Tkinter enquanto
+a captura roda na própria thread, `PipelineExpressao` serializa `processar`,
+`aplicar_ajustes`, `reiniciar_estado` e `liberar` com um `threading.RLock`.
+
+Essa necessidade foi identificada por auditoria: existia um caminho real em que
+um erro **transitório** da câmera (ex.: "a câmera parou de entregar imagens")
+colocava a interface em modo `erro` com a thread de captura **ainda viva**; nesse
+estado, "Analisar imagem" não encerrava a captura e usava os mesmos objetos
+nativos em paralelo — risco de resultado corrompido ou de falha nativa não
+capturável. Além do `RLock`, `analisar_imagem` passou a encerrar a captura
+incondicionalmente. Regressão coberta por `test_pipeline_suporta_uso_concorrente`
+e `test_analisar_imagem_encerra_captura_mesmo_em_modo_erro`.
+
+### 4.9 Parada da captura com confirmação
+
+`TrabalhadorCamera.parar()` devolve `True` apenas quando a thread realmente
+terminou — garantindo que o `finally` de `run()` liberou o `VideoCapture`. Se o
+prazo expirar (típico quando `cap.read()` trava com webcam USB), devolve `False`
+e a interface **não tenta reabrir o dispositivo**: exibe "Aguardando a câmera
+anterior ser liberada". Sem isso, a reabertura falharia com "dispositivo em uso",
+mensagem que atribuiria o problema a outro programa.
+
 ## 5. Tratamento de falhas
 
 | Falha | Comportamento |
@@ -200,6 +226,9 @@ o que impede vazamento de memória e garante o requisito RF10.
 | Câmera para de entregar quadros | Após 15 falhas, aviso; após 25, reabertura automática do dispositivo. |
 | Exceção dentro da inferência | Capturada na thread; registrada no status; a captura continua viva. |
 | Imagem inválida | Recusada antes da decodificação, com motivo específico. |
+| Imagem com dimensões absurdas (*decompression bomb*) | Recusada pelo cabeçalho, antes de qualquer decodificação, com mensagem própria. |
+| Alinhamento degenerado (pontos colineares/idênticos) | Convertido em `ErroAlinhamento`; o rosto é ignorado, a aplicação segue. |
+| Captura não encerra no prazo | Interface informa que a câmera está sendo liberada e **não** tenta reabrir. |
 | Quadro degenerado | Detector devolve zero rostos; nenhuma classificação é feita. |
 | Fechamento da janela | Thread encerrada, `VideoCapture.release()` garantido por `finally`. |
 

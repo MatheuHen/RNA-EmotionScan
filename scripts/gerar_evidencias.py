@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import platform
+import subprocess
 import sys
 import time
 from datetime import datetime
@@ -34,6 +35,42 @@ from expressao_neural.ui import desenho, tema  # noqa: E402
 
 DESTINO = config.DIR_EVIDENCIAS
 FIXTURE = RAIZ / "tests" / "fixtures" / "lena.jpg"
+
+
+def _estado_da_maquina() -> dict:
+    """Frequencia e carga da CPU no momento da medicao.
+
+    Sem isso, um mesmo codigo mede tempos muito diferentes conforme o estado de
+    energia do processador e os programas abertos -- e o numero deixa de ser
+    auditavel.
+    """
+    estado: dict[str, object] = {}
+    try:
+        saida = subprocess.run(
+            [
+                "powershell", "-NoProfile", "-Command",
+                "$c=Get-CimInstance Win32_Processor;"
+                "Write-Output \"$($c.Name)|$($c.CurrentClockSpeed)|"
+                "$($c.MaxClockSpeed)|$($c.LoadPercentage)|"
+                "$($c.NumberOfLogicalProcessors)\"",
+            ],
+            capture_output=True, text=True, timeout=30,
+        )
+        partes = saida.stdout.strip().split("|")
+        if len(partes) == 5:
+            estado = {
+                "processador": partes[0].strip(),
+                "clock_atual_mhz": int(partes[1]),
+                "clock_maximo_mhz": int(partes[2]),
+                "carga_cpu_percent": int(partes[3]),
+                "nucleos_logicos": int(partes[4]),
+            }
+            estado["fracao_do_clock_maximo"] = round(
+                int(partes[1]) / max(1, int(partes[2])), 3
+            )
+    except Exception:  # noqa: BLE001 - diagnostico opcional
+        estado = {"observacao": "estado da CPU não pôde ser lido"}
+    return estado
 
 
 def _salvar(nome: str, imagem: np.ndarray) -> Path:
@@ -211,6 +248,14 @@ def main() -> int:
     )
 
     print("\n2. Medições de desempenho (CPU)")
+    estado_cpu = _estado_da_maquina()
+    if "clock_atual_mhz" in estado_cpu:
+        print(
+            f"   estado da CPU: {estado_cpu['clock_atual_mhz']}/"
+            f"{estado_cpu['clock_maximo_mhz']} MHz "
+            f"({estado_cpu['fracao_do_clock_maximo'] * 100:.0f}% do máximo), "
+            f"carga {estado_cpu['carga_cpu_percent']}%"
+        )
     for _ in range(5):
         pipeline.processar(imagem)
     tempos_total: list[float] = []
@@ -256,6 +301,7 @@ def main() -> int:
             "numpy": np.__version__,
             "aceleracao": "CPU (cv2.dnn, DNN_TARGET_CPU)",
         },
+        "estado_da_cpu_na_medicao": estado_cpu,
         "modelos": [
             {
                 "chave": m.chave,
@@ -310,6 +356,8 @@ def main() -> int:
         "|---|---|",
     ]
     for k, v in dados["ambiente"].items():
+        linhas.append(f"| {k.replace('_', ' ').capitalize()} | {v} |")
+    for k, v in estado_cpu.items():
         linhas.append(f"| {k.replace('_', ' ').capitalize()} | {v} |")
     linhas += [
         "",

@@ -129,11 +129,19 @@ class TrabalhadorCamera(threading.Thread):
     def trocar_camera(self, indice: int) -> None:
         self._trocar_para = int(indice)
 
-    def parar(self, timeout: float = 3.0) -> None:
+    def parar(self, timeout: float = 3.0) -> bool:
+        """Sinaliza a parada e aguarda o encerramento.
+
+        Devolve True se a thread terminou (camera garantidamente liberada pelo
+        `finally` de `run`). Devolve False se o prazo expirou -- caso em que a
+        thread continua detendo o dispositivo, tipicamente porque `cap.read()`
+        travou. O chamador NAO deve tentar reabrir a camera nesse estado.
+        """
         self._parar.set()
         self._pausado.clear()
         if self.is_alive():
             self.join(timeout)
+        return not self.is_alive()
 
     # ----------------------------------------------------------------- interno
     def _configurar(self, cap: cv.VideoCapture) -> None:
@@ -183,6 +191,10 @@ class TrabalhadorCamera(threading.Thread):
                     self._trocar_para = None
                     if self._cap is not None:
                         self._cap.release()
+                        # Nunca manter referencia a um capture ja liberado: ler
+                        # dele devolveria falhas ate a recuperacao reabrir o
+                        # dispositivo ERRADO (o anterior) limpando o erro.
+                        self._cap = None
                     try:
                         self._cap = _abrir(novo)
                         self._configurar(self._cap)
@@ -199,7 +211,19 @@ class TrabalhadorCamera(threading.Thread):
                     time.sleep(0.05)
                     continue
 
-                assert self._cap is not None
+                if self._cap is None:
+                    # Troca de camera falhou e nao ha dispositivo valido: tenta
+                    # reabrir o indice corrente sem bloquear a thread.
+                    try:
+                        self._cap = _abrir(self._ajustes.indice_camera)
+                        self._configurar(self._cap)
+                        self._registrar_erro(None)
+                        falhas_leitura = 0
+                    except ErroCamera as exc:
+                        self._registrar_erro(str(exc))
+                        time.sleep(0.5)
+                    continue
+
                 ok, quadro = self._cap.read()
                 if not ok or quadro is None or quadro.size == 0:
                     falhas_leitura += 1
@@ -211,6 +235,7 @@ class TrabalhadorCamera(threading.Thread):
                         # Tentativa de recuperacao: reabrir o dispositivo (RF02).
                         try:
                             self._cap.release()
+                            self._cap = None
                             self._cap = _abrir(self._ajustes.indice_camera)
                             self._configurar(self._cap)
                             self._registrar_erro(None)

@@ -41,6 +41,8 @@ class JanelaPrincipal(tk.Tk):
 
         self._pipeline: PipelineExpressao | None = None
         self._trabalhador: TrabalhadorCamera | None = None
+        # Captura que não encerrou no prazo e ainda pode deter a câmera.
+        self._trabalhador_preso: TrabalhadorCamera | None = None
         self._foto: ImageTk.PhotoImage | None = None
         self._quadro_exibido: np.ndarray | None = None
         self._ultimo_resultado: ResultadoQuadro | None = None
@@ -469,6 +471,22 @@ class JanelaPrincipal(tk.Tk):
         self._pipeline.reiniciar_estado()
 
         self._encerrar_trabalhador()
+        if self._camera_ainda_ocupada():
+            # Reabrir agora falharia com "dispositivo em uso" e confundiria o
+            # usuário: a câmera está presa na captura anterior, não ocupada por
+            # outro programa.
+            self._definir_status(
+                "Aguardando a câmera anterior ser liberada. Tente novamente em "
+                "alguns segundos.",
+                tema.ALERTA,
+            )
+            self._mostrar_placa(
+                ["LIBERANDO A CAMERA", "Aguarde e clique em Iniciar camera novamente"]
+            )
+            self._modo = "parado"
+            self._atualizar_botoes()
+            return
+
         self._definir_status("Abrindo câmera…", tema.PRIMARIA)
         self._mostrar_placa(["ABRINDO CAMERA", "Aguarde alguns instantes"])
         self.update_idletasks()
@@ -535,10 +553,26 @@ class JanelaPrincipal(tk.Tk):
         self._mostrar_placa(["CAMERA ENCERRADA", "Clique em Iniciar camera para retomar"])
         self._atualizar_botoes()
 
-    def _encerrar_trabalhador(self) -> None:
-        if self._trabalhador is not None:
-            self._trabalhador.parar()
-            self._trabalhador = None
+    def _encerrar_trabalhador(self) -> bool:
+        """Encerra a captura. Devolve False se a thread não terminou a tempo."""
+        if self._trabalhador is None:
+            return True
+        parou = self._trabalhador.parar()
+        if not parou:
+            # A thread ficou presa em cap.read(): a câmera ainda está ocupada.
+            # Guardamos a referência para não tentar reabrir o dispositivo.
+            self._trabalhador_preso = self._trabalhador
+        self._trabalhador = None
+        return parou
+
+    def _camera_ainda_ocupada(self) -> bool:
+        preso = getattr(self, "_trabalhador_preso", None)
+        if preso is None:
+            return False
+        if preso.is_alive():
+            return True
+        self._trabalhador_preso = None  # a thread finalmente liberou o dispositivo
+        return False
 
     def procurar_cameras(self) -> None:
         """Varredura de dispositivos em thread propria (operacao lenta)."""
@@ -620,8 +654,10 @@ class JanelaPrincipal(tk.Tk):
             messagebox.showerror("Imagem inválida", str(exc), parent=self)
             return
 
-        if self._modo in ("ativo", "pausado"):
-            self._encerrar_trabalhador()
+        # Encerra a captura SEMPRE que houver thread viva -- inclusive em modo
+        # "erro", quando o trabalhador continua tentando reconectar. Sem isso,
+        # os modelos seriam usados por duas threads ao mesmo tempo.
+        self._encerrar_trabalhador()
         self._modo = "imagem"
         self._atualizar_botoes()
 

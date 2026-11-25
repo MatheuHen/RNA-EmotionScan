@@ -44,29 +44,39 @@ if exist "%PY%" (
     echo [ OK ] Ambiente virtual criado.
 )
 
-rem -------------------------------- bundle de certificados do Windows (TLS)
-echo.
-echo [ .. ] Preparando certificados locais (necessario em redes com inspecao TLS)
-powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\exportar_certificados.ps1" "%~dp0scripts\windows-ca-bundle.pem"
-if exist "%~dp0scripts\windows-ca-bundle.pem" (
-    set "PIPCERT=--cert "%~dp0scripts\windows-ca-bundle.pem""
-    echo [ OK ] Bundle de certificados disponivel.
-) else (
-    set "PIPCERT="
-    echo [AVISO] Bundle nao gerado; seguindo com os certificados padrao do pip.
-)
-
 rem ---------------------------------------------------------- dependencias
+rem Primeiro tentamos com os certificados padrao do pip (pacote certifi), que
+rem e a cadeia de confianca mais restrita e, portanto, a mais segura.
+rem O bundle de CAs do Windows e usado APENAS como alternativa, quando a rede
+rem faz inspecao de TLS e a verificacao padrao falha.
 echo.
-echo [ .. ] Atualizando pip
-"%PY%" -m pip install %PIPCERT% --upgrade pip --disable-pip-version-check -q
-echo [ .. ] Instalando dependencias de requirements.txt
-"%PY%" -m pip install %PIPCERT% -r "%~dp0requirements.txt" --disable-pip-version-check
+echo [ .. ] Instalando dependencias (verificacao padrao de certificados)
+set "PIPCERT="
+"%PY%" -m pip install --upgrade pip --disable-pip-version-check -q
+"%PY%" -m pip install -r "%~dp0requirements.txt" --disable-pip-version-check
+
 if errorlevel 1 (
     echo.
-    echo [FALHA] Nao foi possivel instalar as dependencias.
-    echo         Verifique a conexao, proxy e antivirus com inspecao de TLS.
-    goto :erro
+    echo [AVISO] A instalacao falhou com a verificacao padrao de certificados.
+    echo         Isso costuma indicar proxy corporativo ou antivirus com
+    echo         inspecao de TLS. Tentando com as autoridades certificadoras
+    echo         ja confiadas por este computador.
+    echo.
+    powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\exportar_certificados.ps1" "%~dp0scripts\windows-ca-bundle.pem"
+    if not exist "%~dp0scripts\windows-ca-bundle.pem" (
+        echo [FALHA] Nao foi possivel gerar o bundle de certificados.
+        goto :erro
+    )
+    set "PIPCERT=--cert "%~dp0scripts\windows-ca-bundle.pem""
+    echo [ .. ] Reinstalando dependencias com o bundle do Windows
+    "%PY%" -m pip install --cert "%~dp0scripts\windows-ca-bundle.pem" --upgrade pip --disable-pip-version-check -q
+    "%PY%" -m pip install --cert "%~dp0scripts\windows-ca-bundle.pem" -r "%~dp0requirements.txt" --disable-pip-version-check
+    if errorlevel 1 (
+        echo.
+        echo [FALHA] Nao foi possivel instalar as dependencias.
+        echo         Verifique a conexao, o proxy e o antivirus.
+        goto :erro
+    )
 )
 echo [ OK ] Dependencias instaladas.
 

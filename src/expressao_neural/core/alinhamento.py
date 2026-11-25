@@ -37,8 +37,13 @@ def _similaridade_nao_reflexiva(uv: np.ndarray, xy: np.ndarray) -> np.ndarray:
     if np.linalg.matrix_rank(big_x) < 4:
         raise ErroAlinhamento("pontos de referencia degenerados")
 
-    r, _, _, _ = np.linalg.lstsq(big_x, big_u, rcond=None)
+    try:
+        r, _, _, _ = np.linalg.lstsq(big_x, big_u, rcond=None)
+    except np.linalg.LinAlgError as exc:
+        raise ErroAlinhamento(f"minimos quadrados nao convergiram: {exc}") from exc
     sc, ss, tx, ty = np.squeeze(r)
+    if not np.isfinite((sc, ss, tx, ty)).all():
+        raise ErroAlinhamento("transformacao com valores nao finitos")
 
     t_inv = np.array([[sc, -ss, 0.0], [ss, sc, 0.0], [tx, ty, 1.0]])
     try:

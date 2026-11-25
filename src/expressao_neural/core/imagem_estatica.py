@@ -54,12 +54,20 @@ def carregar(caminho: str | Path) -> np.ndarray:
     p = validar_caminho(caminho)
 
     # Camada Pillow: detecta arquivo corrompido ou com extensao mentirosa.
+    # `DecompressionBombError` herda de Exception (nao de OSError/ValueError) e
+    # e disparada pelo cabecalho, antes do limite de lado ser avaliado -- por
+    # isso precisa ser tratada aqui, com mensagem propria.
     try:
         with Image.open(p) as img:
             img.verify()
         with Image.open(p) as img:
             largura, altura = img.size
             formato = (img.format or "").upper()
+    except Image.DecompressionBombError as exc:
+        raise ImagemInvalida(
+            f"A imagem {p.name} declara dimensões absurdamente grandes e foi "
+            "recusada por segurança (proteção contra decompression bomb)."
+        ) from exc
     except (UnidentifiedImageError, OSError, ValueError) as exc:
         raise ImagemInvalida(
             f"O arquivo {p.name} não é uma imagem válida ou está corrompido."

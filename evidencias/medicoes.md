@@ -1,6 +1,6 @@
 # Medições reais — Expressão Neural
 
-Geradas em 2026-11-25T16:03:30 por `scripts/gerar_evidencias.py`.
+Geradas em 2026-11-25T19:44:06 por `scripts/gerar_evidencias.py`.
 Todos os números vêm de execução real nesta máquina; nenhum valor é estimado.
 
 ## Ambiente de medição
@@ -14,17 +14,23 @@ Todos os números vêm de execução real nesta máquina; nenhum valor é estima
 | Opencv | 4.12.0 |
 | Numpy | 2.2.6 |
 | Aceleracao | CPU (cv2.dnn, DNN_TARGET_CPU) |
+| Processador | AMD Ryzen 7 7435HS |
+| Clock atual mhz | 2496 |
+| Clock maximo mhz | 3100 |
+| Carga cpu percent | 11 |
+| Nucleos logicos | 16 |
+| Fracao do clock maximo | 0.805 |
 
 ## Desempenho (1 rosto, imagem 512x512, 120 amostras)
 
 | Etapa | Média | Mediana | Mínimo | Máximo | Desvio padrão |
 |---|---|---|---|---|---|
-| Detecção (YuNet) | 13.52 ms | 13.4 ms | 11.84 ms | 17.35 ms | 0.83 ms |
-| Classificação (MobileFaceNet) | 2.87 ms | 2.77 ms | 2.48 ms | 3.63 ms | 0.3 ms |
-| Ciclo completo | 17.15 ms | 17.03 ms | 15.31 ms | 21.32 ms | 1.0 ms |
+| Detecção (YuNet) | 23.23 ms | 23.07 ms | 20.39 ms | 28.58 ms | 1.86 ms |
+| Classificação (MobileFaceNet) | 6.67 ms | 6.42 ms | 5.94 ms | 12.4 ms | 0.89 ms |
+| Ciclo completo | 31.18 ms | 30.96 ms | 27.62 ms | 42.13 ms | 2.45 ms |
 
-Equivalente a **58.3 ciclos de inferência por segundo** em CPU, sem GPU dedicada.
-Carregamento dos modelos: 66.8 ms (aquecimento 47.86 ms).
+Equivalente a **32.1 ciclos de inferência por segundo** em CPU, sem GPU dedicada.
+Carregamento dos modelos: 134.0 ms (aquecimento 98.38 ms).
 
 ## Classificação da imagem de referência
 

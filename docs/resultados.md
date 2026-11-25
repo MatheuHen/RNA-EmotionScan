@@ -96,28 +96,52 @@ de longa duração, executado separadamente).
 
 ## 5. Resultados — desempenho computacional medido
 
-Máquina de medição: Windows 10, AMD64 Family 25 (Zen 3), Python 3.11.9,
+Máquina: Windows 10, **AMD Ryzen 7 7435HS** (16 núcleos lógicos), Python 3.11.9,
 OpenCV 4.12.0, **somente CPU** (`DNN_TARGET_CPU`), sem GPU dedicada.
 Imagem 512×512, 1 rosto, 120 amostras consecutivas após aquecimento.
 
+### 5.1 Duas medições, em estados diferentes da máquina
+
+O mesmo código foi medido duas vezes, com resultados bem distintos. A diferença
+**não é do software**: é do estado de energia do processador e da carga de
+outros programas. Registrar as duas é mais honesto do que escolher a melhor.
+
+| Medição | Estado da CPU | Detecção | Classificação | **Ciclo completo** | Equivalente |
+|---|---|---|---|---|---|
+| **A** — máquina ociosa | em modo turbo | 13,52 ms | 2,87 ms | **17,15 ms** | ~58 ciclos/s |
+| **B** — máquina ocupada | 2496/3100 MHz (80% do máximo), carga 11%, navegador e jogo abertos | 23,23 ms | 6,67 ms | **31,18 ms** | ~32 ciclos/s |
+
+Detalhamento da medição B (a mais recente e a mais conservadora):
+
 | Etapa | Média | Mediana | Mínimo | Máximo | Desvio padrão |
 |---|---|---|---|---|---|
-| Detecção (YuNet) | 13,52 ms | 13,40 ms | 11,84 ms | 17,35 ms | 0,83 ms |
-| Classificação (MobileFaceNet) | 2,87 ms | 2,77 ms | 2,48 ms | 3,63 ms | 0,30 ms |
-| **Ciclo completo** | **17,15 ms** | 17,03 ms | 15,31 ms | 21,32 ms | 1,00 ms |
+| Detecção (YuNet) | 23,23 ms | 23,07 ms | 20,39 ms | 28,58 ms | 1,86 ms |
+| Classificação (MobileFaceNet) | 6,67 ms | 6,42 ms | 5,94 ms | 12,40 ms | 0,89 ms |
+| **Ciclo completo** | **31,18 ms** | 30,96 ms | 27,62 ms | 42,13 ms | 2,45 ms |
 
-**Equivalente a 58,3 ciclos de inferência por segundo em CPU.**
+Carregamento dos dois modelos: 134 ms. Aquecimento da rede: 98 ms.
 
-Carregamento dos dois modelos: **66,8 ms**. Aquecimento da rede: **47,9 ms**.
+A partir desta constatação, `scripts/gerar_evidencias.py` passou a **registrar a
+frequência e a carga da CPU** junto de cada medição (`estado_da_cpu_na_medicao`
+em `evidencias/medicoes.json`), para que nenhum número fique sem contexto.
 
-Observações:
+### 5.2 O custo da serialização de acesso aos modelos
 
-- A **detecção custa ~4,7× mais que a classificação**. O gargalo é o YuNet
-  varrendo o quadro inteiro, não a rede de expressões.
-- O desvio padrão de 1,0 ms indica comportamento previsível, sem picos que
-  causariam travamento perceptível.
-- Com `inferir_a_cada = 2` (padrão), a carga de inferência cai pela metade e
-  sobra folga para a renderização da interface.
+A correção de concorrência (seção 4.8 de `docs/arquitetura.md`) introduziu um
+`RLock` no caminho de inferência. O custo foi **medido diretamente**, e não
+estimado: **0,239 µs por aquisição** — cerca de 0,0008% de um ciclo de 31 ms.
+Comparando 200 execuções com e sem o lock, a diferença ficou dentro do ruído de
+medição. **A correção de segurança não teve custo de desempenho perceptível.**
+
+### 5.3 Leitura dos números
+
+- A **detecção custa ~3,5× mais que a classificação** nas duas medições. O
+  gargalo é o YuNet varrendo o quadro inteiro, não a rede de expressões.
+- Mesmo no pior caso medido (31,18 ms), há folga: com `inferir_a_cada = 2`
+  (padrão) a carga de inferência cai pela metade.
+- **Recomendação para o evento:** feche navegador, jogos e aplicativos pesados
+  antes de apresentar, e ligue o notebook na tomada (o modo bateria reduz a
+  frequência). Rode `verificar.bat` no local para ver o número real do dia.
 
 > **Atenção à interpretação:** estes números medem **desempenho computacional**.
 > Não são acurácia nem confiança. Ver seção 8.
@@ -164,9 +188,23 @@ numérica**, não acurácia.
 
 ## 7. Resultados — estabilidade em execução prolongada
 
-Ver `evidencias/execucao_prolongada.log` para a saída bruta. O teste compara o
-tempo médio por ciclo na primeira e na segunda metade da execução, e verifica se
-o número de trilhas de rosto permanece limitado (ausência de vazamento).
+**Executado: 30 minutos contínuos de inferência.** Saída bruta em
+`evidencias/execucao_prolongada.log`.
+
+| Métrica | Valor |
+|---|---|
+| Duração | 30 min (1800,20 s) |
+| Ciclos completos executados | **95.811** |
+| Tempo médio — primeira metade | 18,5 ms |
+| Tempo médio — segunda metade | 19,1 ms |
+| **Degradação ao longo do tempo** | **+3,2%** |
+| Trilhas de rosto vivas ao final | 1 (de 1 rosto) |
+| Memória do processo (observada) | ~93 MB, estável |
+
+Interpretação: **não há degradação progressiva nem vazamento**. A variação de
+3,2% entre as metades está dentro da flutuação normal de frequência da CPU — bem
+abaixo do limite de tolerância do teste. O número de trilhas permaneceu em 1,
+confirmando que o descarte de rostos ausentes funciona em escala longa.
 
 Controles de memória implementados e verificados:
 
@@ -177,6 +215,46 @@ Controles de memória implementados e verificados:
 > A execução prolongada automatizada exercita o **pipeline de inferência**. A
 > sessão de 30 minutos **com webcam física** permanece como validação presencial
 > (item H de `docs/checklist_validacao.md`).
+
+## 7.1 Auditoria de segurança, privacidade e robustez
+
+Foi executada uma revisão independente, somente leitura, de todo o código-fonte,
+scripts e `.gitignore`.
+
+### Categorias sem achado (confirmadas por evidência)
+
+- **Nenhum segredo, credencial, token ou chave** em qualquer arquivo.
+- **Nenhuma chamada de rede em `src/`.** As únicas ocorrências de URL são
+  strings de metadados em `core/modelos.py`, nunca acessadas em execução. A lista
+  completa de imports de `src/` não contém biblioteca de rede alguma. Isso
+  sustenta tecnicamente o requisito de funcionamento offline.
+- **Nenhuma gravação automática de imagem ou vídeo.** Não existe `imwrite` nem
+  `Image.save` em `src/`. A única escrita em disco da aplicação é
+  `config.local.json`, com preferências numéricas.
+- **Nenhuma chave privada exportada** por `scripts/exportar_certificados.ps1`:
+  apenas `RawData` de certificados públicos de CA.
+- **Nenhum vazamento de `VideoCapture`**: todos os caminhos de exceção foram
+  revisados.
+- **Nenhum `except` mascarando falha de forma perigosa.**
+- **`.gitignore` adequado**: cobre `config.local.json`, `*.pem`, `*.key`,
+  `models/*.onnx`, `.venv/`, `.env` e pastas de imagens privadas.
+- Path traversal e zip bomb **não se aplicam** a este modelo de ameaça
+  (aplicação local, sem sandbox, sem manipulação de arquivo compactado).
+
+### Achados corrigidos
+
+| # | Gravidade | Problema | Correção | Regressão coberta por |
+|---|---|---|---|---|
+| 1 | Média/Alta | Erro **transitório** de câmera colocava a interface em modo `erro` com a thread de captura ainda viva; nesse estado "Analisar imagem" usava `cv2.dnn.Net` e `FaceDetectorYN` em **duas threads ao mesmo tempo** — risco de resultado corrompido ou falha nativa não capturável | `RLock` serializando o acesso aos modelos + `analisar_imagem` encerra a captura incondicionalmente | `test_pipeline_suporta_uso_concorrente`, `test_ajustes_concorrentes_com_processamento`, `test_analisar_imagem_encerra_captura_mesmo_em_modo_erro` |
+| 2 | Média | `parar()` retornava após o tempo limite sem garantir a liberação da câmera; a reabertura falhava com "dispositivo em uso", atribuindo o problema a outro programa | `parar()` devolve `True`/`False`; a interface informa "aguardando a câmera ser liberada" e não tenta reabrir | `test_parar_devolve_false_quando_a_thread_nao_encerra`, `test_parar_devolve_true_quando_encerra_normalmente` |
+| 3 | Baixa/Média | `PIL.DecompressionBombError` **não herda** de `OSError` nem de `ValueError` (confirmado: MRO é `Exception → BaseException`), escapava da validação e produziria traceback na tela | Capturada explicitamente, com mensagem própria | `test_decompression_bomb_vira_imagem_invalida`, `test_bomba_nao_escapa_como_excecao_crua` |
+| 4 | Baixa | `pip --cert` era usado **sempre**, substituindo a cadeia restrita do `certifi` pelas raízes da máquina mesmo em rede sem inspeção TLS | O bundle passou a ser **fallback**: só é gerado e usado se a instalação padrão falhar | validação manual em rede sem proxy |
+| 5 | Baixa | Após falha na troca de câmera, o `VideoCapture` já liberado continuava referenciado; a recuperação reabria o dispositivo **antigo** e limpava o erro | `self._cap = None` após o release, com reabertura explícita | `test_troca_de_camera_falha_nao_reutiliza_capture_liberado` |
+| 6 | Baixa | `LinAlgError` do `lstsq` não era convertido em `ErroAlinhamento` e escapava no fluxo de imagem estática | Capturado e convertido; valores não finitos também rejeitados | `test_alinhamento_degenerado_vira_erro_alinhamento` |
+
+Achado informativo não corrigido por ser intencional: o e-mail acadêmico do
+autor aparece na janela "Sobre", visível aos visitantes — é identificação de
+autoria exigida pelo trabalho, não um vazamento.
 
 ## 8. Distinção entre as métricas
 

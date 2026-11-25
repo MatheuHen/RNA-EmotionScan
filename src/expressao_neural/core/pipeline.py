@@ -1,6 +1,14 @@
-"""Orquestracao deteccao -> alinhamento -> classificacao -> suavizacao."""
+"""Orquestracao deteccao -> alinhamento -> classificacao -> suavizacao.
+
+`cv2.dnn.Net` e `cv2.FaceDetectorYN` NAO sao thread-safe: `setInput`/`forward`
+e `setInputSize`/`detect` sao pares nao atomicos, e o OpenCV libera o GIL
+durante a execucao. Como a analise de imagem estatica roda na thread do Tkinter
+enquanto a captura roda na thread propria, todo acesso aos modelos e
+serializado por um `RLock` desta classe.
+"""
 from __future__ import annotations
 
+import threading
 import time
 from dataclasses import dataclass, field
 
@@ -63,6 +71,8 @@ class PipelineExpressao:
     """Mantem as instancias dos modelos e processa quadros sob demanda."""
 
     def __init__(self, ajustes: config.Ajustes | None = None) -> None:
+        # Reentrante: `aplicar_ajustes` e `processar` podem se aninhar.
+        self._lock = threading.RLock()
         self.ajustes = ajustes or config.Ajustes()
         self.detector = DetectorFacial(
             limiar_confianca=self.ajustes.limiar_deteccao,
@@ -79,17 +89,27 @@ class PipelineExpressao:
         return self._ms_aquecimento
 
     def aplicar_ajustes(self, ajustes: config.Ajustes) -> None:
-        self.ajustes = ajustes
-        self.detector.definir_limiares(ajustes.limiar_deteccao, ajustes.limiar_nms)
-        self.detector.max_rostos = ajustes.max_rostos if ajustes.multiplos_rostos else 1
-        self.suavizador.alfa = float(np.clip(ajustes.suavizacao_alfa, 0.05, 1.0))
+        with self._lock:
+            self.ajustes = ajustes
+            self.detector.definir_limiares(ajustes.limiar_deteccao, ajustes.limiar_nms)
+            self.detector.max_rostos = (
+                ajustes.max_rostos if ajustes.multiplos_rostos else 1
+            )
+            self.suavizador.alfa = float(np.clip(ajustes.suavizacao_alfa, 0.05, 1.0))
 
     def reiniciar_estado(self) -> None:
         """Descarta o historico temporal (camera parou, trocou de fonte...)."""
-        self.suavizador.limpar()
+        with self._lock:
+            self.suavizador.limpar()
 
     # ---------------------------------------------------------------- execucao
     def processar(self, quadro: np.ndarray, suavizar: bool | None = None) -> ResultadoQuadro:
+        with self._lock:
+            return self._processar_sem_lock(quadro, suavizar)
+
+    def _processar_sem_lock(
+        self, quadro: np.ndarray, suavizar: bool | None
+    ) -> ResultadoQuadro:
         if suavizar is None:
             suavizar = self.ajustes.suavizacao_ativa
         t_ini = time.perf_counter()
@@ -144,4 +164,5 @@ class PipelineExpressao:
         return resultado
 
     def liberar(self) -> None:
-        self.suavizador.limpar()
+        with self._lock:
+            self.suavizador.limpar()
