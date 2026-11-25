@@ -1,0 +1,81 @@
+{
+  "gerado_em": "2026-11-25T16:03:30",
+  "ambiente": {
+    "sistema": "Windows 10",
+    "processador": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+    "arquitetura": "AMD64",
+    "python": "3.11.9",
+    "opencv": "4.12.0",
+    "numpy": "2.2.6",
+    "aceleracao": "CPU (cv2.dnn, DNN_TARGET_CPU)"
+  },
+  "modelos": [
+    {
+      "chave": "detector",
+      "arquivo": "face_detection_yunet_2023mar.onnx",
+      "sha256": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
+      "tamanho_bytes": 232589,
+      "licenca": "Apache License 2.0 (OpenCV Zoo)",
+      "pre_treinado": true
+    },
+    {
+      "chave": "classificador",
+      "arquivo": "facial_expression_recognition_mobilefacenet_2022july.onnx",
+      "sha256": "4f61307602fc089ce20488a31d4e4614e3c9753a7d6c41578c854858b183e1a9",
+      "tamanho_bytes": 4791892,
+      "licenca": "Apache License 2.0 (OpenCV Zoo)",
+      "pre_treinado": true
+    }
+  ],
+  "carregamento_modelos_ms": 66.8,
+  "aquecimento_ms": 47.86,
+  "imagem_referencia": {
+    "arquivo": "lena.jpg",
+    "dimensoes": "512x512",
+    "rostos_detectados": 1,
+    "confianca_deteccao": 0.909
+  },
+  "classificacao": {
+    "expressao_prevista": "Neutra",
+    "classe_modelo": "neutral",
+    "confianca": 0.6195,
+    "soma_probabilidades": 1.0,
+    "distribuicao": {
+      "Raiva": 0.000109,
+      "Nojo": 0.00056,
+      "Medo": 2.2e-05,
+      "Alegria": 0.277439,
+      "Neutra": 0.619468,
+      "Tristeza": 1.4e-05,
+      "Surpresa": 0.102388
+    }
+  },
+  "desempenho": {
+    "ciclo_completo": {
+      "media_ms": 17.15,
+      "mediana_ms": 17.03,
+      "minimo_ms": 15.31,
+      "maximo_ms": 21.32,
+      "desvio_padrao_ms": 1.0,
+      "amostras": 120
+    },
+    "deteccao": {
+      "media_ms": 13.52,
+      "mediana_ms": 13.4,
+      "minimo_ms": 11.84,
+      "maximo_ms": 17.35,
+      "desvio_padrao_ms": 0.83,
+      "amostras": 120
+    },
+    "classificacao": {
+      "media_ms": 2.87,
+      "mediana_ms": 2.77,
+      "minimo_ms": 2.48,
+      "maximo_ms": 3.63,
+      "desvio_padrao_ms": 0.3,
+      "amostras": 120
+    },
+    "quadros_por_segundo_equivalente": 58.3
+  },
+  "captura_interface_gerada": true
+}
