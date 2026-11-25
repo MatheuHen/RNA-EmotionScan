@@ -1,0 +1,2 @@
+﻿"""Utilitários de apoio."""
+
