@@ -43,6 +43,10 @@ class JanelaPrincipal(tk.Tk):
         self._trabalhador: TrabalhadorCamera | None = None
         # Captura que não encerrou no prazo e ainda pode deter a câmera.
         self._trabalhador_preso: TrabalhadorCamera | None = None
+        # Reinício em andamento: impede empilhar dois reinícios num clique duplo.
+        self._reiniciando = False
+        # Resultado do encerramento feito em segundo plano, consumido por _passo.
+        self._reinicio_pendente: tuple[TrabalhadorCamera | None, bool] | None = None
         self._foto: ImageTk.PhotoImage | None = None
         self._quadro_exibido: np.ndarray | None = None
         self._ultimo_resultado: ResultadoQuadro | None = None
@@ -540,17 +544,71 @@ class JanelaPrincipal(tk.Tk):
         self._atualizar_botoes()
 
     def reiniciar_camera(self) -> None:
-        if self._trabalhador is None:
+        """Encerra a captura atual e reabre a câmera.
+
+        Dois defeitos corrigidos aqui, ambos observados em uso real:
+
+        1. O método não alterava `self._modo`. Como `iniciar_camera()` começa
+           com `if self._modo in ("ativo", "pausado"): return`, a reabertura
+           agendada retornava na primeira linha e nenhum trabalhador novo era
+           criado. A interface ficava viva, com os botões habilitados, mas
+           permanentemente sem imagem.
+
+        2. O encerramento (com `join` de até 3 s) rodava direto na thread do
+           Tkinter, congelando a janela nesse período.
+
+        Agora o estado passa por "parado" antes de reabrir, e o encerramento
+        acontece fora da thread da interface.
+        """
+        if self._reiniciando:
+            return  # clique duplo não deve empilhar dois reinícios
+
+        if self._trabalhador is None and not self._camera_ainda_ocupada():
             self.iniciar_camera()
             return
+
+        self._reiniciando = True
         self._definir_status("Reiniciando captura…", tema.PRIMARIA)
-        self._encerrar_trabalhador()
+        # Estado coerente DESDE JÁ: sem trabalhador, o modo não pode afirmar
+        # que a captura está ativa, senão a guarda de iniciar_camera aborta.
+        self._modo = "parado"
+        self._atualizar_botoes()
+        self._limpar_resultados()
+        self._mostrar_placa(["REINICIANDO", "Aguarde a camera reabrir"])
+        self.update_idletasks()
+
+        trabalhador = self._trabalhador
+        self._trabalhador = None
+
+        def encerrar_em_segundo_plano() -> None:
+            """Paga o custo do join fora da thread da interface.
+
+            NÃO chama `after()` daqui: no Tkinter, agendar a partir de outra
+            thread levanta "main thread is not in main loop". O resultado é
+            publicado num campo e o laço de eventos (`_passo`) o consome.
+            """
+            parou = True
+            if trabalhador is not None:
+                parou = trabalhador.parar(timeout=5.0)
+            self._reinicio_pendente = (trabalhador, parou)
+
+        threading.Thread(
+            target=encerrar_em_segundo_plano, name="ReinicioCamera", daemon=True
+        ).start()
+
+    def _concluir_reinicio(self, anterior, parou: bool) -> None:
+        """Executa na thread do Tk depois que a captura antiga encerrou."""
+        self._reiniciando = False
+        if not parou and anterior is not None:
+            # A thread não terminou: ela ainda detém o dispositivo.
+            self._trabalhador_preso = anterior
         if self._pipeline is not None:
             self._pipeline.reiniciar_estado()
-        self._limpar_resultados()
-        self.after(300, self.iniciar_camera)
+        self.iniciar_camera()
 
     def parar_camera(self) -> None:
+        self._reiniciando = False  # Encerrar prevalece sobre um reinício em curso
+        self._reinicio_pendente = None
         self._encerrar_trabalhador()
         self._modo = "parado"
         self._limpar_resultados()
@@ -739,6 +797,9 @@ class JanelaPrincipal(tk.Tk):
 
     def _passo(self) -> None:
         try:
+            pendente, self._reinicio_pendente = self._reinicio_pendente, None
+            if pendente is not None:
+                self._concluir_reinicio(*pendente)
             self._atualizar_quadro()
         except Exception as exc:  # a interface nunca deve cair por um quadro ruim
             self._definir_status(f"Falha ao atualizar a tela: {exc}", tema.ERRO)
@@ -931,6 +992,8 @@ class JanelaPrincipal(tk.Tk):
             except tk.TclError:
                 pass
             self._tick = None
+        self._reiniciando = False  # impede que um reinício pendente reabra a câmera
+        self._reinicio_pendente = None
         self._encerrar_trabalhador()
         if self._pipeline is not None:
             self._pipeline.liberar()
