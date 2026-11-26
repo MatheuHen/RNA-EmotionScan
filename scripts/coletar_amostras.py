@@ -33,7 +33,7 @@ from PIL import Image, ImageTk  # noqa: E402
 from expressao_neural import config  # noqa: E402
 from expressao_neural.core.alinhamento import ErroAlinhamento, alinhar_rosto  # noqa: E402
 from expressao_neural.core.camera import ErroCamera, _abrir  # noqa: E402
-from expressao_neural.core.detector import DetectorFacial  # noqa: E402
+from expressao_neural.core.detector import DetectorFacial, ErroModelo  # noqa: E402
 from expressao_neural.ui import tema  # noqa: E402
 
 DESTINO = RAIZ / "dados" / "amostras"
@@ -62,8 +62,14 @@ class Coletor(tk.Tk):
         self.fontes = tema.aplicar(self)
 
         self.por_classe = por_classe
-        self.detector = DetectorFacial(limiar_confianca=0.80)
-        self.cap = _abrir(indice_camera)
+        try:
+            self.detector = DetectorFacial(limiar_confianca=0.80)
+            self.cap = _abrir(indice_camera)
+        except Exception:
+            # A janela Tk ja existe: destrui-la evita deixar uma janela orfa
+            # na tela quando a camera ou o modelo nao estao disponiveis.
+            self.destroy()
+            raise
         self.cap.set(cv.CAP_PROP_FRAME_WIDTH, 640)
         self.cap.set(cv.CAP_PROP_FRAME_HEIGHT, 480)
 
@@ -232,6 +238,8 @@ class Coletor(tk.Tk):
                     text=f"{self.classe}: meta atingida", fg=tema.SUCESSO
                 )
                 self.proxima()
+                if self._encerrado:
+                    return  # ultima classe concluida: a janela ja foi destruida
 
         rgb = cv.cvtColor(exibir, cv.COLOR_BGR2RGB)
         self._foto = ImageTk.PhotoImage(Image.fromarray(rgb))
@@ -287,7 +295,7 @@ def main() -> int:
     tema.ativar_consciencia_dpi()
     try:
         app = Coletor(args.por_classe, args.camera)
-    except ErroCamera as exc:
+    except (ErroCamera, ErroModelo) as exc:
         print(f"ERRO: {exc}", file=sys.stderr)
         return 1
     app.mainloop()
