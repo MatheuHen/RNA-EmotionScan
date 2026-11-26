@@ -16,14 +16,42 @@ Marque cada item e anote o resultado. Reserve cerca de 40 minutos.
 
 ## B. Teste offline (o mais importante para o evento)
 
-- [ ] Desligar o Wi-Fi **e** desconectar o cabo de rede.
-- [ ] Executar `verificar.bat` — deve concluir normalmente.
-- [ ] Executar `iniciar.bat` — a janela deve abrir normalmente.
-- [ ] Iniciar a câmera e confirmar classificação em tempo real **sem rede**.
-- [ ] Abrir "Sobre o projeto" e navegar pelas 7 abas — nenhum conteúdo faltando.
-- [ ] Analisar uma imagem local — deve funcionar sem rede.
+**Existe um script que faz isso sozinho e grava a evidência:**
+
+```bat
+offline.bat
+```
+
+Ele se recusa a rodar com a internet ligada — validar modo offline com rede
+acessível não prova nada. Ao terminar, grava `evidencias/teste_offline.md`.
+
+### Passo a passo
+
+- [ ] **1. Desligue a rede.** Clique no ícone de rede na bandeja (canto
+      inferior direito), desligue o Wi-Fi e desconecte o cabo, se houver.
+- [ ] **2. Execute `offline.bat`.** Ele confirma que a rede está fora e então
+      verifica, nesta ordem:
+      integridade dos modelos (SHA-256) · carregamento · inferência real ·
+      distribuição somando 1,0 · ausência de rosto · suíte de testes ·
+      abertura da interface.
+- [ ] **3. Confira o resultado.** `APROVADO` significa que o sistema funciona
+      sem internet. A evidência fica em `evidencias/teste_offline.md`.
+
+### Verificações manuais complementares
+
+O script não consegue fazer estas — exigem você na frente da câmera:
+
+- [ ] **Ainda sem rede**, abra `iniciar.bat` e clique em "Iniciar câmera".
+      Confirme classificação em tempo real.
+- [ ] Abra "Sobre o projeto" e navegue pelas 8 abas — nada faltando.
+- [ ] Use "Analisar imagem" com uma foto local.
+- [ ] Teste o botão "Reiniciar" — a câmera deve voltar.
+
+- [ ] **4. RELIGUE a rede** ao terminar.
 
 Resultado: ________________________________________________
+
+Data e hora do teste: _____________________________________
 
 ## C. Webcam
 
