@@ -89,10 +89,19 @@ class Ajustes:
     altura_captura: int = 480
     fps_alvo: int = 30
     # Executa a inferencia a cada N quadros capturados (1 = todos os quadros).
-    # 1 por padrao: o ciclo completo medido (~26 ms) cabe no intervalo de 33 ms
-    # de uma camera a 30 FPS, entao nao ha motivo para pular quadros. Pular
-    # introduzia atraso perceptivel em expressoes rapidas.
-    inferir_a_cada: int = 1
+    #
+    # 2 por padrao, decidido por MEDICAO e nao por calculo. A conta isolada
+    # sugeria que 1 caberia: inferencia de ~19 ms dentro do orcamento de 33 ms
+    # de uma camera a 30 FPS. Mas essa conta ignora que a thread de captura e a
+    # de renderizacao disputam CPU. Medido no aplicativo real:
+    #
+    #     inferir_a_cada = 1  ->  15 a 25 FPS (oscila, video menos suave)
+    #     inferir_a_cada = 2  ->  30,2 FPS constantes
+    #
+    # Com 2, a expressao e reavaliada a cada ~66 ms em vez de ~40 ms --
+    # diferenca impercevivel ao olho, enquanto a perda de fluidez do video e
+    # bem visivel. Ajustavel na interface.
+    inferir_a_cada: int = 2
     # 0,35 em vez de 0,50: expressoes NATURAIS (sorriso leve, surpresa discreta)
     # costumam vencer com 35-55% de confianca. Com o limiar em 0,50 a previsao
     # correta do modelo era rotulada "Indefinida", obrigando o usuario a exagerar
