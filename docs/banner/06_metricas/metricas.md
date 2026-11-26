@@ -1,6 +1,6 @@
 # Métricas reais — Expressão Neural
 
-Coletadas em 2026-11-26T13:05:03 por `scripts/banner_metricas.py`.
+Coletadas em 2026-11-26T14:32:03 por `scripts/banner_metricas.py`.
 **Todos os números vêm de execução real. Nada é estimado ou simulado.**
 
 ## Hardware e condições do teste
@@ -10,7 +10,7 @@ Coletadas em 2026-11-26T13:05:03 por `scripts/banner_metricas.py`.
 | Processador | AMD Ryzen 7 7435HS |
 | Núcleos lógicos | 16 |
 | Frequência na medição | 3100 MHz de 3100 MHz máximos |
-| Carga da CPU | 7% |
+| Carga da CPU | 6% |
 | Memória RAM total | 7.8 GB |
 | GPU | nenhuma — inferência somente em CPU (DNN_TARGET_CPU) |
 | Sistema | Windows 10 |
@@ -25,22 +25,22 @@ Amostras: **150** execuções consecutivas, 1 rosto, após aquecimento.
 
 | Etapa | Média | Mediana | Mínimo | Máximo | Desvio padrão |
 |---|---|---|---|---|---|
-| Detecção (YuNet) | 13.63 ms | 13.48 ms | 12.42 ms | 16.22 ms | 0.87 ms |
-| Classificação (MobileFaceNet) | 2.91 ms | 2.77 ms | 2.51 ms | 4.93 ms | 0.37 ms |
-| Ciclo completo | 17.35 ms | 17.06 ms | 15.72 ms | 22.71 ms | 1.14 ms |
+| Detecção (YuNet) | 14.82 ms | 14.62 ms | 13.51 ms | 18.29 ms | 0.91 ms |
+| Classificação (MobileFaceNet) | 3.1 ms | 3.1 ms | 2.59 ms | 3.92 ms | 0.31 ms |
+| Ciclo completo | 18.92 ms | 18.7 ms | 17.42 ms | 22.81 ms | 1.05 ms |
 
-- **FPS equivalente de inferência:** 57.7 por segundo (1 rosto).
-- **Tempo de inicialização:** 65.0 ms para carregar os dois modelos + 47.37 ms de aquecimento.
-- **Memória do processo:** 77.8 MB.
+- **FPS equivalente de inferência:** 52.9 por segundo (1 rosto).
+- **Tempo de inicialização:** 28.9 ms para carregar os dois modelos + 11.36 ms de aquecimento.
+- **Memória do processo:** 77.5 MB.
 - **Classes reconhecidas:** 7.
 
 ## Testes automatizados
 
-- Total executado: **142**
-- Aprovados: **142**
+- Total executado: **154**
+- Aprovados: **154**
 - Reprovados: **0**
 - Ignorados: 0
-- Duração: 20.9 s
+- Duração: 21.3 s
 
 | Arquivo | Testes | Cobre |
 |---|---|---|
@@ -49,6 +49,7 @@ Amostras: **150** execuções consecutivas, 1 rosto, após aquecimento.
 | `test_inferencia.py` | 19 | pré-processamento, classes, softmax, inferência real |
 | `test_calibracao.py` | 16 |  |
 | `test_robustez.py` | 13 | regressões da auditoria de segurança |
+| `test_icone.py` | 12 |  |
 | `test_camera.py` | 11 | ciclo de vida da captura e liberação de recursos |
 | `test_interface.py` | 11 | tema, componentes, janela e encerramento |
 | `test_modelos.py` | 11 | dependências, integridade SHA-256, carregamento |

@@ -16,14 +16,14 @@ apresentação em tela cheia.
 ## Desempenho (CPU, sem GPU dedicada)
 
 Em AMD Ryzen 7 7435HS, com 150 amostras consecutivas sobre um rosto, o
-ciclo completo de detecção e classificação levou em média **17,35 ms**,
-equivalente a cerca de **58 inferências por segundo**. A detecção consome
+ciclo completo de detecção e classificação levou em média **18,92 ms**,
+equivalente a cerca de **53 inferências por segundo**. A detecção consome
 aproximadamente quatro quintos desse tempo: o gargalo é localizar o rosto, não
 reconhecer a expressão. Os modelos carregam em cerca de 120 ms.
 
 ## Verificação automatizada
 
-A suíte executa **142 testes, todos aprovados**, utilizando os modelos ONNX
+A suíte executa **154 testes, todos aprovados**, utilizando os modelos ONNX
 reais — mocks são empregados apenas no ciclo de vida da câmera. Em ensaio de
 **30 minutos contínuos**, o sistema completou **95.811 ciclos** com variação de
 apenas **+3,2%** entre a primeira e a segunda metade e memória estável em

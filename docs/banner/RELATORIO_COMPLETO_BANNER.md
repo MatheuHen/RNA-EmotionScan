@@ -201,7 +201,7 @@ apresentação (1920×1080, sem barra de tarefas), com o rosto do próprio autor
 | 04 | `02_capturas/figura_04_neutra.png` | 1920×1080 | **Neutra 89,9%** (Alegria 8,5%) · 30,1 FPS · inferência 3,2 ms |
 | 05 | `02_capturas/figura_05_painel_classificacao.png` | 400×924 | recorte do painel das 7 pontuações |
 | 06 | `02_capturas/figura_06_sobre_o_projeto.png` | 1100×760 | janela "Sobre o Projeto" |
-| 07 | `05_evidencias/figura_07b_resumo_testes.png` | 2280×690 | 142 aprovados · 0 reprovados |
+| 07 | `05_evidencias/figura_07b_resumo_testes.png` | 2280×690 | 154 aprovados · 0 reprovados |
 | 08 | `05_evidencias/figura_08_desempenho.png` | 3040×1680 | tempos medidos por etapa |
 
 ### Desempenho observado com webcam real
@@ -324,9 +324,9 @@ pipeline de inferência.
 
 | Etapa | Média | Mediana | Mínimo | Máximo | Desvio padrão |
 |---|---|---|---|---|---|
-| Detecção (YuNet) | **13,63 ms** | — | — | — | — |
-| Classificação (MobileFaceNet) | **2,91 ms** | — | — | — | — |
-| **Ciclo completo** | **17,35 ms** | — | — | — | — |
+| Detecção (YuNet) | **14,82 ms** | — | — | — | — |
+| Classificação (MobileFaceNet) | **3,10 ms** | — | — | — | — |
+| **Ciclo completo** | **18,92 ms** | — | — | — | — |
 
 - **FPS equivalente de inferência: 38,2 por segundo** (1 rosto).
 - **Tempo de inicialização:** 119,2 ms para carregar os dois modelos +
@@ -343,7 +343,7 @@ pipeline de inferência.
 > frequência e carga da CPU junto de cada medição. **Para o banner, recomenda-se
 > usar o número medido no dia, com o notebook na tomada e aplicativos fechados.**
 
-## 5.142 testes automatizados
+## 5.154 testes automatizados
 
 | Métrica | Valor |
 |---|---|
@@ -451,7 +451,7 @@ precisão e revocação por classe.
 |---|---|---|
 | **Acurácia de classificação** | fração de previsões corretas sobre dados rotulados | **não medida** |
 | **Confiança da previsão** | probabilidade atribuída pelo modelo à classe vencedora | medida e exibida em tempo real; **não garante acerto** |
-| **Desempenho computacional** | tempo de processamento por quadro | 17,35 ms de média |
+| **Desempenho computacional** | tempo de processamento por quadro | 18,92 ms de média |
 
 ---
 
@@ -490,8 +490,8 @@ internamente consistentes entre texto, tabelas e gráficos.
 
 ```
 ┌──────────────────────────────────────────────────────────┐
-│  26 ms por ciclo  ·  ~58 inferências/s  ·  somente CPU   │
-│  142 testes automatizados aprovados                      │
+│  26 ms por ciclo  ·  ~53 inferências/s  ·  somente CPU   │
+│  154 testes automatizados aprovados                      │
 │  95.811 ciclos em 30 min sem degradação                  │
 │  100% offline — nenhuma imagem sai do computador         │
 └──────────────────────────────────────────────────────────┘

@@ -63,11 +63,11 @@ Redes Neurais Artificiais (RNA) · Prof. Sandro Silva Moreira
 
 ## 6. Resultados e conclusões (texto pronto, ~160 palavras)
 
-> O sistema processa um ciclo completo de detecção e classificação em **17,35 ms
-> em média** (desvio padrão 1,14 ms) em CPU AMD Zen 3, equivalente a **58
+> O sistema processa um ciclo completo de detecção e classificação em **18,92 ms
+> em média** (desvio padrão 1,05 ms) em CPU AMD Zen 3, equivalente a **58
 > inferências por segundo** — folga confortável para vídeo fluido. A detecção
 > consome 15,98 ms e a classificação apenas 3,47 ms: o gargalo é localizar o
-> rosto, não reconhecer a expressão. A suíte automatizada executa **142 testes**
+> rosto, não reconhecer a expressão. A suíte automatizada executa **154 testes**
 > com os modelos reais, todos aprovados.
 >
 > O resultado mais relevante, porém, é outro. Submetido a 14 variações
@@ -85,8 +85,8 @@ Redes Neurais Artificiais (RNA) · Prof. Sandro Silva Moreira
 
 ```
 ┌──────────────────────────────────────────────────┐
-│  20,36 ms por ciclo  ·  ~58 inferências/s  ·  CPU │
-│  142 testes automatizados aprovados               │
+│  20,36 ms por ciclo  ·  ~53 inferências/s  ·  CPU │
+│  154 testes automatizados aprovados               │
 │  100% offline  ·  nenhuma imagem sai do PC        │
 └──────────────────────────────────────────────────┘
 ```

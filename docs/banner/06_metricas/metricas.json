@@ -1,10 +1,10 @@
 {
-  "gerado_em": "2026-11-26T13:05:03",
+  "gerado_em": "2026-11-26T14:32:03",
   "hardware_de_teste": {
     "processador": "AMD Ryzen 7 7435HS",
     "clock_atual_mhz": 3100,
     "clock_maximo_mhz": 3100,
-    "carga_percent": 7,
+    "carga_percent": 6,
     "nucleos_logicos": 16,
     "memoria_total_gb": 7.8,
     "gpu_utilizada": "nenhuma — inferência somente em CPU (DNN_TARGET_CPU)",
@@ -60,15 +60,15 @@
     ]
   },
   "inicializacao": {
-    "carregamento_dos_modelos_ms": 65.0,
-    "aquecimento_da_rede_ms": 47.37
+    "carregamento_dos_modelos_ms": 28.9,
+    "aquecimento_da_rede_ms": 11.36
   },
   "testes_automatizados": {
-    "total": 142,
-    "aprovados": 142,
+    "total": 154,
+    "aprovados": 154,
     "reprovados": 0,
     "ignorados": 0,
-    "duracao_s": 20.86,
+    "duracao_s": 21.28,
     "codigo_saida": 0,
     "por_arquivo": [
       {
@@ -97,6 +97,11 @@
         "cobre": "regressões da auditoria de segurança"
       },
       {
+        "arquivo": "test_icone.py",
+        "quantidade": 12,
+        "cobre": ""
+      },
+      {
         "arquivo": "test_camera.py",
         "quantidade": 11,
         "cobre": "ciclo de vida da captura e liberação de recursos"
@@ -122,32 +127,32 @@
   },
   "desempenho": {
     "ciclo_completo": {
-      "media_ms": 17.35,
-      "mediana_ms": 17.06,
-      "minimo_ms": 15.72,
-      "maximo_ms": 22.71,
-      "desvio_padrao_ms": 1.14,
+      "media_ms": 18.92,
+      "mediana_ms": 18.7,
+      "minimo_ms": 17.42,
+      "maximo_ms": 22.81,
+      "desvio_padrao_ms": 1.05,
       "amostras": 150
     },
     "deteccao": {
-      "media_ms": 13.63,
-      "mediana_ms": 13.48,
-      "minimo_ms": 12.42,
-      "maximo_ms": 16.22,
-      "desvio_padrao_ms": 0.87,
+      "media_ms": 14.82,
+      "mediana_ms": 14.62,
+      "minimo_ms": 13.51,
+      "maximo_ms": 18.29,
+      "desvio_padrao_ms": 0.91,
       "amostras": 150
     },
     "classificacao": {
-      "media_ms": 2.91,
-      "mediana_ms": 2.77,
-      "minimo_ms": 2.51,
-      "maximo_ms": 4.93,
-      "desvio_padrao_ms": 0.37,
+      "media_ms": 3.1,
+      "mediana_ms": 3.1,
+      "minimo_ms": 2.59,
+      "maximo_ms": 3.92,
+      "desvio_padrao_ms": 0.31,
       "amostras": 150
     },
-    "fps_equivalente_1_rosto": 57.7
+    "fps_equivalente_1_rosto": 52.9
   },
-  "memoria_processo_mb": 77.8,
+  "memoria_processo_mb": 77.5,
   "condicoes": [
     {
       "condicao": "Iluminação muito reduzida",

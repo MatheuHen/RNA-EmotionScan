@@ -55,8 +55,8 @@ pessoas reais**, que não pode ser automatizada.
 
 ## Resultados medidos
 
-- Ciclo completo: **17,35 ms** de média (desvio padrão 1,14 ms) em CPU AMD Zen 3.
-- Detecção 15,98 ms · Classificação 3,47 ms · ~58 ciclos/s.
+- Ciclo completo: **18,92 ms** de média (desvio padrão 1,05 ms) em CPU AMD Zen 3.
+- Detecção 15,98 ms · Classificação 3,47 ms · ~53 ciclos/s.
 - Carregamento dos modelos: 66,8 ms.
 - Suíte automatizada: **142 testes aprovados**.
 

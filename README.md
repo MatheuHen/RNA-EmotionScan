@@ -80,9 +80,9 @@ Windows 10, AMD64 Zen 3, somente CPU, 1 rosto, 150 amostras:
 
 | Etapa | Média |
 |---|---|
-| Detecção (YuNet) | 13,63 ms |
-| Classificação (MobileFaceNet) | 2,91 ms |
-| **Ciclo completo** | **20,36 ms (~58 ciclos/s)** |
+| Detecção (YuNet) | 14,82 ms |
+| Classificação (MobileFaceNet) | 3,10 ms |
+| **Ciclo completo** | **20,36 ms (~53 ciclos/s)** |
 
 Dados completos em [`evidencias/medicoes.md`](evidencias/medicoes.md).
 
@@ -157,7 +157,7 @@ ExpressaoNeural/
 │  └─ utils/ambiente.py    diagnóstico (RF01)
 ├─ models/                 arquivos ONNX (não versionados)
 ├─ scripts/                download de modelos, verificação, evidências
-├─ tests/                  142 testes automatizados
+├─ tests/                  154 testes automatizados
 ├─ docs/                   documentação técnica e acadêmica
 └─ evidencias/             capturas, gráficos e medições reais
 ```
