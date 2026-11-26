@@ -43,11 +43,13 @@ ROTEIRO = [
     ("figura_01_tela_principal.png", "Figura 01 — Tela principal",
      "Deixe a tela como está. Se a câmera estiver ligada, ótimo.", None),
     ("figura_02_alegria.png", "Figura 02 — Expressão de ALEGRIA",
-     "Sorria abertamente, mostrando os dentes, olhando para a câmera.", "Alegria"),
+     "Um sorriso natural, como numa conversa. Não precisa exagerar.", "Alegria"),
     ("figura_03_surpresa.png", "Figura 03 — Expressão de SURPRESA",
-     "Arregale os olhos e abra a boca, sobrancelhas bem levantadas.", "Surpresa"),
+     "Levante as sobrancelhas e abra um pouco a boca. Surpresa leve basta.",
+     "Surpresa"),
     ("figura_04_neutra.png", "Figura 04 — Expressão NEUTRA",
-     "Relaxe o rosto completamente, sem sorrir e sem franzir a testa.", "Neutra"),
+     "Rosto relaxado, como em repouso. É a expressão mais fácil de acertar.",
+     "Neutra"),
     ("figura_05_painel_classificacao.png", "Figura 05 — Painel de classificação",
      "Mantenha o rosto enquadrado; será salvo um recorte do painel lateral.", None),
     ("figura_06_sobre_o_projeto.png", "Figura 06 — Janela Sobre o Projeto",
@@ -287,23 +289,39 @@ def main() -> int:  # noqa: C901
                         assistente.estado("nenhum rosto detectado", tema.TEXTO_FRACO)
                         assistente.pronto(classe_alvo is None)
                     else:
-                        limiar = janela.ajustes.limiar_confianca
-                        rotulo = alvo_res.rotulo_exibicao(limiar)
+                        # Compara com a PREVISAO DO MODELO (argmax), nao com o
+                        # rotulo filtrado pelo limiar. Uma expressao natural que
+                        # vence com 45% ja e um acerto do modelo; exigir que
+                        # passe do limiar obrigava a exagerar a expressao.
+                        rotulo = alvo_res.rotulo
                         conf = alvo_res.confianca * 100
-                        if classe_alvo and rotulo == classe_alvo:
+                        acertou = classe_alvo is None or rotulo == classe_alvo
+                        if classe_alvo and acertou:
                             cor, marca = tema.SUCESSO, "PRONTO  "
                         elif classe_alvo:
                             cor, marca = tema.ALERTA, "ajuste   "
                         else:
-                            cor, marca = tema.PRIMARIA, "         "
+                            cor, marca = tema.PRIMARIA, "        "
+
+                        # Segunda colocada: ajuda a entender por que a rede
+                        # hesita quando a expressao e sutil.
+                        probs = alvo_res.probabilidades
+                        ordem = sorted(
+                            range(len(probs)), key=lambda i: float(probs[i]),
+                            reverse=True,
+                        )
+                        segunda = (
+                            f"   2ª: {config.CLASSES_PT[ordem[1]]} "
+                            f"{float(probs[ordem[1]]) * 100:.0f}%"
+                            if len(ordem) > 1 else ""
+                        )
                         assistente.estado(
                             f"{marca}{rotulo}  {conf:.0f}%"
-                            + (f"   (alvo: {classe_alvo})" if classe_alvo else ""),
+                            + (f"   (alvo: {classe_alvo})" if classe_alvo else "")
+                            + segunda,
                             cor,
                         )
-                        assistente.pronto(
-                            classe_alvo is None or rotulo == classe_alvo
-                        )
+                        assistente.pronto(acertou)
                 except tk.TclError:
                     # Janela fechada pelo usuario no meio do roteiro.
                     print("   (janela fechada — encerrando o roteiro)")

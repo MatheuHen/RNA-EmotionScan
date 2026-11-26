@@ -92,14 +92,21 @@ class Ajustes:
     fps_alvo: int = 30
     # Executa a inferencia a cada N quadros capturados (1 = todos os quadros)
     inferir_a_cada: int = 2
-    limiar_confianca: float = 0.50
+    # 0,35 em vez de 0,50: expressoes NATURAIS (sorriso leve, surpresa discreta)
+    # costumam vencer com 35-55% de confianca. Com o limiar em 0,50 a previsao
+    # correta do modelo era rotulada "Indefinida", obrigando o usuario a exagerar
+    # a expressao -- o que nao representa uso real nem apresentacao ao publico.
+    # O valor continua ajustavel na interface.
+    limiar_confianca: float = 0.35
     limiar_deteccao: float = 0.85
     limiar_nms: float = 0.30
     max_rostos: int = 5
     multiplos_rostos: bool = True
     suavizacao_ativa: bool = True
-    # Peso do quadro novo na media exponencial (1.0 = sem suavizacao)
-    suavizacao_alfa: float = 0.40
+    # Peso do quadro novo na media exponencial (1.0 = sem suavizacao).
+    # 0,55 responde mais rapido a mudanca de expressao sem voltar a oscilar:
+    # com 0,40 uma expressao sutil levava varios quadros para aparecer.
+    suavizacao_alfa: float = 0.55
     espelhar_imagem: bool = True
 
     def salvar(self, caminho: Path = ARQ_CONFIG_USUARIO) -> None:

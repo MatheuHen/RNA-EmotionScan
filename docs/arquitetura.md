@@ -191,6 +191,30 @@ proporcional ao tamanho do rosto. Uma trilha não pode ser reivindicada duas
 vezes no mesmo quadro. Trilhas ausentes por mais de 5 quadros são descartadas,
 o que impede vazamento de memória e garante o requisito RF10.
 
+### 4.7-A Limiar de confiança: 0,35, não 0,50
+
+O limiar separa "exibir a expressão" de "exibir *Expressão não identificada com
+confiança suficiente*". Ele **não altera a previsão do modelo** — apenas decide
+se o rótulo é mostrado.
+
+O padrão inicial de 0,50 se mostrou alto na validação com webcam: expressões
+**naturais** (sorriso de conversa, surpresa discreta) costumam vencer com 35% a
+55% de confiança. Com 0,50, uma previsão correta do modelo aparecia como
+"Indefinida", obrigando o usuário a exagerar a expressão — o que não representa
+uso real nem funciona bem numa demonstração a visitantes.
+
+O padrão passou a **0,35**, e continua ajustável na interface. Duas
+consequências que devem ser comunicadas:
+
+- expressões sutis passam a ser rotuladas, com a confiança real sempre visível
+  ao lado — o usuário vê que a decisão foi apertada;
+- a taxa de rótulos errados exibidos aumenta, porque menos previsões ficam
+  retidas. Por isso o gráfico das sete pontuações é exibido sempre: ele mostra a
+  disputa real entre as classes.
+
+Pela mesma razão, `suavizacao_alfa` subiu de 0,40 para **0,55**: com 0,40 uma
+expressão sutil levava vários quadros para se firmar no gráfico.
+
 ### 4.8 Serialização do acesso aos modelos
 
 `cv2.dnn.Net` e `cv2.FaceDetectorYN` **não são thread-safe**: `setInput`/`forward`
