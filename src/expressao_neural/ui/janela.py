@@ -807,6 +807,7 @@ class JanelaPrincipal(tk.Tk):
         alvo = resultado.principal
         if alvo is None:
             self._limpar_resultados(manter_contadores=True)
+            self._status_da_captura(resultado)
             return
 
         indice = alvo.indice
@@ -829,15 +830,48 @@ class JanelaPrincipal(tk.Tk):
             f"{alvo.estabilidade * 100:.0f}%" if self.ajustes.suavizacao_ativa else "desligada",
             tema.SUCESSO if alvo.estabilidade > 0.7 else tema.ALERTA,
         )
-        if resultado.quantidade_rostos > 1:
-            extras = ", ".join(
-                f"{r.rotulo_exibicao(limiar)}" for r in resultado.rostos[1:4]
-            )
+        self._status_da_captura(resultado)
+
+    def _status_da_captura(self, resultado: ResultadoQuadro) -> None:
+        """Mantém o rodapé coerente com o quadro ATUAL.
+
+        Antes, o status só era escrito quando havia mais de um rosto e nunca
+        voltava atrás: uma detecção falsa momentânea de 2 rostos deixava o
+        rodapé congelado contradizendo o painel lateral.
+        """
+        if self._modo not in ("ativo", "pausado"):
+            return  # imagem estática e erros têm mensagens próprias
+        t = self._trabalhador
+        if t is not None and t.erro:
+            return  # a mensagem de erro tem prioridade
+        if t is not None and t.pausado:
             self._definir_status(
-                f"{resultado.quantidade_rostos} rostos — principal: "
-                f"{alvo.rotulo_exibicao(limiar)}; outros: {extras}.",
-                tema.SUCESSO,
+                "Captura pausada — a câmera continua reservada.", tema.ALERTA
             )
+            return
+
+        limiar = self.ajustes.limiar_confianca
+        quantidade = resultado.quantidade_rostos
+        if quantidade == 0:
+            self._definir_status(
+                "Câmera ativa — nenhum rosto no enquadramento.", tema.TEXTO_SECUNDARIO
+            )
+            return
+        if quantidade == 1:
+            self._definir_status(
+                "Câmera ativa — classificação em tempo real.", tema.SUCESSO
+            )
+            return
+
+        alvo = resultado.principal
+        extras = ", ".join(r.rotulo_exibicao(limiar) for r in resultado.rostos[1:4])
+        if quantidade > 4:
+            extras += ", …"
+        self._definir_status(
+            f"{quantidade} rostos — principal: {alvo.rotulo_exibicao(limiar)}; "
+            f"outros: {extras}.",
+            tema.SUCESSO,
+        )
 
     def _limpar_resultados(self, manter_contadores: bool = False) -> None:
         """RF10: ao perder o rosto, nenhum resultado antigo permanece na tela."""

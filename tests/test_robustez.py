@@ -288,3 +288,74 @@ def test_analisar_imagem_encerra_captura_mesmo_em_modo_erro(
         assert janela._modo == "imagem"
     finally:
         janela.encerrar()
+
+
+# ================== rodape nao pode contradizer o painel lateral
+@modelos_disponiveis
+def test_status_volta_ao_normal_depois_de_multiplos_rostos(
+    imagem_rosto, imagem_multiplos_rostos
+) -> None:
+    """Regressão: uma detecção falsa de 2 rostos congelava o rodapé.
+
+    O texto "2 rostos — principal: Neutra; outros: Alegria" permanecia visível
+    mesmo quando o quadro seguinte tinha 1 rosto classificado de outra forma,
+    contradizendo o painel lateral na captura do banner.
+    """
+    tk = pytest.importorskip("tkinter")
+    from expressao_neural.core.pipeline import PipelineExpressao
+    from expressao_neural.ui.janela import JanelaPrincipal
+
+    try:
+        janela = JanelaPrincipal()
+    except tk.TclError:  # pragma: no cover
+        pytest.skip("ambiente sem interface gráfica disponível")
+
+    try:
+        p = PipelineExpressao(Ajustes(multiplos_rostos=True, max_rostos=5))
+        janela._modo = "ativo"  # simula câmera ligada, sem abrir dispositivo
+
+        multi = p.processar(imagem_multiplos_rostos, suavizar=False)
+        if multi.quantidade_rostos < 2:
+            pytest.skip("fixture não produziu dois rostos")
+        janela._atualizar_paineis(multi)
+        janela.update_idletasks()
+        assert "rostos" in janela._mensagem_status
+
+        # Quadro seguinte com UM rosto: o rodapé precisa acompanhar.
+        p.reiniciar_estado()
+        um = p.processar(imagem_rosto, suavizar=False)
+        assert um.quantidade_rostos == 1
+        janela._atualizar_paineis(um)
+        janela.update_idletasks()
+        assert "2 rostos" not in janela._mensagem_status
+        assert "classificação em tempo real" in janela._mensagem_status
+
+        # E sem nenhum rosto, idem.
+        from expressao_neural.core.pipeline import ResultadoQuadro
+
+        janela._atualizar_paineis(ResultadoQuadro())
+        janela.update_idletasks()
+        assert "nenhum rosto" in janela._mensagem_status.lower()
+        p.liberar()
+    finally:
+        janela.encerrar()
+
+
+def test_status_de_captura_nao_sobrescreve_modo_imagem() -> None:
+    """Em análise de imagem estática o rodapé tem mensagem própria."""
+    tk = pytest.importorskip("tkinter")
+    from expressao_neural.core.pipeline import ResultadoQuadro
+    from expressao_neural.ui.janela import JanelaPrincipal
+    from expressao_neural.ui import tema
+
+    try:
+        janela = JanelaPrincipal()
+    except tk.TclError:  # pragma: no cover
+        pytest.skip("ambiente sem interface gráfica disponível")
+    try:
+        janela._modo = "imagem"
+        janela._definir_status("foto.jpg: 1 rosto classificado.", tema.SUCESSO)
+        janela._status_da_captura(ResultadoQuadro())
+        assert janela._mensagem_status == "foto.jpg: 1 rosto classificado."
+    finally:
+        janela.encerrar()
