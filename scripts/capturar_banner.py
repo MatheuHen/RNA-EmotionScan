@@ -161,18 +161,22 @@ def _salvar_tela(janela: tk.Tk, caminho: Path, recorte=None) -> bool:
 
 def main() -> int:  # noqa: C901
     DESTINO.mkdir(parents=True, exist_ok=True)
-    # Nao perder uma captura boa por causa de uma repetida ruim.
+    # As capturas anteriores sao COPIADAS para _anteriores/, nunca movidas.
+    #
+    # Antes eram movidas, e isso ja causou perda real: ao abrir o roteiro e
+    # fechar sem capturar nada, a pasta principal ficava vazia e o material do
+    # banner perdia as figuras. Copiar custa alguns MB e elimina o risco --
+    # cada figura capturada sobrescreve a sua no destino, individualmente.
     anteriores = sorted(DESTINO.glob("figura_*.png"))
     if anteriores:
+        import shutil
+
         reserva = DESTINO / "_anteriores"
         reserva.mkdir(exist_ok=True)
         for f in anteriores:
-            destino = reserva / f.name
-            if destino.exists():
-                destino.unlink()
-            f.rename(destino)
-        print(f"({len(anteriores)} captura(s) anterior(es) movida(s) para "
-              f"{reserva.name}/)")
+            shutil.copy2(f, reserva / f.name)
+        print(f"({len(anteriores)} captura(s) anterior(es) copiada(s) para "
+              f"{reserva.name}/ — as atuais só são substituídas se você capturar)")
     print("=" * 72)
     print(" EmotionScan — captura assistida para o banner")
     print("=" * 72)

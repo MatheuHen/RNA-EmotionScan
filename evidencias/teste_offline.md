@@ -2,7 +2,7 @@
 
 **Resultado: APROVADO**
 
-- Executado em: 26/11/2026 às 16:00:05
+- Executado em: 26/11/2026 às 16:17:51
 - Duração: 38 s
 - Sistema: Windows 10
 - Versão do sistema: EmotionScan v1.3
@@ -28,11 +28,11 @@ Antes de qualquer verificação, o script tentou alcançar 5 alvos conhecidos (D
 
 | Item | Valor |
 |---|---|
-| Carregamento dos modelos | 130,0 ms |
+| Carregamento dos modelos | 70,0 ms |
 | Classe prevista na imagem de referência | Neutra |
 | Confiança | 62,0% |
-| Ciclo completo | 16,88 ms |
-| Suíte de testes | 159 passed, 1 deselected in 35.20s |
+| Ciclo completo | 16,85 ms |
+| Suíte de testes | 158 passed, 1 skipped, 1 deselected in 34.82s |
 
 ## O que este teste comprova
 
