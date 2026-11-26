@@ -2,60 +2,51 @@
 
 Apresentação: **30/11/2026**.
 
-## 🔴 Obrigatório antes da apresentação (só você pode fazer)
+## ✅ Concluído e verificado
 
-Guia completo em [`docs/checklist_validacao.md`](docs/checklist_validacao.md).
+| Item | Evidência |
+|---|---|
+| Sistema funcional com as 7 expressões | `docs/banner/02_capturas/` |
+| Treinamento da camada de calibração | `docs/treinamento.md` · 67,9% → 94,6% |
+| Teste offline com a rede desligada | `evidencias/teste_offline.md` · APROVADO |
+| Execução prolongada (30 min) | `evidencias/execucao_prolongada.log` |
+| Suíte automatizada | **154 testes aprovados** |
+| Material do banner | `docs/banner/EmotionScan_MaterialBanner.zip` |
+| Auditoria técnica | `docs/banner/AUDITORIA_TECNICA_FINAL_EMOTIONSCAN.md` |
 
-- [ ] **Teste offline** — desligar Wi-Fi e cabo, executar `verificar.bat` e
-      `iniciar.bat`, confirmar classificação em tempo real sem rede.
-      *(Única pendência que invalida o requisito de funcionamento offline se falhar.)*
-- [ ] **Teste com webcam física** — iniciar, pausar, retomar, reiniciar,
-      encerrar; confirmar que a luz da câmera apaga ao encerrar.
-- [ ] **Teste com pessoas** — reproduzir as 7 expressões e anotar previsão e
-      confiança na tabela da seção D do checklist.
-- [ ] **Sessão de 30 minutos com a câmera ligada** — anotar FPS e memória no
-      início e no fim.
-- [ ] **Teste com desconexão da webcam durante a execução** — confirmar mensagem
-      clara e ausência de travamento.
-- [ ] **Teste em outra resolução de tela** (segundo notebook ou escala do Windows).
-- [ ] Preparar 3 a 5 **imagens de contingência** numa pasta conhecida.
+## 🔴 Véspera da apresentação
 
-## 🟡 Véspera do evento
-
+- [ ] Notebook **na tomada** (em bateria a CPU reduz a frequência e o FPS cai).
 - [ ] Desativar suspensão automática de tela e disco.
 - [ ] Desativar notificações do Windows (Assistente de Foco).
-- [ ] Fechar Teams, Zoom, Meet e qualquer programa que use a câmera.
-- [ ] Executar `verificar.bat` uma última vez no local do evento.
-- [ ] Testar com a **iluminação real** do local.
-- [ ] Criar atalho de `iniciar.bat` na área de trabalho.
-- [ ] Levar carregador e confirmar tomada.
+- [ ] Fechar Teams, Zoom, Meet e navegador — qualquer coisa que use a câmera
+      ou consuma CPU.
+- [ ] Rodar `verificar.bat` **no local**, com a iluminação real do evento.
+- [ ] Atalho de `iniciar.bat` na área de trabalho.
+- [ ] 3 a 5 imagens de contingência numa pasta conhecida, caso a webcam falhe.
 
-## 🟢 Banner (modelo oficial do professor)
+## 🟡 Ensaio recomendado
 
-Conteúdo pronto em [`docs/banner.md`](docs/banner.md): textos de Introdução,
-Metodologia e Resultados, caixa de destaque, paleta, diagrama e referências.
+- [ ] Testar com outras pessoas — ver seção D de `docs/checklist_validacao.md`.
+      Alegria, Surpresa e Neutra são confiáveis; Medo, Tristeza e Nojo erram
+      mais. Isso é esperado e está documentado como limitação.
+- [ ] Deixar rodando 30 min **com a câmera ligada** (seção H).
+- [ ] Testar em outra resolução de tela, se for usar projetor.
 
-- [ ] Montar no modelo oficial — 90×120 cm, vertical, 3402×4535 px no Canva.
-- [ ] Usar as imagens de `evidencias/`.
-- [ ] Revisar a seção 12 de `docs/banner.md` (**o que NÃO escrever**) antes de
-      finalizar.
+## 🟢 Banner
 
-## 🔵 Opcional — só se houver tempo e sem risco ao escopo
+Material pronto em `docs/banner/`. Antes de imprimir, releia a seção 8.3 do
+`RELATORIO_COMPLETO_BANNER.md` — a lista do que **não** escrever.
 
-- [ ] **Acurácia própria**: executar o protocolo de `docs/testes.md` §6 com
-      voluntários e consentimento registrado. Renderia uma matriz de confusão
-      própria para o banner — mas exige tempo e pessoas.
-- [ ] **Modo desafio de expressões** (item 7 do escopo original). Só avaliar
-      depois que todas as validações acima estiverem fechadas; **não implementar
-      se comprometer o prazo**. O reconhecimento continua sendo o objetivo
-      principal.
-- [ ] Capturar uma tela da interface com o seu próprio rosto para o banner
-      (substituindo a imagem de referência atual).
+- [ ] Montar no modelo oficial — 90×120 cm, 3402×4535 px no Canva.
 
-## ⚪ Não fazer
+## ⚪ Nunca
 
-- ❌ Publicar em repositório remoto sem autorização explícita.
+- ❌ Citar **94,6%** sem o contexto "56 amostras de teste do próprio autor,
+      expressões encenadas".
+- ❌ Dizer "treinei uma rede neural" — treinei uma **camada de calibração de
+      56 parâmetros** sobre modelos congelados.
+- ❌ Citar **FER2013** — não aparece em nenhuma fonte oficial destes modelos.
+- ❌ Atribuir os **88,27% em RAF-DB** a este sistema.
+- ❌ Publicar em repositório remoto sem autorização.
 - ❌ Versionar fotos de terceiros.
-- ❌ Afirmar acurácia própria antes de medi-la.
-- ❌ Adicionar TensorFlow, PyTorch ou onnxruntime.
-- ❌ Adicionar qualquer chamada de rede dentro de `src/`.

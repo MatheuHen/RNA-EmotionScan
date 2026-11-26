@@ -154,9 +154,11 @@ desempenho perceptível.**
 - A **detecção custa ~4.6× mais que a
   classificação**. O gargalo é o YuNet varrendo o quadro inteiro, não a rede de
   expressões.
-- Com a webcam a 30 FPS, o orçamento por quadro é de 33 ms. O ciclo de
-  20,36 ms cabe nele, e por isso `inferir_a_cada = 1` (padrão):
-  todo quadro é analisado, sem pular nenhum.
+- Com a webcam a 30 FPS, o orçamento por quadro é de 33 ms — mas `cap.read()`
+  **sozinho já consome esse orçamento**, porque bloqueia até o próximo quadro
+  nascer. Por isso a leitura e a inferência rodam em **threads separadas**:
+  a captura publica o quadro na hora, e a análise alcança o quadro seguinte.
+  Medido: 30,2 FPS com a câmera real, contra 15 na arquitetura anterior.
 - **FPS da webcam ≠ inferências por segundo.** A câmera entrega 30 quadros/s; o
   pipeline aguenta 49/s. A câmera é o gargalo,
   não a rede neural.

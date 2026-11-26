@@ -125,12 +125,34 @@ def main(argv: list[str] | None = None) -> int:
         (r"\b(\d{2,})\s+testes,\s*todos aprovados", aprov, "contagem de testes"),
     ]
     # Afirmações literais que não dependem de medição
-    literais: list[tuple[str, str]] = [
-        (r"α\s*=\s*0,40", "alfa da suavização (atual: 0,55)"),
-        (r"limiar de confiança[^.\n]{0,24}0,50", "limiar de confiança (atual: 0,35)"),
-        (r"`inferir_a_cada = 2`", "passo de inferência (atual: 1)"),
-        (r"com `inferir_a_cada = 2`", "passo de inferência (atual: 1)"),
-    ]
+    # Comparadas com os PADRÕES REAIS lidos de config.py, nunca com valores
+    # escritos à mão aqui. Uma regra de valor fixo envelhece junto com o código
+    # e passa a acusar o que está correto — foi o que aconteceu quando
+    # `inferir_a_cada` voltou de 1 para 2 e o verificador continuou cobrando 1.
+    sys.path.insert(0, str(RAIZ / "src"))
+    from expressao_neural.config import Ajustes  # noqa: E402
+
+    padrao = Ajustes()
+    alfa = f"{padrao.suavizacao_alfa:.2f}".replace(".", ",")
+    limiar = f"{padrao.limiar_confianca:.2f}".replace(".", ",")
+
+    literais: list[tuple[str, str]] = []
+    for valor in ("0,30", "0,35", "0,40", "0,45", "0,50", "0,55", "0,60"):
+        if valor != alfa:
+            literais.append(
+                (rf"α\s*=\s*{valor}\b", f"alfa da suavização (atual: {alfa})")
+            )
+        if valor != limiar:
+            literais.append((
+                rf"limiar de confiança[^.\n]{{0,24}}{valor}\b",
+                f"limiar de confiança (atual: {limiar})",
+            ))
+    for n in (1, 2, 3, 4):
+        if n != padrao.inferir_a_cada:
+            literais.append((
+                rf"`inferir_a_cada = {n}` \(padrão\)",
+                f"passo de inferência (atual: {padrao.inferir_a_cada})",
+            ))
 
     achados = 0
     for doc in documentos():
