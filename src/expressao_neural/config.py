@@ -21,7 +21,7 @@ ARQ_CONFIG_USUARIO = RAIZ / "config.local.json"
 # ---------------------------------------------------- identidade academica
 APP_NOME = "Expressão Neural"
 APP_DESCRICAO = "Reconhecimento de expressões faciais em tempo real com redes neurais"
-APP_VERSAO = "1.0.0"
+APP_VERSAO = "1.3"
 ACADEMICO = "Matheus Henrique de Araújo Carneiro"
 EMAIL = "matheus.carneiro@academico.unirv.edu.br"
 CURSO = "Engenharia de Software — UniRV"
