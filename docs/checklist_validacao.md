@@ -19,7 +19,7 @@ Marque cada item e anote o resultado. Reserve cerca de 40 minutos.
 **Existe um script que faz isso sozinho e grava a evidência:**
 
 ```bat
-offline.bat
+testar_offline.bat
 ```
 
 Ele se recusa a rodar com a internet ligada — validar modo offline com rede
@@ -29,7 +29,7 @@ acessível não prova nada. Ao terminar, grava `evidencias/teste_offline.md`.
 
 - [ ] **1. Desligue a rede.** Clique no ícone de rede na bandeja (canto
       inferior direito), desligue o Wi-Fi e desconecte o cabo, se houver.
-- [ ] **2. Execute `offline.bat`.** Ele confirma que a rede está fora e então
+- [ ] **2. Execute `testar_offline.bat`.** Ele confirma que a rede está fora e então
       verifica, nesta ordem:
       integridade dos modelos (SHA-256) · carregamento · inferência real ·
       distribuição somando 1,0 · ausência de rosto · suíte de testes ·

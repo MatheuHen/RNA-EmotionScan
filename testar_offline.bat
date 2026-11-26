@@ -11,8 +11,16 @@ if not exist "%PY%" (
 )
 
 echo ========================================================================
-echo  EMOTIONSCAN - teste de funcionamento OFFLINE
+echo  EMOTIONSCAN - TESTE de funcionamento sem internet
 echo ========================================================================
+echo.
+echo  ISTO NAO E UM INICIALIZADOR.
+echo.
+echo  Para usar o sistema, normalmente, use iniciar.bat - ele ja funciona
+echo  COM ou SEM rede. O sistema nao faz nenhuma chamada de internet.
+echo.
+echo  Este script existe so para COMPROVAR isso e gravar a evidencia para
+echo  o trabalho academico.
 echo.
 echo  ANTES DE CONTINUAR, desligue a rede:
 echo.
