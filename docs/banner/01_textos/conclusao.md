@@ -3,7 +3,7 @@
 > Pode ser incorporada ao final da seção de Resultados, conforme o modelo
 > oficial. ~120 palavras.
 
-O objetivo geral foi alcançado: o **Expressão Neural** é uma aplicação funcional
+O objetivo geral foi alcançado: o **EmotionScan** é uma aplicação funcional
 que classifica expressões faciais em tempo real por meio de duas redes neurais
 convolucionais reais, executando integralmente em CPU e sem conexão com a
 internet, com desempenho de 20,36 ms por ciclo — folga confortável para vídeo

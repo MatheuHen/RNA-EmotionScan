@@ -12,7 +12,7 @@ if not exist "%PY%" (
 )
 
 echo ========================================================================
-echo  EXPRESSAO NEURAL - Testes automatizados
+echo  EMOTIONSCAN - Testes automatizados
 echo ========================================================================
 echo.
 

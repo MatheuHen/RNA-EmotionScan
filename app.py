@@ -1,4 +1,4 @@
-"""Expressao Neural -- ponto de entrada da aplicacao.
+"""EmotionScan -- ponto de entrada da aplicacao.
 
 Uso:
     python app.py                 abre a interface grafica
@@ -81,7 +81,7 @@ def _classificar_imagem(caminho: str) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        prog="expressao-neural",
+        prog="emotionscan",
         description="Reconhecimento de expressões faciais em tempo real com redes neurais.",
     )
     parser.add_argument(

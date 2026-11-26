@@ -111,7 +111,7 @@ def test_ajuste_de_area_preserva_proporcao() -> None:
 def test_placa_de_mensagem_gera_imagem_valida() -> None:
     from expressao_neural.ui import desenho
 
-    placa = desenho.placa_mensagem(640, 360, ["EXPRESSAO NEURAL", "Aguardando"])
+    placa = desenho.placa_mensagem(640, 360, ["EMOTIONSCAN", "Aguardando"])
     assert placa.shape == (360, 640, 3)
     assert placa.dtype == np.uint8
 

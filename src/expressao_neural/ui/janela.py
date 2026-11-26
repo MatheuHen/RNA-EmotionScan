@@ -1,4 +1,4 @@
-﻿"""Janela principal do Expressao Neural.
+﻿"""Janela principal do EmotionScan.
 
 Regra de ouro: a thread do Tkinter NUNCA executa inferencia nem leitura de
 camera. Ela apenas consome o quadro mais recente publicado pelo
@@ -411,7 +411,7 @@ class JanelaPrincipal(tk.Tk):
             )
             self._mostrar_placa(
                 [
-                    "EXPRESSAO NEURAL",
+                    "EMOTIONSCAN",
                     "Clique em Iniciar camera para comecar",
                     "A camera so e acionada por acao sua",
                 ]

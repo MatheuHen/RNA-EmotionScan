@@ -1,6 +1,6 @@
-# Métricas reais — Expressão Neural
+# Métricas reais — EmotionScan
 
-Coletadas em 2026-11-26T14:32:03 por `scripts/banner_metricas.py`.
+Coletadas em 2026-11-26T14:43:01 por `scripts/banner_metricas.py`.
 **Todos os números vêm de execução real. Nada é estimado ou simulado.**
 
 ## Hardware e condições do teste
@@ -25,13 +25,13 @@ Amostras: **150** execuções consecutivas, 1 rosto, após aquecimento.
 
 | Etapa | Média | Mediana | Mínimo | Máximo | Desvio padrão |
 |---|---|---|---|---|---|
-| Detecção (YuNet) | 14.82 ms | 14.62 ms | 13.51 ms | 18.29 ms | 0.91 ms |
-| Classificação (MobileFaceNet) | 3.1 ms | 3.1 ms | 2.59 ms | 3.92 ms | 0.31 ms |
-| Ciclo completo | 18.92 ms | 18.7 ms | 17.42 ms | 22.81 ms | 1.05 ms |
+| Detecção (YuNet) | 15.44 ms | 15.41 ms | 13.0 ms | 19.68 ms | 1.21 ms |
+| Classificação (MobileFaceNet) | 3.39 ms | 3.4 ms | 2.48 ms | 4.46 ms | 0.33 ms |
+| Ciclo completo | 19.77 ms | 19.79 ms | 16.57 ms | 25.66 ms | 1.5 ms |
 
-- **FPS equivalente de inferência:** 52.9 por segundo (1 rosto).
-- **Tempo de inicialização:** 28.9 ms para carregar os dois modelos + 11.36 ms de aquecimento.
-- **Memória do processo:** 77.5 MB.
+- **FPS equivalente de inferência:** 50.6 por segundo (1 rosto).
+- **Tempo de inicialização:** 65.2 ms para carregar os dois modelos + 48.42 ms de aquecimento.
+- **Memória do processo:** 78.3 MB.
 - **Classes reconhecidas:** 7.
 
 ## Testes automatizados
@@ -40,7 +40,7 @@ Amostras: **150** execuções consecutivas, 1 rosto, após aquecimento.
 - Aprovados: **154**
 - Reprovados: **0**
 - Ignorados: 0
-- Duração: 21.3 s
+- Duração: 21.1 s
 
 | Arquivo | Testes | Cobre |
 |---|---|---|

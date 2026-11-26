@@ -92,7 +92,7 @@ def desenhar(lado: int) -> Image.Image:
 def main() -> int:
     DESTINO.mkdir(parents=True, exist_ok=True)
     print("=" * 64)
-    print(" Expressão Neural — gerando o ícone da aplicação")
+    print(" EmotionScan — gerando o ícone da aplicação")
     print("=" * 64)
 
     imagens = [desenhar(n) for n in TAMANHOS]

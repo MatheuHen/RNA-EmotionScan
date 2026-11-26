@@ -1,4 +1,4 @@
-# Expressao Neural - dependencias de execucao
+# EmotionScan - dependencias de execucao
 # Versoes fixadas para garantir reprodutibilidade na apresentacao.
 # A inferencia ONNX e feita pelo proprio OpenCV (cv2.dnn):
 # TensorFlow, PyTorch e onnxruntime NAO sao necessarios.

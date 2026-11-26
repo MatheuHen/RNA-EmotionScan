@@ -12,22 +12,22 @@ código-fonte, documentação e scripts retornou **zero ocorrências** desse nom
 
 | Onde | Nome atual |
 |---|---|
-| `src/expressao_neural/config.py:22` | `APP_NOME = "Expressão Neural"` |
+| `src/expressao_neural/config.py:22` | `APP_NOME = "EmotionScan"` |
 | Pacote Python | `expressao_neural` |
 | Pasta do projeto | `ExpressaoNeural` |
-| Interface, rodapé, janela "Sobre" | "Expressão Neural" |
-| `pyproject.toml` | `name = "expressao-neural"` |
+| Interface, rodapé, janela "Sobre" | "EmotionScan" |
+| `pyproject.toml` | `name = "emotionscan"` |
 
 **Consequência prática:** se o banner disser "EmotionScan" e o sistema exibir
-"Expressão Neural" na tela durante a apresentação, a divergência fica visível
+"EmotionScan" na tela durante a apresentação, a divergência fica visível
 para o professor e para os visitantes. **Decida antes de imprimir:**
 
 1. **Renomear o sistema** para EmotionScan (exige alterar código, interface,
    documentação e refazer as capturas de tela); ou
-2. **Manter "Expressão Neural"** no banner; ou
-3. Usar ambos de forma explícita: *"EmotionScan (Expressão Neural)"*.
+2. **Manter "EmotionScan"** no banner; ou
+3. Usar ambos de forma explícita: *"EmotionScan (EmotionScan)"*.
 
-Esta auditoria descreve o sistema **como ele é hoje**: Expressão Neural.
+Esta auditoria descreve o sistema **como ele é hoje**: EmotionScan.
 
 ### Legenda de classificação
 
@@ -822,7 +822,7 @@ O fluxo sugerido —
 # 10. Conteúdo definitivo para o banner
 
 > ⚠️ Os textos abaixo usam o título solicitado (**EmotionScan**). Releia a
-> advertência inicial: o sistema exibe "Expressão Neural" na tela.
+> advertência inicial: o sistema exibe "EmotionScan" na tela.
 
 ## Título
 
@@ -1001,7 +1001,7 @@ nov. 2026.
 | 4 | Diagrama de arquitetura não mostra a camada de calibração |
 | 5 | Documentos com números desatualizados (seção 11.1) |
 | 6 | Teste offline não executado |
-| 7 | Divergência de nome EmotionScan × Expressão Neural |
+| 7 | Divergência de nome EmotionScan × EmotionScan |
 
 ---
 

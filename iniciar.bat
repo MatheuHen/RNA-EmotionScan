@@ -27,7 +27,7 @@ if errorlevel 1 (
 )
 
 echo.
-echo Abrindo Expressao Neural...
+echo Abrindo EmotionScan...
 
 rem pythonw.exe abre a interface sem manter uma janela de console.
 if exist "%PY%" (

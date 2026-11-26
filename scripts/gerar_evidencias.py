@@ -223,7 +223,7 @@ def main() -> int:
         return 1
 
     print("=" * 72)
-    print(" Expressão Neural — geração de evidências reais")
+    print(" EmotionScan — geração de evidências reais")
     print("=" * 72)
 
     faltando = [s for s in modelos.verificar_todos(conferir_hash=False) if not s.existe]
@@ -348,7 +348,7 @@ def main() -> int:
     print(f"   + {(DESTINO / 'medicoes.json').relative_to(RAIZ)}")
 
     linhas = [
-        "# Medições reais — Expressão Neural",
+        "# Medições reais — EmotionScan",
         "",
         f"Geradas em {dados['gerado_em']} por `scripts/gerar_evidencias.py`.",
         "Todos os números vêm de execução real nesta máquina; nenhum valor é estimado.",

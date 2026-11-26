@@ -1,4 +1,4 @@
-# Arquitetura do sistema — Expressão Neural
+# Arquitetura do sistema — EmotionScan
 
 ## 1. Visão geral
 

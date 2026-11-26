@@ -156,4 +156,4 @@ tests/test_robustez.py::test_analisar_imagem_encerra_captura_mesmo_em_modo_erro 
 tests/test_robustez.py::test_status_volta_ao_normal_depois_de_multiplos_rostos PASSED [ 99%]
 tests/test_robustez.py::test_status_de_captura_nao_sobrescreve_modo_imagem PASSED [100%]
 
-===================== 154 passed, 1 deselected in 21.28s ======================
+===================== 154 passed, 1 deselected in 21.10s ======================

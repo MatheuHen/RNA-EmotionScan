@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-26T14:32:03",
+  "gerado_em": "2026-11-26T14:43:01",
   "hardware_de_teste": {
     "processador": "AMD Ryzen 7 7435HS",
     "clock_atual_mhz": 3100,
@@ -60,15 +60,15 @@
     ]
   },
   "inicializacao": {
-    "carregamento_dos_modelos_ms": 28.9,
-    "aquecimento_da_rede_ms": 11.36
+    "carregamento_dos_modelos_ms": 65.2,
+    "aquecimento_da_rede_ms": 48.42
   },
   "testes_automatizados": {
     "total": 154,
     "aprovados": 154,
     "reprovados": 0,
     "ignorados": 0,
-    "duracao_s": 21.28,
+    "duracao_s": 21.1,
     "codigo_saida": 0,
     "por_arquivo": [
       {
@@ -127,32 +127,32 @@
   },
   "desempenho": {
     "ciclo_completo": {
-      "media_ms": 18.92,
-      "mediana_ms": 18.7,
-      "minimo_ms": 17.42,
-      "maximo_ms": 22.81,
-      "desvio_padrao_ms": 1.05,
+      "media_ms": 19.77,
+      "mediana_ms": 19.79,
+      "minimo_ms": 16.57,
+      "maximo_ms": 25.66,
+      "desvio_padrao_ms": 1.5,
       "amostras": 150
     },
     "deteccao": {
-      "media_ms": 14.82,
-      "mediana_ms": 14.62,
-      "minimo_ms": 13.51,
-      "maximo_ms": 18.29,
-      "desvio_padrao_ms": 0.91,
+      "media_ms": 15.44,
+      "mediana_ms": 15.41,
+      "minimo_ms": 13.0,
+      "maximo_ms": 19.68,
+      "desvio_padrao_ms": 1.21,
       "amostras": 150
     },
     "classificacao": {
-      "media_ms": 3.1,
-      "mediana_ms": 3.1,
-      "minimo_ms": 2.59,
-      "maximo_ms": 3.92,
-      "desvio_padrao_ms": 0.31,
+      "media_ms": 3.39,
+      "mediana_ms": 3.4,
+      "minimo_ms": 2.48,
+      "maximo_ms": 4.46,
+      "desvio_padrao_ms": 0.33,
       "amostras": 150
     },
-    "fps_equivalente_1_rosto": 52.9
+    "fps_equivalente_1_rosto": 50.6
   },
-  "memoria_processo_mb": 77.5,
+  "memoria_processo_mb": 78.3,
   "condicoes": [
     {
       "condicao": "Iluminação muito reduzida",

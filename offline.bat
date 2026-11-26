@@ -11,7 +11,7 @@ if not exist "%PY%" (
 )
 
 echo ========================================================================
-echo  EXPRESSAO NEURAL - teste de funcionamento OFFLINE
+echo  EMOTIONSCAN - teste de funcionamento OFFLINE
 echo ========================================================================
 echo.
 echo  ANTES DE CONTINUAR, desligue a rede:

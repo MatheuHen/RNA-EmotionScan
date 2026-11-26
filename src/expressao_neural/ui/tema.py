@@ -1,4 +1,4 @@
-"""Identidade visual do Expressao Neural.
+"""Identidade visual do EmotionScan.
 
 Paleta escura de alto contraste (tecnologica e academica), tipografia Segoe UI
 com degradacao automatica para fontes sempre presentes. Nenhum recurso remoto:

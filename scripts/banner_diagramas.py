@@ -165,7 +165,7 @@ def diagrama_arquitetura() -> None:
     svg = _svg_cabecalho(L, A)
     png = Lona(L, A)
 
-    titulo = "Expressão Neural — fluxo de processamento"
+    titulo = "EmotionScan — fluxo de processamento"
     svg.append(
         f'  <text x="24" y="30" font-size="17" font-weight="700" fill="{PRETO}">'
         f'{titulo}</text>'

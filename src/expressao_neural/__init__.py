@@ -1,4 +1,4 @@
-﻿"""Expressão Neural — reconhecimento de expressões faciais em tempo real."""
+﻿"""EmotionScan — reconhecimento de expressões faciais em tempo real."""
 from .config import APP_NOME, APP_VERSAO
 
 __all__ = ["APP_NOME", "APP_VERSAO"]

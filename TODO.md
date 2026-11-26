@@ -1,4 +1,4 @@
-# TODO — Expressão Neural
+# TODO — EmotionScan
 
 Apresentação: **30/11/2026**.
 

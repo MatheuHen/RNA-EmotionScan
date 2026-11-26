@@ -45,5 +45,5 @@ Teclas: ENTER captura · P pula · ESC encerra.
 Refaça o ZIP para incluir as imagens:
 
 ```bat
-powershell -NoProfile -Command "Compress-Archive -Path docs\banner\01_textos,docs\banner\02_capturas,docs\banner\03_diagramas,docs\banner\04_graficos,docs\banner\05_evidencias,docs\banner\06_metricas,docs\banner\RELATORIO_COMPLETO_BANNER.md -DestinationPath docs\banner\ExpressaoNeural_MaterialBanner.zip -Force"
+powershell -NoProfile -Command "Compress-Archive -Path docs\banner\01_textos,docs\banner\02_capturas,docs\banner\03_diagramas,docs\banner\04_graficos,docs\banner\05_evidencias,docs\banner\06_metricas,docs\banner\RELATORIO_COMPLETO_BANNER.md -DestinationPath docs\banner\EmotionScan_MaterialBanner.zip -Force"
 ```

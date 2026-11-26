@@ -215,7 +215,7 @@ def main() -> int:  # noqa: C901
     args = ap.parse_args()
 
     print("=" * 72)
-    print(" Expressão Neural — treinamento da camada de calibração")
+    print(" EmotionScan — treinamento da camada de calibração")
     print("=" * 72)
 
     print("\n1. Extraindo logits das amostras rotuladas (modelo base congelado)")

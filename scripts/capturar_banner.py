@@ -66,7 +66,7 @@ class Assistente(tk.Toplevel):
 
     def __init__(self, pai, ao_capturar, ao_pular, ao_encerrar) -> None:
         super().__init__(pai)
-        self.title("Roteiro de captura — Expressão Neural")
+        self.title("Roteiro de captura — EmotionScan")
         self.configure(bg=tema.SUPERFICIE)
         self.attributes("-topmost", True)
         self.geometry("560x330+1330+690")
@@ -174,7 +174,7 @@ def main() -> int:  # noqa: C901
         print(f"({len(anteriores)} captura(s) anterior(es) movida(s) para "
               f"{reserva.name}/)")
     print("=" * 72)
-    print(" Expressão Neural — captura assistida para o banner")
+    print(" EmotionScan — captura assistida para o banner")
     print("=" * 72)
     print("\nA aplicação vai abrir. Inicie a câmera quando solicitado.")
     print("Em cada figura, ajuste-se e pressione ENTER na janela 'Roteiro'.\n")

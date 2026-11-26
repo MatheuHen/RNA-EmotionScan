@@ -1,4 +1,4 @@
-# Expressão Neural
+# EmotionScan
 
 **Reconhecimento de Expressões Faciais em Tempo Real utilizando Redes Neurais**
 
@@ -16,7 +16,7 @@ CPU**.
 | **Evento** | 5º Workshop de Trabalhos de Inteligência Artificial da FASOFT — UniRV |
 | **Apresentação** | 30/11/2026 |
 
-![Interface do Expressão Neural](evidencias/captura_interface.png)
+![Interface do EmotionScan](evidencias/captura_interface.png)
 
 ---
 
@@ -80,9 +80,9 @@ Windows 10, AMD64 Zen 3, somente CPU, 1 rosto, 150 amostras:
 
 | Etapa | Média |
 |---|---|
-| Detecção (YuNet) | 14,82 ms |
-| Classificação (MobileFaceNet) | 3,10 ms |
-| **Ciclo completo** | **20,36 ms (~53 ciclos/s)** |
+| Detecção (YuNet) | 15,44 ms |
+| Classificação (MobileFaceNet) | 3,39 ms |
+| **Ciclo completo** | **20,36 ms (~51 ciclos/s)** |
 
 Dados completos em [`evidencias/medicoes.md`](evidencias/medicoes.md).
 

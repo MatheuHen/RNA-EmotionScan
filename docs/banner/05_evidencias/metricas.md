@@ -1,4 +1,4 @@
-# Métricas reais — Expressão Neural
+# Métricas reais — EmotionScan
 
 Coletadas em 2026-11-25T20:05:24 por `scripts/banner_metricas.py`.
 **Todos os números vêm de execução real. Nada é estimado ou simulado.**

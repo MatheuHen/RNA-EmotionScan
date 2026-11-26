@@ -148,7 +148,7 @@ def obter(info: modelos.ModeloInfo, forcar: bool = False) -> bool:
 def main(argv: list[str] | None = None) -> int:
     forcar = "--forcar" in (argv if argv is not None else sys.argv[1:])
     print("=" * 72)
-    print(" Expressão Neural — obtenção dos modelos neurais (ONNX)")
+    print(" EmotionScan — obtenção dos modelos neurais (ONNX)")
     print(" Esta é a ÚNICA etapa que precisa de internet.")
     print("=" * 72)
 

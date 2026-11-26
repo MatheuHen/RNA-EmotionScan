@@ -6,33 +6,33 @@
   <line x1="76" y1="334.0" x2="720" y2="334.0" stroke="#c3cad4" stroke-dasharray="3 3"/>
   <text x="68" y="338.0" font-size="11" fill="#55606e" font-weight="400" text-anchor="end">0</text>
   <line x1="76" y1="275.5" x2="720" y2="275.5" stroke="#c3cad4" stroke-dasharray="3 3"/>
-  <text x="68" y="279.5" font-size="11" fill="#55606e" font-weight="400" text-anchor="end">6</text>
+  <text x="68" y="279.5" font-size="11" fill="#55606e" font-weight="400" text-anchor="end">7</text>
   <line x1="76" y1="217.0" x2="720" y2="217.0" stroke="#c3cad4" stroke-dasharray="3 3"/>
-  <text x="68" y="221.0" font-size="11" fill="#55606e" font-weight="400" text-anchor="end">13</text>
+  <text x="68" y="221.0" font-size="11" fill="#55606e" font-weight="400" text-anchor="end">14</text>
   <line x1="76" y1="158.5" x2="720" y2="158.5" stroke="#c3cad4" stroke-dasharray="3 3"/>
-  <text x="68" y="162.5" font-size="11" fill="#55606e" font-weight="400" text-anchor="end">19</text>
+  <text x="68" y="162.5" font-size="11" fill="#55606e" font-weight="400" text-anchor="end">22</text>
   <line x1="76" y1="100.0" x2="720" y2="100.0" stroke="#c3cad4" stroke-dasharray="3 3"/>
-  <text x="68" y="104.0" font-size="11" fill="#55606e" font-weight="400" text-anchor="end">26</text>
+  <text x="68" y="104.0" font-size="11" fill="#55606e" font-weight="400" text-anchor="end">29</text>
   <text x="68" y="82" font-size="11" fill="#55606e" font-weight="400" text-anchor="end">ms</text>
-  <rect x="100" y="198.2559654286967" width="118" height="135.7440345713033" fill="#1f4e79" stroke="none"/>
-  <line x1="159.0" y1="166.4724431640258" x2="159.0" y2="210.25493204734767" stroke="#101418" stroke-width="1.5"/>
-  <line x1="149.0" y1="210.25493204734767" x2="169.0" y2="210.25493204734767" stroke="#101418" stroke-width="1.5"/>
-  <line x1="149.0" y1="166.4724431640258" x2="169.0" y2="166.4724431640258" stroke="#101418" stroke-width="1.5"/>
-  <text x="159.0" y="186.2559654286967" font-size="13" fill="#1f4e79" font-weight="700" text-anchor="middle">14,8 ms</text>
+  <rect x="100" y="208.28460082396174" width="118" height="125.71539917603828" fill="#1f4e79" stroke="none"/>
+  <line x1="159.0" y1="173.761719184946" x2="159.0" y2="228.15154214452735" stroke="#101418" stroke-width="1.5"/>
+  <line x1="149.0" y1="228.15154214452735" x2="169.0" y2="228.15154214452735" stroke="#101418" stroke-width="1.5"/>
+  <line x1="149.0" y1="173.761719184946" x2="169.0" y2="173.761719184946" stroke="#101418" stroke-width="1.5"/>
+  <text x="159.0" y="196.28460082396174" font-size="13" fill="#1f4e79" font-weight="700" text-anchor="middle">15,4 ms</text>
   <text x="159.0" y="356" font-size="12" fill="#101418" font-weight="600" text-anchor="middle">Detecção</text>
   <text x="159.0" y="372" font-size="12" fill="#101418" font-weight="600" text-anchor="middle">(YuNet)</text>
-  <rect x="304" y="305.6054988413603" width="118" height="28.394501158639695" fill="#1e6b3a" stroke="none"/>
-  <line x1="363.0" y1="298.09469530907495" x2="363.0" y2="310.2768522577817" stroke="#101418" stroke-width="1.5"/>
-  <line x1="353.0" y1="310.2768522577817" x2="373.0" y2="310.2768522577817" stroke="#101418" stroke-width="1.5"/>
-  <line x1="353.0" y1="298.09469530907495" x2="373.0" y2="298.09469530907495" stroke="#101418" stroke-width="1.5"/>
-  <text x="363.0" y="293.6054988413603" font-size="13" fill="#1e6b3a" font-weight="700" text-anchor="middle">3,1 ms</text>
+  <rect x="304" y="306.39797906691905" width="118" height="27.602020933080947" fill="#1e6b3a" stroke="none"/>
+  <line x1="363.0" y1="297.68583676650707" x2="363.0" y2="313.80737111680213" stroke="#101418" stroke-width="1.5"/>
+  <line x1="353.0" y1="313.80737111680213" x2="373.0" y2="313.80737111680213" stroke="#101418" stroke-width="1.5"/>
+  <line x1="353.0" y1="297.68583676650707" x2="373.0" y2="297.68583676650707" stroke="#101418" stroke-width="1.5"/>
+  <text x="363.0" y="294.39797906691905" font-size="13" fill="#1e6b3a" font-weight="700" text-anchor="middle">3,4 ms</text>
   <text x="363.0" y="356" font-size="12" fill="#101418" font-weight="600" text-anchor="middle">Classificação</text>
   <text x="363.0" y="372" font-size="12" fill="#101418" font-weight="600" text-anchor="middle">(MobileFaceNet)</text>
-  <rect x="508" y="160.70194776726998" width="118" height="173.29805223273002" fill="#5b3a8e" stroke="none"/>
-  <line x1="567.0" y1="125.07142857142858" x2="567.0" y2="174.44122252145047" stroke="#101418" stroke-width="1.5"/>
-  <line x1="557.0" y1="174.44122252145047" x2="577.0" y2="174.44122252145047" stroke="#101418" stroke-width="1.5"/>
+  <rect x="508" y="173.02892216902353" width="118" height="160.97107783097647" fill="#5b3a8e" stroke="none"/>
+  <line x1="567.0" y1="125.07142857142858" x2="567.0" y2="199.0839271796014" stroke="#101418" stroke-width="1.5"/>
+  <line x1="557.0" y1="199.0839271796014" x2="577.0" y2="199.0839271796014" stroke="#101418" stroke-width="1.5"/>
   <line x1="557.0" y1="125.07142857142858" x2="577.0" y2="125.07142857142858" stroke="#101418" stroke-width="1.5"/>
-  <text x="567.0" y="148.70194776726998" font-size="13" fill="#5b3a8e" font-weight="700" text-anchor="middle">18,9 ms</text>
+  <text x="567.0" y="161.02892216902353" font-size="13" fill="#5b3a8e" font-weight="700" text-anchor="middle">19,8 ms</text>
   <text x="567.0" y="356" font-size="12" fill="#101418" font-weight="600" text-anchor="middle">Ciclo completo</text>
   <text x="26" y="402" font-size="11" fill="#55606e" font-weight="400" text-anchor="start">Barra = média; haste vertical = mínimo e máximo observados. Somente CPU, sem GPU dedicada.</text>
 </svg>

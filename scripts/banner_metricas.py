@@ -359,7 +359,7 @@ def ler_execucao_prolongada() -> dict:
 def main() -> int:
     DESTINO.mkdir(parents=True, exist_ok=True)
     print("=" * 72)
-    print(" Expressão Neural — coleta de métricas reais para o banner")
+    print(" EmotionScan — coleta de métricas reais para o banner")
     print("=" * 72)
 
     faltando = [s for s in modelos.verificar_todos(conferir_hash=False) if not s.existe]
@@ -452,7 +452,7 @@ def _escrever_markdown(d: dict) -> None:
     t = d["testes_automatizados"]
     ep = d["execucao_prolongada"]
     L = [
-        "# Métricas reais — Expressão Neural",
+        "# Métricas reais — EmotionScan",
         "",
         f"Coletadas em {d['gerado_em']} por `scripts/banner_metricas.py`.",
         "**Todos os números vêm de execução real. Nada é estimado ou simulado.**",

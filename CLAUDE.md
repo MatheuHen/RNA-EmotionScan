@@ -1,4 +1,4 @@
-# Expressão Neural — instruções do projeto
+# EmotionScan — instruções do projeto
 
 Projeto acadêmico isolado. **Este arquivo é a fonte de verdade do projeto** e
 prevalece sobre qualquer configuração global.

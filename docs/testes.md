@@ -1,4 +1,4 @@
-# Documentação dos testes — Expressão Neural
+# Documentação dos testes — EmotionScan
 
 ## 1. Como executar
 

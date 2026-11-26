@@ -4,7 +4,7 @@ chcp 65001 >nul 2>&1
 cd /d "%~dp0"
 
 echo ========================================================================
-echo  EXPRESSAO NEURAL - Configuracao do ambiente
+echo  EMOTIONSCAN - Configuracao do ambiente
 echo  Esta e a UNICA etapa que precisa de internet.
 echo ========================================================================
 echo.

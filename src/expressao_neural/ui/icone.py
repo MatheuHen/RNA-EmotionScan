@@ -28,7 +28,7 @@ ARQUIVO_ICO = RAIZ / "assets" / "icone.ico"
 ARQUIVO_PNG = RAIZ / "assets" / "icone_256.png"
 
 # Identificador no formato recomendado: Empresa.Produto.Componente.Versao
-APP_USER_MODEL_ID = "UniRV.ExpressaoNeural.Aplicacao.1"
+APP_USER_MODEL_ID = "UniRV.EmotionScan.Aplicacao.1"
 
 _foto_icone: tk.PhotoImage | None = None  # evita coleta pelo GC
 

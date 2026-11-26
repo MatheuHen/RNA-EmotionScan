@@ -1,2 +1,2 @@
-﻿"""Pacote de testes do Expressão Neural."""
+﻿"""Pacote de testes do EmotionScan."""
 

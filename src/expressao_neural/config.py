@@ -1,4 +1,4 @@
-"""Configuracao central do Expressao Neural.
+"""Configuracao central do EmotionScan.
 
 Toda constante de caminho, limiar, rotulo e identificacao academica fica aqui.
 Nenhum segredo, credencial ou endereco de servico externo de execucao.
@@ -19,7 +19,7 @@ DIR_DOCS = RAIZ / "docs"
 ARQ_CONFIG_USUARIO = RAIZ / "config.local.json"
 
 # ---------------------------------------------------- identidade academica
-APP_NOME = "Expressão Neural"
+APP_NOME = "EmotionScan"
 APP_DESCRICAO = "Reconhecimento de expressões faciais em tempo real com redes neurais"
 APP_VERSAO = "1.3"
 ACADEMICO = "Matheus Henrique de Araújo Carneiro"

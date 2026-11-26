@@ -1,5 +1,5 @@
 # RELATÓRIO COMPLETO PARA O BANNER ACADÊMICO
-## Expressão Neural — Reconhecimento de Expressões Faciais em Tempo Real utilizando Redes Neurais
+## EmotionScan — Reconhecimento de Expressões Faciais em Tempo Real utilizando Redes Neurais
 
 | | |
 |---|---|
@@ -324,9 +324,9 @@ pipeline de inferência.
 
 | Etapa | Média | Mediana | Mínimo | Máximo | Desvio padrão |
 |---|---|---|---|---|---|
-| Detecção (YuNet) | **14,82 ms** | — | — | — | — |
-| Classificação (MobileFaceNet) | **3,10 ms** | — | — | — | — |
-| **Ciclo completo** | **18,92 ms** | — | — | — | — |
+| Detecção (YuNet) | **15,44 ms** | — | — | — | — |
+| Classificação (MobileFaceNet) | **3,39 ms** | — | — | — | — |
+| **Ciclo completo** | **19,77 ms** | — | — | — | — |
 
 - **FPS equivalente de inferência: 38,2 por segundo** (1 rosto).
 - **Tempo de inicialização:** 119,2 ms para carregar os dois modelos +
@@ -451,7 +451,7 @@ precisão e revocação por classe.
 |---|---|---|
 | **Acurácia de classificação** | fração de previsões corretas sobre dados rotulados | **não medida** |
 | **Confiança da previsão** | probabilidade atribuída pelo modelo à classe vencedora | medida e exibida em tempo real; **não garante acerto** |
-| **Desempenho computacional** | tempo de processamento por quadro | 18,92 ms de média |
+| **Desempenho computacional** | tempo de processamento por quadro | 19,77 ms de média |
 
 ---
 
@@ -490,7 +490,7 @@ internamente consistentes entre texto, tabelas e gráficos.
 
 ```
 ┌──────────────────────────────────────────────────────────┐
-│  26 ms por ciclo  ·  ~53 inferências/s  ·  somente CPU   │
+│  26 ms por ciclo  ·  ~51 inferências/s  ·  somente CPU   │
 │  154 testes automatizados aprovados                      │
 │  95.811 ciclos em 30 min sem degradação                  │
 │  100% offline — nenhuma imagem sai do computador         │

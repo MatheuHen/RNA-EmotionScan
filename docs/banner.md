@@ -17,7 +17,7 @@
 
 ## 2. Título
 
-**Expressão Neural: Reconhecimento de Expressões Faciais em Tempo Real utilizando Redes Neurais**
+**EmotionScan: Reconhecimento de Expressões Faciais utilizando Redes Neurais**
 
 ## 3. Autoria
 
@@ -34,7 +34,7 @@ Redes Neurais Artificiais (RNA) · Prof. Sandro Silva Moreira
 > desafio está na variabilidade: a mesma expressão muda de aparência conforme
 > iluminação, ângulo, distância e características individuais.
 >
-> Este trabalho apresenta o **Expressão Neural**, uma aplicação desktop que
+> Este trabalho apresenta o **EmotionScan**, uma aplicação desktop que
 > classifica sete expressões faciais em tempo real a partir da webcam, utilizando
 > duas redes neurais convolucionais pré-treinadas em formato ONNX. O sistema
 > executa inteiramente em CPU, sem GPU dedicada e sem qualquer conexão com a
@@ -63,8 +63,8 @@ Redes Neurais Artificiais (RNA) · Prof. Sandro Silva Moreira
 
 ## 6. Resultados e conclusões (texto pronto, ~160 palavras)
 
-> O sistema processa um ciclo completo de detecção e classificação em **18,92 ms
-> em média** (desvio padrão 1,05 ms) em CPU AMD Zen 3, equivalente a **58
+> O sistema processa um ciclo completo de detecção e classificação em **19,77 ms
+> em média** (desvio padrão 1,50 ms) em CPU AMD Zen 3, equivalente a **58
 > inferências por segundo** — folga confortável para vídeo fluido. A detecção
 > consome 15,98 ms e a classificação apenas 3,47 ms: o gargalo é localizar o
 > rosto, não reconhecer a expressão. A suíte automatizada executa **154 testes**
@@ -85,7 +85,7 @@ Redes Neurais Artificiais (RNA) · Prof. Sandro Silva Moreira
 
 ```
 ┌──────────────────────────────────────────────────┐
-│  20,36 ms por ciclo  ·  ~53 inferências/s  ·  CPU │
+│  20,36 ms por ciclo  ·  ~51 inferências/s  ·  CPU │
 │  154 testes automatizados aprovados               │
 │  100% offline  ·  nenhuma imagem sai do PC        │
 └──────────────────────────────────────────────────┘

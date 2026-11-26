@@ -54,7 +54,7 @@ ORDEM = ["Neutra", "Alegria", "Surpresa", "Tristeza", "Raiva", "Nojo", "Medo"]
 class Coletor(tk.Tk):
     def __init__(self, por_classe: int, indice_camera: int) -> None:
         super().__init__()
-        self.title("Coleta de amostras — Expressão Neural")
+        self.title("Coleta de amostras — EmotionScan")
         self.configure(bg=tema.FUNDO)
         self.geometry("1100x760")
         self.protocol("WM_DELETE_WINDOW", self.encerrar)
@@ -284,7 +284,7 @@ def main() -> int:
     args = ap.parse_args()
 
     print("=" * 72)
-    print(" Expressão Neural — coleta de amostras rotuladas")
+    print(" EmotionScan — coleta de amostras rotuladas")
     print("=" * 72)
     print(f"\n Meta: {args.por_classe} amostras por expressão "
           f"({args.por_classe * len(ORDEM)} no total).")
