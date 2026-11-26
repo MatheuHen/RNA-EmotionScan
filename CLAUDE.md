@@ -27,8 +27,11 @@ Disciplina: Redes Neurais Artificiais. Apresentação: 30/11/2026.
 
 1. **Nunca simular inferência.** Nada de valor fixo, aleatório ou heurística
    apresentada como rede neural. Se algo não puder ser inferido, não exibir.
-2. **Nunca afirmar acurácia própria.** Os 88,27% são do modelo original em
-   RAF-DB. Acurácia deste sistema **não foi medida** — ver `docs/testes.md` §6.
+2. **Nunca generalizar a acurácia própria.** Existe medição própria —
+   67,9% (modelo base) e 94,6% (com calibração) — mas sobre 56 amostras de
+   teste de UMA pessoa, com expressões encenadas. Sempre citar com esse
+   contexto colado. Os 88,27% são do modelo original em RAF-DB e devem ser
+   atribuídos como tal. Ver `docs/treinamento.md`.
 3. **Nunca declarar que os modelos foram treinados aqui.** São pré-treinados
    (OpenCV Zoo, Apache 2.0).
 4. **Nunca adicionar chamada de rede em `src/`.** Downloads só em

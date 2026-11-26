@@ -24,6 +24,9 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(RAIZ / "src"))
 
+if hasattr(sys.stdout, "reconfigure"):   # console cp1252 nao suporta °, ×, ≤
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 import cv2 as cv  # noqa: E402
 import numpy as np  # noqa: E402
 

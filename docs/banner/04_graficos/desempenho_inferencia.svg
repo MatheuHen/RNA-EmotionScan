@@ -1,38 +1,38 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" font-family="Segoe UI, Calibri, Arial, sans-serif">
   <rect width="760" height="420" fill="#ffffff"/>
   <text x="26" y="32" font-size="17" fill="#101418" font-weight="700" text-anchor="start">Tempo de processamento por etapa (CPU)</text>
-  <text x="26" y="52" font-size="12" fill="#55606e" font-weight="400" text-anchor="start">150 amostras · 1 rosto · AMD Ryzen 7 7435HS a 2496 MHz · sem GPU</text>
+  <text x="26" y="52" font-size="12" fill="#55606e" font-weight="400" text-anchor="start">150 amostras · 1 rosto · AMD Ryzen 7 7435HS a 3100 MHz · sem GPU</text>
   <line x1="26" y1="64" x2="734" y2="64" stroke="#c3cad4"/>
   <line x1="76" y1="334.0" x2="720" y2="334.0" stroke="#c3cad4" stroke-dasharray="3 3"/>
   <text x="68" y="338.0" font-size="11" fill="#55606e" font-weight="400" text-anchor="end">0</text>
   <line x1="76" y1="275.5" x2="720" y2="275.5" stroke="#c3cad4" stroke-dasharray="3 3"/>
-  <text x="68" y="279.5" font-size="11" fill="#55606e" font-weight="400" text-anchor="end">9</text>
+  <text x="68" y="279.5" font-size="11" fill="#55606e" font-weight="400" text-anchor="end">7</text>
   <line x1="76" y1="217.0" x2="720" y2="217.0" stroke="#c3cad4" stroke-dasharray="3 3"/>
-  <text x="68" y="221.0" font-size="11" fill="#55606e" font-weight="400" text-anchor="end">19</text>
+  <text x="68" y="221.0" font-size="11" fill="#55606e" font-weight="400" text-anchor="end">15</text>
   <line x1="76" y1="158.5" x2="720" y2="158.5" stroke="#c3cad4" stroke-dasharray="3 3"/>
-  <text x="68" y="162.5" font-size="11" fill="#55606e" font-weight="400" text-anchor="end">28</text>
+  <text x="68" y="162.5" font-size="11" fill="#55606e" font-weight="400" text-anchor="end">22</text>
   <line x1="76" y1="100.0" x2="720" y2="100.0" stroke="#c3cad4" stroke-dasharray="3 3"/>
-  <text x="68" y="104.0" font-size="11" fill="#55606e" font-weight="400" text-anchor="end">37</text>
+  <text x="68" y="104.0" font-size="11" fill="#55606e" font-weight="400" text-anchor="end">30</text>
   <text x="68" y="82" font-size="11" fill="#55606e" font-weight="400" text-anchor="end">ms</text>
-  <rect x="100" y="205.9286793267156" width="118" height="128.0713206732844" fill="#1f4e79" stroke="none"/>
-  <line x1="159.0" y1="171.02309020284852" x2="159.0" y2="248.47183858437634" stroke="#101418" stroke-width="1.5"/>
-  <line x1="149.0" y1="248.47183858437634" x2="169.0" y2="248.47183858437634" stroke="#101418" stroke-width="1.5"/>
-  <line x1="149.0" y1="171.02309020284852" x2="169.0" y2="171.02309020284852" stroke="#101418" stroke-width="1.5"/>
-  <text x="159.0" y="193.9286793267156" font-size="13" fill="#1f4e79" font-weight="700" text-anchor="middle">20,3 ms</text>
+  <rect x="100" y="209.04945466210438" width="118" height="124.95054533789563" fill="#1f4e79" stroke="none"/>
+  <line x1="159.0" y1="179.72751817792985" x2="159.0" y2="223.98409431137725" stroke="#101418" stroke-width="1.5"/>
+  <line x1="149.0" y1="223.98409431137725" x2="169.0" y2="223.98409431137725" stroke="#101418" stroke-width="1.5"/>
+  <line x1="149.0" y1="179.72751817792985" x2="169.0" y2="179.72751817792985" stroke="#101418" stroke-width="1.5"/>
+  <text x="159.0" y="197.04945466210438" font-size="13" fill="#1f4e79" font-weight="700" text-anchor="middle">16,0 ms</text>
   <text x="159.0" y="356" font-size="12" fill="#101418" font-weight="600" text-anchor="middle">Detecção</text>
   <text x="159.0" y="372" font-size="12" fill="#101418" font-weight="600" text-anchor="middle">(YuNet)</text>
-  <rect x="304" y="303.51283987915406" width="118" height="30.487160120845918" fill="#1e6b3a" stroke="none"/>
-  <line x1="363.0" y1="285.14479930945186" x2="363.0" y2="314.7482736296936" stroke="#101418" stroke-width="1.5"/>
-  <line x1="353.0" y1="314.7482736296936" x2="373.0" y2="314.7482736296936" stroke="#101418" stroke-width="1.5"/>
-  <line x1="353.0" y1="285.14479930945186" x2="373.0" y2="285.14479930945186" stroke="#101418" stroke-width="1.5"/>
-  <text x="363.0" y="291.51283987915406" font-size="13" fill="#1e6b3a" font-weight="700" text-anchor="middle">4,8 ms</text>
+  <rect x="304" y="306.8674347733105" width="118" height="27.13256522668948" fill="#1e6b3a" stroke="none"/>
+  <line x1="363.0" y1="286.7721343028229" x2="363.0" y2="312.0280955945252" stroke="#101418" stroke-width="1.5"/>
+  <line x1="353.0" y1="312.0280955945252" x2="373.0" y2="312.0280955945252" stroke="#101418" stroke-width="1.5"/>
+  <line x1="353.0" y1="286.7721343028229" x2="373.0" y2="286.7721343028229" stroke="#101418" stroke-width="1.5"/>
+  <text x="363.0" y="294.8674347733105" font-size="13" fill="#1e6b3a" font-weight="700" text-anchor="middle">3,5 ms</text>
   <text x="363.0" y="356" font-size="12" fill="#101418" font-weight="600" text-anchor="middle">Classificação</text>
   <text x="363.0" y="372" font-size="12" fill="#101418" font-weight="600" text-anchor="middle">(MobileFaceNet)</text>
-  <rect x="508" y="168.68763487268018" width="118" height="165.31236512731982" fill="#5b3a8e" stroke="none"/>
-  <line x1="567.0" y1="125.07142857142858" x2="567.0" y2="220.13077255071215" stroke="#101418" stroke-width="1.5"/>
-  <line x1="557.0" y1="220.13077255071215" x2="577.0" y2="220.13077255071215" stroke="#101418" stroke-width="1.5"/>
+  <rect x="508" y="174.80143284858855" width="118" height="159.19856715141145" fill="#5b3a8e" stroke="none"/>
+  <line x1="567.0" y1="125.07142857142858" x2="567.0" y2="195.36588430282293" stroke="#101418" stroke-width="1.5"/>
+  <line x1="557.0" y1="195.36588430282293" x2="577.0" y2="195.36588430282293" stroke="#101418" stroke-width="1.5"/>
   <line x1="557.0" y1="125.07142857142858" x2="577.0" y2="125.07142857142858" stroke="#101418" stroke-width="1.5"/>
-  <text x="567.0" y="156.68763487268018" font-size="13" fill="#5b3a8e" font-weight="700" text-anchor="middle">26,2 ms</text>
+  <text x="567.0" y="162.80143284858855" font-size="13" fill="#5b3a8e" font-weight="700" text-anchor="middle">20,4 ms</text>
   <text x="567.0" y="356" font-size="12" fill="#101418" font-weight="600" text-anchor="middle">Ciclo completo</text>
   <text x="26" y="402" font-size="11" fill="#55606e" font-weight="400" text-anchor="start">Barra = média; haste vertical = mínimo e máximo observados. Somente CPU, sem GPU dedicada.</text>
 </svg>

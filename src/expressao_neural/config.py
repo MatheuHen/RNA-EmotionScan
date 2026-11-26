@@ -58,8 +58,6 @@ CORES_CLASSES: tuple[str, ...] = (
     "#f59e0b",  # Surpresa
 )
 
-EMOJI_CLASSES: tuple[str, ...] = ("😠", "🤢", "😨", "😀", "😐", "😢", "😲")
-
 MSG_BAIXA_CONFIANCA = "Expressão não identificada com confiança suficiente."
 
 # ---------------------------------------------------- parametros do modelo

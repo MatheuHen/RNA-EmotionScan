@@ -1,10 +1,16 @@
 # Modelos neurais utilizados
 
-> **Declaração obrigatória:** os dois modelos são **pré-treinados por terceiros** e
-> redistribuídos pelo OpenCV Zoo sob licença Apache 2.0. **Nenhum treinamento,
-> ajuste fino ou alteração de pesos foi realizado neste trabalho.** Toda
-> informação abaixo foi conferida na documentação e no código-fonte oficiais,
-> citados ao final.
+> **Declaração obrigatória:** os dois modelos são **pré-treinados por terceiros**
+> e redistribuídos pelo OpenCV Zoo sob licença Apache 2.0. **As redes
+> convolucionais permanecem congeladas: nenhum peso delas foi alterado, e não
+> houve ajuste fino (*fine-tuning*).**
+>
+> Houve, sim, treinamento próprio — mas de uma **camada de calibração de 56
+> parâmetros** aplicada sobre as saídas do classificador congelado. A
+> distinção exata está em [`docs/treinamento.md`](treinamento.md).
+>
+> Toda informação abaixo foi conferida na documentação e no código-fonte
+> oficiais, citados ao final.
 
 ## 1. Detecção facial — YuNet
 

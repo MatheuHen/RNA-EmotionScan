@@ -24,6 +24,9 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(RAIZ / "src"))
 
+if hasattr(sys.stdout, "reconfigure"):   # console cp1252 nao suporta °, ×, ≤
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 import cv2 as cv  # noqa: E402
 import numpy as np  # noqa: E402
 
@@ -220,6 +223,58 @@ def coletar_desempenho(pipeline, imagem) -> dict:
     }
 
 
+def _metricas_de_classificacao() -> dict:
+    """Le o resultado do treinamento proprio, se ele ja tiver sido executado.
+
+    Enquanto nao houver conjunto rotulado, as metricas ficam explicitamente
+    como "nao avaliada" -- nunca como numero inventado.
+    """
+    relatorio = DESTINO / "treinamento_calibracao.json"
+    if not relatorio.is_file():
+        return {
+            "acuracia": "não avaliada",
+            "precisao": "não avaliada",
+            "recall": "não avaliada",
+            "f1_score": "não avaliada",
+            "matriz_de_confusao": "não avaliada",
+            "motivo": (
+                "Ainda não há conjunto de imagens rotuladas. Execute "
+                "scripts/coletar_amostras.py e scripts/treinar_calibracao.py."
+            ),
+            "como_obter": (
+                "scripts/coletar_amostras.py coleta amostras rotuladas pela "
+                "webcam; scripts/treinar_calibracao.py treina a camada de "
+                "calibração e calcula todas as métricas."
+            ),
+        }
+    try:
+        r = json.loads(relatorio.read_text(encoding="utf-8"))
+        res, dados = r["resultados"], r["dados"]
+        base, cal = res["modelo_base"], res["com_calibracao"]
+    except (OSError, KeyError, json.JSONDecodeError):
+        return {"acuracia": "não avaliada",
+                "motivo": "relatório de treinamento ilegível"}
+    return {
+        "avaliada": True,
+        "conjunto": (
+            f"{dados['total_amostras']} amostras próprias "
+            f"({dados['amostras_treino']} treino / {dados['amostras_teste']} teste)"
+        ),
+        "acuracia_modelo_base": base["acuracia"],
+        "acuracia_com_calibracao": cal["acuracia"],
+        "precisao_macro": cal["macro_precisao"],
+        "recall_macro": cal["macro_revocacao"],
+        "f1_score_macro": cal["macro_f1"],
+        "matriz_de_confusao": cal["matriz_confusao"],
+        "por_classe": cal["por_classe"],
+        "ganho_pontos_percentuais": res["variacao_acuracia_pp"],
+        "limitacao": (
+            "Conjunto de UMA pessoa, com expressões encenadas. A acurácia vale "
+            "para esse contexto e NÃO generaliza para público diverso."
+        ),
+    }
+
+
 def _memoria_mb() -> float | None:
     try:
         r = subprocess.run(
@@ -366,21 +421,7 @@ def main() -> int:
             "teste_com_rede_desligada": "NÃO EXECUTADO — depende de validação manual",
         },
         "metricas_de_classificacao": {
-            "acuracia": "não avaliada",
-            "precisao": "não avaliada",
-            "recall": "não avaliada",
-            "f1_score": "não avaliada",
-            "matriz_de_confusao": "não avaliada",
-            "motivo": (
-                "Não há conjunto de imagens rotuladas disponível neste projeto. "
-                "Métricas de classificação exigem rótulo verdadeiro por amostra, "
-                "que só pode ser obtido com voluntários e consentimento registrado."
-            ),
-            "como_obter": (
-                "Execute scripts/avaliar_metricas.py apontando para uma pasta com "
-                "subpastas nomeadas pelas 7 classes. O script calcula acurácia, "
-                "precisão, recall, F1 e matriz de confusão reais."
-            ),
+            **_metricas_de_classificacao(),
             "acuracia_do_modelo_original": {
                 "valor": "88,27%",
                 "conjunto": "RAF-DB",
@@ -519,18 +560,43 @@ def _escrever_markdown(d: dict) -> None:
         "",
         "## Métricas de classificação",
         "",
-        "| Métrica | Situação |",
-        "|---|---|",
-        "| Acurácia | **não avaliada** |",
-        "| Precisão | **não avaliada** |",
-        "| Recall | **não avaliada** |",
-        "| F1-score | **não avaliada** |",
-        "| Matriz de confusão | **não avaliada** |",
-        "",
-        f"**Motivo:** {d['metricas_de_classificacao']['motivo']}",
-        "",
-        f"**Como obter:** {d['metricas_de_classificacao']['como_obter']}",
-        "",
+    ]
+    mc = d["metricas_de_classificacao"]
+    if mc.get("avaliada"):
+        L += [
+            f"Avaliadas sobre {mc['conjunto']}.",
+            "",
+            "| Métrica | Modelo base | Com calibração própria |",
+            "|---|---|---|",
+            f"| **Acurácia** | {mc['acuracia_modelo_base'] * 100:.1f}% | "
+            f"**{mc['acuracia_com_calibracao'] * 100:.1f}%** |",
+            f"| Precisão (macro) | — | {mc['precisao_macro']:.3f} |",
+            f"| Recall (macro) | — | {mc['recall_macro']:.3f} |",
+            f"| F1-score (macro) | — | {mc['f1_score_macro']:.3f} |",
+            "",
+            f"Ganho: **{mc['ganho_pontos_percentuais']:+.2f} pontos percentuais**.",
+            "",
+            "Matriz de confusão em `docs/banner/04_graficos/matriz_confusao.png`.",
+            "",
+            f"> ⚠️ {mc['limitacao']}",
+            "",
+        ]
+    else:
+        L += [
+            "| Métrica | Situação |",
+            "|---|---|",
+            "| Acurácia | **não avaliada** |",
+            "| Precisão | **não avaliada** |",
+            "| Recall | **não avaliada** |",
+            "| F1-score | **não avaliada** |",
+            "| Matriz de confusão | **não avaliada** |",
+            "",
+            f"**Motivo:** {mc.get('motivo', '—')}",
+            "",
+            f"**Como obter:** {mc.get('como_obter', '—')}",
+            "",
+        ]
+    L += [
         "> O valor **88,27% em RAF-DB** pertence ao **modelo pré-treinado** "
         "(fonte: README oficial do OpenCV Zoo), **não** ao sistema aqui "
         "desenvolvido. Citá-lo como acurácia deste trabalho seria incorreto.",

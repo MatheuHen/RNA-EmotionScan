@@ -58,16 +58,16 @@ Redes Neurais Artificiais (RNA) · Prof. Sandro Silva Moreira
 > **Ambos os modelos são pré-treinados por terceiros (OpenCV Zoo, licença Apache
 > 2.0). A contribuição deste trabalho é a engenharia completa da aplicação:**
 > arquitetura, pipeline de visão computacional, interpretação das saídas,
-> estabilidade temporal, interface, tratamento de falhas e 109 testes
+> estabilidade temporal, interface, tratamento de falhas e 142 testes
 > automatizados com inferência real.
 
 ## 6. Resultados e conclusões (texto pronto, ~160 palavras)
 
-> O sistema processa um ciclo completo de detecção e classificação em **17,15 ms
-> em média** (desvio padrão 1,0 ms) em CPU AMD Zen 3, equivalente a **58
+> O sistema processa um ciclo completo de detecção e classificação em **17,35 ms
+> em média** (desvio padrão 1,14 ms) em CPU AMD Zen 3, equivalente a **58
 > inferências por segundo** — folga confortável para vídeo fluido. A detecção
-> consome 13,52 ms e a classificação apenas 2,87 ms: o gargalo é localizar o
-> rosto, não reconhecer a expressão. A suíte automatizada executa **108 testes**
+> consome 15,98 ms e a classificação apenas 3,47 ms: o gargalo é localizar o
+> rosto, não reconhecer a expressão. A suíte automatizada executa **142 testes**
 > com os modelos reais, todos aprovados.
 >
 > O resultado mais relevante, porém, é outro. Submetido a 14 variações
@@ -85,8 +85,8 @@ Redes Neurais Artificiais (RNA) · Prof. Sandro Silva Moreira
 
 ```
 ┌──────────────────────────────────────────────────┐
-│  17,15 ms por ciclo  ·  ~58 inferências/s  ·  CPU │
-│  108 testes automatizados aprovados               │
+│  20,36 ms por ciclo  ·  ~58 inferências/s  ·  CPU │
+│  142 testes automatizados aprovados               │
 │  100% offline  ·  nenhuma imagem sai do PC        │
 └──────────────────────────────────────────────────┘
 ```
@@ -128,7 +128,7 @@ Regenerar a qualquer momento:
 ┌─────────────┐   caixa + 5 pontos   ┌──────────────┐   112×112   ┌───────────────┐
 │   YuNet     │────────────────────▶ │ Alinhamento  │───────────▶ │ MobileFaceNet │
 │  (detecção) │                      │ (similaridade│             │ (classificação)│
-│   13,5 ms   │                      │  por mínimos │             │    2,9 ms     │
+│   15,98 ms   │                      │  por mínimos │             │    3,47 ms     │
 └─────────────┘                      │  quadrados)  │             └───────┬───────┘
                                      └──────────────┘                     │ 7 logits
                                                                           ▼

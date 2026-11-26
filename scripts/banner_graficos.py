@@ -1,10 +1,11 @@
 """Gera os graficos do banner em SVG e PNG, a partir de dados REAIS.
 
-Fontes dos dados (nenhum valor e digitado a mao neste arquivo):
-  * evidencias/medicoes.json          -> desempenho por etapa
-  * evidencias/execucao_prolongada.log -> estabilidade em 30 min
-  * docs/banner/06_metricas/metricas.json -> testes e condicoes (gerado por
-    banner_metricas.py, que executa o pipeline de verdade)
+Fonte unica dos dados: docs/banner/06_metricas/metricas.json, gerado por
+scripts/banner_metricas.py, que executa a suite de testes e o pipeline de
+inferencia de verdade. Nenhum valor e digitado a mao neste arquivo.
+
+Fonte unica de proposito: garante que texto, tabelas e graficos do banner
+mostrem exatamente os mesmos numeros.
 
 Fundo branco, cores discretas, textos legiveis para impressao.
 """
@@ -22,7 +23,6 @@ from banner_diagramas import (  # noqa: E402
 )
 
 DESTINO = RAIZ / "docs" / "banner" / "04_graficos"
-MEDICOES = RAIZ / "evidencias" / "medicoes.json"
 METRICAS = RAIZ / "docs" / "banner" / "06_metricas" / "metricas.json"
 
 

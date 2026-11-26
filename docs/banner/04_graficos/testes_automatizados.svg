@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="516" viewBox="0 0 760 516" font-family="Segoe UI, Calibri, Arial, sans-serif">
-  <rect width="760" height="516" fill="#ffffff"/>
-  <text x="26" y="32" font-size="17" fill="#101418" font-weight="700" text-anchor="start">Testes automatizados — 119 aprovados, 0 reprovados</text>
-  <text x="26" y="52" font-size="12" fill="#55606e" font-weight="400" text-anchor="start">Executados em 19,0 s com os modelos ONNX reais (mocks apenas no ciclo de vida da câmera)</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="612" viewBox="0 0 760 612" font-family="Segoe UI, Calibri, Arial, sans-serif">
+  <rect width="760" height="612" fill="#ffffff"/>
+  <text x="26" y="32" font-size="17" fill="#101418" font-weight="700" text-anchor="start">Testes automatizados — 142 aprovados, 0 reprovados</text>
+  <text x="26" y="52" font-size="12" fill="#55606e" font-weight="400" text-anchor="start">Executados em 21,2 s com os modelos ONNX reais (mocks apenas no ciclo de vida da câmera)</text>
   <line x1="26" y1="64" x2="734" y2="64" stroke="#c3cad4"/>
   <text x="26" y="110" font-size="12.5" fill="#101418" font-weight="600" text-anchor="start">test_integracao.py</text>
   <text x="26" y="126" font-size="10.5" fill="#55606e" font-weight="400" text-anchor="start">integração, condições adversas, desempenho</text>
@@ -18,27 +18,37 @@
   <rect x="310" y="196" width="360" height="22" fill="#eef1f5" stroke="none"/>
   <rect x="310" y="196" width="235.86206896551724" height="22" fill="#1e6b3a" stroke="none"/>
   <text x="680" y="212" font-size="13" fill="#101418" font-weight="700" text-anchor="start">19</text>
-  <text x="26" y="254" font-size="12.5" fill="#101418" font-weight="600" text-anchor="start">test_camera.py</text>
-  <text x="26" y="270" font-size="10.5" fill="#55606e" font-weight="400" text-anchor="start">ciclo de vida da captura e liberação de recursos</text>
+  <text x="26" y="254" font-size="12.5" fill="#101418" font-weight="600" text-anchor="start">test_calibracao.py</text>
+  <text x="26" y="270" font-size="10.5" fill="#55606e" font-weight="400" text-anchor="start"></text>
   <rect x="310" y="244" width="360" height="22" fill="#eef1f5" stroke="none"/>
-  <rect x="310" y="244" width="136.55172413793105" height="22" fill="#1e6b3a" stroke="none"/>
-  <text x="680" y="260" font-size="13" fill="#101418" font-weight="700" text-anchor="start">11</text>
-  <text x="26" y="302" font-size="12.5" fill="#101418" font-weight="600" text-anchor="start">test_interface.py</text>
-  <text x="26" y="318" font-size="10.5" fill="#55606e" font-weight="400" text-anchor="start">tema, componentes, janela e encerramento</text>
+  <rect x="310" y="244" width="198.6206896551724" height="22" fill="#1e6b3a" stroke="none"/>
+  <text x="680" y="260" font-size="13" fill="#101418" font-weight="700" text-anchor="start">16</text>
+  <text x="26" y="302" font-size="12.5" fill="#101418" font-weight="600" text-anchor="start">test_robustez.py</text>
+  <text x="26" y="318" font-size="10.5" fill="#55606e" font-weight="400" text-anchor="start">regressões da auditoria de segurança</text>
   <rect x="310" y="292" width="360" height="22" fill="#eef1f5" stroke="none"/>
-  <rect x="310" y="292" width="136.55172413793105" height="22" fill="#1e6b3a" stroke="none"/>
-  <text x="680" y="308" font-size="13" fill="#101418" font-weight="700" text-anchor="start">11</text>
-  <text x="26" y="350" font-size="12.5" fill="#101418" font-weight="600" text-anchor="start">test_modelos.py</text>
-  <text x="26" y="366" font-size="10.5" fill="#55606e" font-weight="400" text-anchor="start">dependências, integridade SHA-256, carregamento</text>
+  <rect x="310" y="292" width="161.3793103448276" height="22" fill="#1e6b3a" stroke="none"/>
+  <text x="680" y="308" font-size="13" fill="#101418" font-weight="700" text-anchor="start">13</text>
+  <text x="26" y="350" font-size="12.5" fill="#101418" font-weight="600" text-anchor="start">test_camera.py</text>
+  <text x="26" y="366" font-size="10.5" fill="#55606e" font-weight="400" text-anchor="start">ciclo de vida da captura e liberação de recursos</text>
   <rect x="310" y="340" width="360" height="22" fill="#eef1f5" stroke="none"/>
   <rect x="310" y="340" width="136.55172413793105" height="22" fill="#1e6b3a" stroke="none"/>
   <text x="680" y="356" font-size="13" fill="#101418" font-weight="700" text-anchor="start">11</text>
-  <text x="26" y="398" font-size="12.5" fill="#101418" font-weight="600" text-anchor="start">test_robustez.py</text>
-  <text x="26" y="414" font-size="10.5" fill="#55606e" font-weight="400" text-anchor="start">regressões da auditoria de segurança</text>
+  <text x="26" y="398" font-size="12.5" fill="#101418" font-weight="600" text-anchor="start">test_interface.py</text>
+  <text x="26" y="414" font-size="10.5" fill="#55606e" font-weight="400" text-anchor="start">tema, componentes, janela e encerramento</text>
   <rect x="310" y="388" width="360" height="22" fill="#eef1f5" stroke="none"/>
   <rect x="310" y="388" width="136.55172413793105" height="22" fill="#1e6b3a" stroke="none"/>
   <text x="680" y="404" font-size="13" fill="#101418" font-weight="700" text-anchor="start">11</text>
-  <line x1="26" y1="434" x2="734" y2="434" stroke="#c3cad4"/>
-  <text x="26" y="458" font-size="13" fill="#1e6b3a" font-weight="700" text-anchor="start">Total: 119 testes · 119 aprovados · 0 reprovados · taxa de aprovação 100%</text>
-  <text x="26" y="480" font-size="11.5" fill="#55606e" font-weight="400" text-anchor="start">Execução prolongada à parte: 95.811 ciclos em 30 min</text>
+  <text x="26" y="446" font-size="12.5" fill="#101418" font-weight="600" text-anchor="start">test_modelos.py</text>
+  <text x="26" y="462" font-size="10.5" fill="#55606e" font-weight="400" text-anchor="start">dependências, integridade SHA-256, carregamento</text>
+  <rect x="310" y="436" width="360" height="22" fill="#eef1f5" stroke="none"/>
+  <rect x="310" y="436" width="136.55172413793105" height="22" fill="#1e6b3a" stroke="none"/>
+  <text x="680" y="452" font-size="13" fill="#101418" font-weight="700" text-anchor="start">11</text>
+  <text x="26" y="494" font-size="12.5" fill="#101418" font-weight="600" text-anchor="start">test_reiniciar_camera.py</text>
+  <text x="26" y="510" font-size="10.5" fill="#55606e" font-weight="400" text-anchor="start"></text>
+  <rect x="310" y="484" width="360" height="22" fill="#eef1f5" stroke="none"/>
+  <rect x="310" y="484" width="62.06896551724138" height="22" fill="#1e6b3a" stroke="none"/>
+  <text x="680" y="500" font-size="13" fill="#101418" font-weight="700" text-anchor="start">5</text>
+  <line x1="26" y1="530" x2="734" y2="530" stroke="#c3cad4"/>
+  <text x="26" y="554" font-size="13" fill="#1e6b3a" font-weight="700" text-anchor="start">Total: 142 testes · 142 aprovados · 0 reprovados · taxa de aprovação 100%</text>
+  <text x="26" y="576" font-size="11.5" fill="#55606e" font-weight="400" text-anchor="start">Execução prolongada à parte: 95.811 ciclos em 30 min</text>
 </svg>

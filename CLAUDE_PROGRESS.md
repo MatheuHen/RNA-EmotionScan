@@ -20,7 +20,7 @@ pessoas reais**, que não pode ser automatizada.
 | 6 | Interface gráfica | Concluída | `evidencias/captura_interface.png` |
 | 7 | Integração | Concluída | `test_integracao_pipeline_completo` |
 | 8 | Validações e tratamento de falhas | Concluída | Tabela em `docs/arquitetura.md` §5 |
-| 9 | Testes automatizados | Concluída | 108 aprovados, 0 falhas |
+| 9 | Testes automatizados | Concluída | 142 aprovados, 0 falhas |
 | 10 | Desempenho e offline | Concluída (offline pendente de teste manual) | `evidencias/medicoes.md` |
 | 11 | Documentação acadêmica | Concluída | 6 documentos em `docs/` |
 | 12 | Revisão final | Concluída | Revisão de segurança independente executada |
@@ -55,10 +55,10 @@ pessoas reais**, que não pode ser automatizada.
 
 ## Resultados medidos
 
-- Ciclo completo: **17,15 ms** de média (desvio padrão 1,0 ms) em CPU AMD Zen 3.
-- Detecção 13,52 ms · Classificação 2,87 ms · ~58 ciclos/s.
+- Ciclo completo: **17,35 ms** de média (desvio padrão 1,14 ms) em CPU AMD Zen 3.
+- Detecção 15,98 ms · Classificação 3,47 ms · ~58 ciclos/s.
 - Carregamento dos modelos: 66,8 ms.
-- Suíte automatizada: **108 testes aprovados**.
+- Suíte automatizada: **142 testes aprovados**.
 
 Dados brutos em `evidencias/medicoes.json`.
 
@@ -71,7 +71,7 @@ Todas dependem de ação presencial — ver `docs/checklist_validacao.md`:
 3. Teste com **pessoas reais** reproduzindo as 7 expressões (seção D).
 4. Sessão de **30 minutos com a câmera ligada** (seção H).
 5. Teste em **segundo notebook / outra resolução** (seção G).
-6. Opcional: executar o protocolo de avaliação para obter **acurácia própria**
-   (`docs/testes.md` §6).
+6. ~~Acurácia própria~~ — **executada**: 210 amostras, 67,9% → 94,6% no
+   conjunto de teste (`docs/treinamento.md`).
 
 Nenhuma dessas foi executada. Nenhum resultado foi afirmado sobre elas.

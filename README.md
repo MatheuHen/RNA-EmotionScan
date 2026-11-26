@@ -67,19 +67,22 @@ Duas redes neurais reais em formato ONNX, executadas pelo `cv2.dnn`:
 | **YuNet** `face_detection_yunet_2023mar` | detecção facial e 5 pontos de referência | Apache 2.0 |
 | **MobileFaceNet / Progressive Teacher** `facial_expression_recognition_mobilefacenet_2022july` | classificação das 7 expressões | Apache 2.0 |
 
-> **Ambos são pré-treinados por terceiros (OpenCV Zoo).** Nenhum treinamento foi
-> realizado neste trabalho. A contribuição do acadêmico é a aplicação completa.
-> Detalhes, procedência e referências em [`docs/modelos.md`](docs/modelos.md).
+> **Ambos são pré-treinados por terceiros (OpenCV Zoo) e permanecem
+> congelados** — nenhum peso foi alterado, não houve *fine-tuning*. Sobre as
+> saídas do classificador foi treinada uma **camada de calibração de 56
+> parâmetros**, com 210 amostras próprias: 67,9% → 94,6% de acurácia no
+> conjunto de teste. Ver [`docs/treinamento.md`](docs/treinamento.md) e
+> [`docs/modelos.md`](docs/modelos.md).
 
 ## Desempenho medido
 
-Windows 10, AMD64 Zen 3, somente CPU, 1 rosto, 120 amostras:
+Windows 10, AMD64 Zen 3, somente CPU, 1 rosto, 150 amostras:
 
 | Etapa | Média |
 |---|---|
-| Detecção (YuNet) | 13,52 ms |
-| Classificação (MobileFaceNet) | 2,87 ms |
-| **Ciclo completo** | **17,15 ms (~58 ciclos/s)** |
+| Detecção (YuNet) | 13,63 ms |
+| Classificação (MobileFaceNet) | 2,91 ms |
+| **Ciclo completo** | **20,36 ms (~58 ciclos/s)** |
 
 Dados completos em [`evidencias/medicoes.md`](evidencias/medicoes.md).
 
@@ -154,7 +157,7 @@ ExpressaoNeural/
 │  └─ utils/ambiente.py    diagnóstico (RF01)
 ├─ models/                 arquivos ONNX (não versionados)
 ├─ scripts/                download de modelos, verificação, evidências
-├─ tests/                  109 testes automatizados
+├─ tests/                  142 testes automatizados
 ├─ docs/                   documentação técnica e acadêmica
 └─ evidencias/             capturas, gráficos e medições reais
 ```

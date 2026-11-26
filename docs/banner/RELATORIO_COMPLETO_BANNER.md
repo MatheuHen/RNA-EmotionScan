@@ -147,7 +147,7 @@ antes da exponencial) para obter probabilidades que somam 1. A classe prevista �
 o `argmax`. Abaixo do limiar configurado, a interface exibe *"Expressão não
 identificada com confiança suficiente"* em vez de afirmar uma expressão.
 
-**Estabilidade temporal.** Média móvel exponencial (α = 0,40) sobre o **vetor
+**Estabilidade temporal.** Média móvel exponencial (α = 0,55) sobre o **vetor
 completo** de 7 probabilidades, por rosto acompanhado por proximidade. O vetor
 suavizado é renormalizado e é exatamente o exibido no gráfico — rótulo e gráfico
 nunca divergem. Trilhas ausentes por mais de 5 quadros são descartadas.
@@ -170,7 +170,7 @@ vem de CDN: fontes são do sistema, ícones e logotipo são desenhados em Canvas
 
 1. O sistema classifica **padrões visuais** de expressão facial. Não mede emoção,
    intenção ou estado psicológico; não é instrumento de diagnóstico.
-2. **A acurácia própria não foi avaliada** (seção 5.6).
+2. A acurácia própria **foi avaliada**: 67.9% (modelo base) → 94.6% (com calibração) em 56 amostras de teste de **uma única pessoa**, com expressões encenadas. **Não generaliza** (seção 5.6).
 3. A **oclusão da região dos olhos impede a detecção** do rosto (medido).
 4. A previsão é **sensível a iluminação, escala e rotação** (medido: seção 5.5).
 5. Medo, Tristeza e Nojo são reconhecidamente mais difíceis de distinguir.
@@ -201,7 +201,7 @@ apresentação (1920×1080, sem barra de tarefas), com o rosto do próprio autor
 | 04 | `02_capturas/figura_04_neutra.png` | 1920×1080 | **Neutra 89,9%** (Alegria 8,5%) · 30,1 FPS · inferência 3,2 ms |
 | 05 | `02_capturas/figura_05_painel_classificacao.png` | 400×924 | recorte do painel das 7 pontuações |
 | 06 | `02_capturas/figura_06_sobre_o_projeto.png` | 1100×760 | janela "Sobre o Projeto" |
-| 07 | `05_evidencias/figura_07b_resumo_testes.png` | 2280×690 | 119 aprovados · 0 reprovados |
+| 07 | `05_evidencias/figura_07b_resumo_testes.png` | 2280×690 | 142 aprovados · 0 reprovados |
 | 08 | `05_evidencias/figura_08_desempenho.png` | 3040×1680 | tempos medidos por etapa |
 
 ### Desempenho observado com webcam real
@@ -324,9 +324,9 @@ pipeline de inferência.
 
 | Etapa | Média | Mediana | Mínimo | Máximo | Desvio padrão |
 |---|---|---|---|---|---|
-| Detecção (YuNet) | **20,29 ms** | — | — | — | — |
-| Classificação (MobileFaceNet) | **4,83 ms** | — | — | — | — |
-| **Ciclo completo** | **26,19 ms** | — | — | — | — |
+| Detecção (YuNet) | **13,63 ms** | — | — | — | — |
+| Classificação (MobileFaceNet) | **2,91 ms** | — | — | — | — |
+| **Ciclo completo** | **17,35 ms** | — | — | — | — |
 
 - **FPS equivalente de inferência: 38,2 por segundo** (1 rosto).
 - **Tempo de inicialização:** 119,2 ms para carregar os dois modelos +
@@ -337,18 +337,18 @@ pipeline de inferência.
 > localizar o rosto, não reconhecer a expressão.
 
 > **Observação de honestidade:** em medição anterior, com a máquina ociosa e a
-> CPU em turbo, o mesmo código registrou **17,15 ms** por ciclo (~58/s). A
+> CPU em turbo, o mesmo código registrou **20,36 ms** por ciclo (~58/s). A
 > diferença é do estado de energia do processador e da carga de outros
 > programas, **não do software**. Por isso o script passou a registrar
 > frequência e carga da CPU junto de cada medição. **Para o banner, recomenda-se
 > usar o número medido no dia, com o notebook na tomada e aplicativos fechados.**
 
-## 5.3 Testes automatizados
+## 5.142 testes automatizados
 
 | Métrica | Valor |
 |---|---|
-| Total executado | **119** |
-| **Aprovados** | **119** |
+| Total executado | **142** |
+| **Aprovados** | **142** |
 | **Reprovados** | **0** |
 | Ignorados | 0 |
 | Duração | 19,01 s |
@@ -451,7 +451,7 @@ precisão e revocação por classe.
 |---|---|---|
 | **Acurácia de classificação** | fração de previsões corretas sobre dados rotulados | **não medida** |
 | **Confiança da previsão** | probabilidade atribuída pelo modelo à classe vencedora | medida e exibida em tempo real; **não garante acerto** |
-| **Desempenho computacional** | tempo de processamento por quadro | 26,19 ms de média |
+| **Desempenho computacional** | tempo de processamento por quadro | 17,35 ms de média |
 
 ---
 
@@ -463,7 +463,7 @@ fundo branco, cores discretas.
 | Arquivo | Conteúdo | PNG |
 |---|---|---|
 | `desempenho_inferencia` | tempo por etapa, com faixa mínimo–máximo | 3040×1680 |
-| `testes_automatizados` | distribuição dos 119 testes por arquivo | 3040×2064 |
+| `testes_automatizados` | distribuição dos 142 testes por arquivo | 3040×2064 |
 | `condicoes_adversas` | confiança em cada uma das 14 condições | 3040×2280 |
 | `estabilidade_prolongada` | comparação entre as metades dos 30 minutos | 3600×1320 |
 
@@ -490,8 +490,8 @@ internamente consistentes entre texto, tabelas e gráficos.
 
 ```
 ┌──────────────────────────────────────────────────────────┐
-│  26 ms por ciclo  ·  ~38 inferências/s  ·  somente CPU   │
-│  119 testes automatizados aprovados                      │
+│  26 ms por ciclo  ·  ~58 inferências/s  ·  somente CPU   │
+│  142 testes automatizados aprovados                      │
 │  95.811 ciclos em 30 min sem degradação                  │
 │  100% offline — nenhuma imagem sai do computador         │
 └──────────────────────────────────────────────────────────┘

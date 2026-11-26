@@ -72,7 +72,7 @@ suficiente."* em vez de afirmar uma expressão.
 ### 3.4 Estabilidade temporal
 
 Média móvel exponencial sobre o vetor completo de 7 probabilidades, por rosto
-acompanhado, com α = 0,40 por padrão. O vetor suavizado é renormalizado e é
+acompanhado, com α = 0,55 por padrão. O vetor suavizado é renormalizado e é
 exatamente o que o gráfico exibe. Quando o rosto desaparece por mais de 5
 quadros, a trilha é descartada e a tela é limpa.
 
@@ -91,57 +91,75 @@ quadros, a trilha é descartada e a tela é limpa.
 | RF09 Análise de imagem estática | Implementado | 10 testes de validação de arquivo |
 | RF10 Estabilidade temporal | Implementado | 10 testes em `test_imagem_e_suavizacao.py` |
 
-**Suíte automatizada: 108 testes executados, 108 aprovados** (sem contar o teste
+**Suíte automatizada: 142 testes executados, 142 aprovados** (sem contar o teste
 de longa duração, executado separadamente).
 
 ## 5. Resultados — desempenho computacional medido
 
 Máquina: Windows 10, **AMD Ryzen 7 7435HS** (16 núcleos lógicos), Python 3.11.9,
 OpenCV 4.12.0, **somente CPU** (`DNN_TARGET_CPU`), sem GPU dedicada.
-Imagem 512×512, 1 rosto, 120 amostras consecutivas após aquecimento.
+Imagem 512×512, 1 rosto, 150 amostras consecutivas após aquecimento.
 
-### 5.1 Duas medições, em estados diferentes da máquina
+### 5.1 Medição de referência
 
-O mesmo código foi medido duas vezes, com resultados bem distintos. A diferença
-**não é do software**: é do estado de energia do processador e da carga de
-outros programas. Registrar as duas é mais honesto do que escolher a melhor.
+**Metodologia:** 150 execuções consecutivas do ciclo completo após
+aquecimento, 1 rosto, imagem 512×512, somente CPU, medidas com
+`time.perf_counter()`.
 
-| Medição | Estado da CPU | Detecção | Classificação | **Ciclo completo** | Equivalente |
-|---|---|---|---|---|---|
-| **A** — máquina ociosa | em modo turbo | 13,52 ms | 2,87 ms | **17,15 ms** | ~58 ciclos/s |
-| **B** — máquina ocupada | 2496/3100 MHz (80% do máximo), carga 11%, navegador e jogo abertos | 23,23 ms | 6,67 ms | **31,18 ms** | ~32 ciclos/s |
-
-Detalhamento da medição B (a mais recente e a mais conservadora):
+**Estado da máquina:** AMD Ryzen 7 7435HS a
+3100/3100 MHz (turbo
+pleno), carga de 5%, sem GPU.
 
 | Etapa | Média | Mediana | Mínimo | Máximo | Desvio padrão |
 |---|---|---|---|---|---|
-| Detecção (YuNet) | 23,23 ms | 23,07 ms | 20,39 ms | 28,58 ms | 1,86 ms |
-| Classificação (MobileFaceNet) | 6,67 ms | 6,42 ms | 5,94 ms | 12,40 ms | 0,89 ms |
-| **Ciclo completo** | **31,18 ms** | 30,96 ms | 27,62 ms | 42,13 ms | 2,45 ms |
+| Detecção (YuNet) | **13,63 ms** | 15,85 ms | 14,07 ms | 19,73 ms | 0,97 ms |
+| Classificação (MobileFaceNet) | **2,91 ms** | 3,40 ms | 2,81 ms | 6,04 ms | 0,37 ms |
+| **Ciclo completo** | **17,35 ms** | 20,20 ms | 17,73 ms | 26,72 ms | 1,25 ms |
 
-Carregamento dos dois modelos: 134 ms. Aquecimento da rede: 98 ms.
+Equivalente a **58 inferências por segundo** em
+benchmark. Carregamento dos dois modelos: 82.0 ms.
+Aquecimento: 58.56 ms.
+Memória do processo: 78.2 MB.
 
-A partir desta constatação, `scripts/gerar_evidencias.py` passou a **registrar a
-frequência e a carga da CPU** junto de cada medição (`estado_da_cpu_na_medicao`
-em `evidencias/medicoes.json`), para que nenhum número fique sem contexto.
+### 5.1.1 O número depende do estado da CPU — e isso foi medido
+
+O mesmo código, na mesma máquina, produziu valores bem diferentes conforme a
+frequência do processador e a carga de outros programas:
+
+| Condição da máquina | Ciclo completo |
+|---|---|
+| Turbo pleno (3100 MHz), carga baixa | **17,35 ms** |
+| 2496 MHz (80% do máximo), navegador e jogo abertos | ~31 ms |
+
+A diferença **não é do software**. Por isso `scripts/banner_metricas.py` e
+`scripts/gerar_evidencias.py` passaram a registrar frequência e carga da CPU
+junto de cada medição, e existe `scripts/verificar_consistencia.py` para impedir
+que números de medições diferentes se misturem na documentação.
+
+**Recomendação para o evento:** feche navegador e aplicativos pesados, ligue o
+notebook na tomada (em bateria a frequência cai) e rode `verificar.bat` no local
+para ver o número real do dia.
 
 ### 5.2 O custo da serialização de acesso aos modelos
 
 A correção de concorrência (seção 4.8 de `docs/arquitetura.md`) introduziu um
 `RLock` no caminho de inferência. O custo foi **medido diretamente**, e não
-estimado: **0,239 µs por aquisição** — cerca de 0,0008% de um ciclo de 31 ms.
-Comparando 200 execuções com e sem o lock, a diferença ficou dentro do ruído de
-medição. **A correção de segurança não teve custo de desempenho perceptível.**
+estimado: **0,239 µs por aquisição** — cerca de 0,001% de um ciclo de
+20,36 ms. Comparando 200 execuções com e sem o lock, a diferença
+ficou dentro do ruído de medição. **A correção de segurança não teve custo de
+desempenho perceptível.**
 
 ### 5.3 Leitura dos números
 
-- A **detecção custa ~3,5× mais que a classificação** nas duas medições. O
-  gargalo é o YuNet varrendo o quadro inteiro, não a rede de expressões.
-- Mesmo no pior caso medido (31,18 ms), há folga: com `inferir_a_cada = 2`
-  (padrão) a carga de inferência cai pela metade.
-- **Recomendação para o evento:** feche navegador, jogos e aplicativos pesados
-  antes de apresentar, e ligue o notebook na tomada (o modo bateria reduz a
-  frequência). Rode `verificar.bat` no local para ver o número real do dia.
+- A **detecção custa ~4.6× mais que a
+  classificação**. O gargalo é o YuNet varrendo o quadro inteiro, não a rede de
+  expressões.
+- Com a webcam a 30 FPS, o orçamento por quadro é de 33 ms. O ciclo de
+  20,36 ms cabe nele, e por isso `inferir_a_cada = 1` (padrão):
+  todo quadro é analisado, sem pular nenhum.
+- **FPS da webcam ≠ inferências por segundo.** A câmera entrega 30 quadros/s; o
+  pipeline aguenta 49/s. A câmera é o gargalo,
+  não a rede neural.
 
 > **Atenção à interpretação:** estes números medem **desempenho computacional**.
 > Não são acurácia nem confiança. Ver seção 8.
@@ -262,7 +280,7 @@ autoria exigida pelo trabalho, não um vazamento.
 |---|---|---|
 | **Acurácia de classificação** | fração de previsões corretas sobre dados rotulados | **Não medida neste trabalho.** O modelo original reporta 88,27% em RAF-DB (OpenCV Zoo) — número do modelo, não deste sistema. |
 | **Confiança da previsão** | probabilidade atribuída pelo modelo à classe vencedora | Medida e exibida em tempo real. **Não é garantia de acerto** (ver seção 6, achado 4). |
-| **Desempenho computacional** | tempo de processamento por quadro | 17,15 ms de média, medido nesta máquina (seção 5). |
+| **Desempenho computacional** | tempo de processamento por quadro | 17,35 ms de média, medido nesta máquina (seção 5). |
 
 Para obter acurácia própria, o protocolo de avaliação com voluntários está
 descrito em `docs/testes.md`, seção 6. **Enquanto não for executado, nenhuma
@@ -290,7 +308,7 @@ acurácia própria deve ser afirmada.**
 
 O objetivo geral foi atingido: há uma aplicação funcional que classifica
 expressões faciais em tempo real usando duas redes neurais convolucionais reais,
-executando inteiramente em CPU, offline, com 17,15 ms por ciclo — folga
+executando inteiramente em CPU, offline, com 20,36 ms por ciclo — folga
 confortável para vídeo fluido em uma demonstração presencial.
 
 O resultado tecnicamente mais relevante não é o desempenho, e sim a constatação

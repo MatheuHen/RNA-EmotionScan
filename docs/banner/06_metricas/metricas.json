@@ -1,10 +1,10 @@
 {
-  "gerado_em": "2026-11-25T20:05:24",
+  "gerado_em": "2026-11-26T13:05:03",
   "hardware_de_teste": {
     "processador": "AMD Ryzen 7 7435HS",
-    "clock_atual_mhz": 2496,
+    "clock_atual_mhz": 3100,
     "clock_maximo_mhz": 3100,
-    "carga_percent": 2,
+    "carga_percent": 7,
     "nucleos_logicos": 16,
     "memoria_total_gb": 7.8,
     "gpu_utilizada": "nenhuma — inferência somente em CPU (DNN_TARGET_CPU)",
@@ -60,15 +60,15 @@
     ]
   },
   "inicializacao": {
-    "carregamento_dos_modelos_ms": 119.2,
-    "aquecimento_da_rede_ms": 88.53
+    "carregamento_dos_modelos_ms": 65.0,
+    "aquecimento_da_rede_ms": 47.37
   },
   "testes_automatizados": {
-    "total": 119,
-    "aprovados": 119,
+    "total": 142,
+    "aprovados": 142,
     "reprovados": 0,
     "ignorados": 0,
-    "duracao_s": 19.01,
+    "duracao_s": 20.86,
     "codigo_saida": 0,
     "por_arquivo": [
       {
@@ -87,6 +87,16 @@
         "cobre": "pré-processamento, classes, softmax, inferência real"
       },
       {
+        "arquivo": "test_calibracao.py",
+        "quantidade": 16,
+        "cobre": ""
+      },
+      {
+        "arquivo": "test_robustez.py",
+        "quantidade": 13,
+        "cobre": "regressões da auditoria de segurança"
+      },
+      {
         "arquivo": "test_camera.py",
         "quantidade": 11,
         "cobre": "ciclo de vida da captura e liberação de recursos"
@@ -102,9 +112,9 @@
         "cobre": "dependências, integridade SHA-256, carregamento"
       },
       {
-        "arquivo": "test_robustez.py",
-        "quantidade": 11,
-        "cobre": "regressões da auditoria de segurança"
+        "arquivo": "test_reiniciar_camera.py",
+        "quantidade": 5,
+        "cobre": ""
       }
     ],
     "usa_modelos_reais": true,
@@ -112,32 +122,32 @@
   },
   "desempenho": {
     "ciclo_completo": {
-      "media_ms": 26.19,
-      "mediana_ms": 26.58,
-      "minimo_ms": 18.04,
-      "maximo_ms": 33.1,
-      "desvio_padrao_ms": 3.45,
+      "media_ms": 17.35,
+      "mediana_ms": 17.06,
+      "minimo_ms": 15.72,
+      "maximo_ms": 22.71,
+      "desvio_padrao_ms": 1.14,
       "amostras": 150
     },
     "deteccao": {
-      "media_ms": 20.29,
-      "mediana_ms": 20.54,
-      "minimo_ms": 13.55,
-      "maximo_ms": 25.82,
-      "desvio_padrao_ms": 2.67,
+      "media_ms": 13.63,
+      "mediana_ms": 13.48,
+      "minimo_ms": 12.42,
+      "maximo_ms": 16.22,
+      "desvio_padrao_ms": 0.87,
       "amostras": 150
     },
     "classificacao": {
-      "media_ms": 4.83,
-      "mediana_ms": 4.79,
-      "minimo_ms": 3.05,
-      "maximo_ms": 7.74,
-      "desvio_padrao_ms": 0.91,
+      "media_ms": 2.91,
+      "mediana_ms": 2.77,
+      "minimo_ms": 2.51,
+      "maximo_ms": 4.93,
+      "desvio_padrao_ms": 0.37,
       "amostras": 150
     },
-    "fps_equivalente_1_rosto": 38.2
+    "fps_equivalente_1_rosto": 57.7
   },
-  "memoria_processo_mb": 78.0,
+  "memoria_processo_mb": 77.8,
   "condicoes": [
     {
       "condicao": "Iluminação muito reduzida",
@@ -278,13 +288,131 @@
     "teste_com_rede_desligada": "NÃO EXECUTADO — depende de validação manual"
   },
   "metricas_de_classificacao": {
-    "acuracia": "não avaliada",
-    "precisao": "não avaliada",
-    "recall": "não avaliada",
-    "f1_score": "não avaliada",
-    "matriz_de_confusao": "não avaliada",
-    "motivo": "Não há conjunto de imagens rotuladas disponível neste projeto. Métricas de classificação exigem rótulo verdadeiro por amostra, que só pode ser obtido com voluntários e consentimento registrado.",
-    "como_obter": "Execute scripts/avaliar_metricas.py apontando para uma pasta com subpastas nomeadas pelas 7 classes. O script calcula acurácia, precisão, recall, F1 e matriz de confusão reais.",
+    "avaliada": true,
+    "conjunto": "210 amostras próprias (154 treino / 56 teste)",
+    "acuracia_modelo_base": 0.6786,
+    "acuracia_com_calibracao": 0.9464,
+    "precisao_macro": 0.9459,
+    "recall_macro": 0.9464,
+    "f1_score_macro": 0.9452,
+    "matriz_de_confusao": [
+      [
+        8,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        8,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        8,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        8,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        7,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        8,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        6
+      ]
+    ],
+    "por_classe": [
+      {
+        "classe": "angry",
+        "amostras": 8,
+        "precisao": 1.0,
+        "revocacao": 1.0,
+        "f1": 1.0
+      },
+      {
+        "classe": "disgust",
+        "amostras": 8,
+        "precisao": 1.0,
+        "revocacao": 1.0,
+        "f1": 1.0
+      },
+      {
+        "classe": "fearful",
+        "amostras": 8,
+        "precisao": 0.8889,
+        "revocacao": 1.0,
+        "f1": 0.9412
+      },
+      {
+        "classe": "happy",
+        "amostras": 8,
+        "precisao": 1.0,
+        "revocacao": 1.0,
+        "f1": 1.0
+      },
+      {
+        "classe": "neutral",
+        "amostras": 8,
+        "precisao": 0.875,
+        "revocacao": 0.875,
+        "f1": 0.875
+      },
+      {
+        "classe": "sad",
+        "amostras": 8,
+        "precisao": 1.0,
+        "revocacao": 1.0,
+        "f1": 1.0
+      },
+      {
+        "classe": "surprised",
+        "amostras": 8,
+        "precisao": 0.8571,
+        "revocacao": 0.75,
+        "f1": 0.8
+      }
+    ],
+    "ganho_pontos_percentuais": 26.78,
+    "limitacao": "Conjunto de UMA pessoa, com expressões encenadas. A acurácia vale para esse contexto e NÃO generaliza para público diverso.",
     "acuracia_do_modelo_original": {
       "valor": "88,27%",
       "conjunto": "RAF-DB",

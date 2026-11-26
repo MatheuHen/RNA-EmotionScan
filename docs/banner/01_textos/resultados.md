@@ -16,14 +16,14 @@ apresentação em tela cheia.
 ## Desempenho (CPU, sem GPU dedicada)
 
 Em AMD Ryzen 7 7435HS, com 150 amostras consecutivas sobre um rosto, o
-ciclo completo de detecção e classificação levou em média **26,2 ms**,
-equivalente a cerca de **38 inferências por segundo**. A detecção consome
+ciclo completo de detecção e classificação levou em média **17,35 ms**,
+equivalente a cerca de **58 inferências por segundo**. A detecção consome
 aproximadamente quatro quintos desse tempo: o gargalo é localizar o rosto, não
 reconhecer a expressão. Os modelos carregam em cerca de 120 ms.
 
 ## Verificação automatizada
 
-A suíte executa **119 testes, todos aprovados**, utilizando os modelos ONNX
+A suíte executa **142 testes, todos aprovados**, utilizando os modelos ONNX
 reais — mocks são empregados apenas no ciclo de vida da câmera. Em ensaio de
 **30 minutos contínuos**, o sistema completou **95.811 ciclos** com variação de
 apenas **+3,2%** entre a primeira e a segunda metade e memória estável em
@@ -42,6 +42,7 @@ de confiança, em vez de apresentar um rótulo único como verdade.
 ## Limitações
 
 O sistema classifica **padrões visuais** de expressão facial; não mede emoção
-nem constitui instrumento de diagnóstico. **A acurácia própria não foi avaliada**,
-por ausência de conjunto rotulado — o valor de 88,27% em RAF-DB pertence ao
+nem constitui instrumento de diagnóstico. A acurácia própria de **94,6%** vale
+para **56 amostras de teste de uma única pessoa**, com expressões encenadas, e
+**não generaliza** para público diverso. O valor de 88,27% em RAF-DB pertence ao
 modelo pré-treinado, não a este sistema. Confiança alta não é garantia de acerto.

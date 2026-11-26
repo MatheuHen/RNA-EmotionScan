@@ -16,7 +16,6 @@ def test_sete_categorias_consistentes() -> None:
     assert len(config.CLASSES_MODELO) == 7
     assert len(config.CLASSES_PT) == 7
     assert len(config.CORES_CLASSES) == 7
-    assert len(config.EMOJI_CLASSES) == 7
 
 
 def test_ordem_das_classes_bate_com_o_modelo_oficial() -> None:

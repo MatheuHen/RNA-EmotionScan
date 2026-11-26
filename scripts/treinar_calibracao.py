@@ -23,6 +23,9 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(RAIZ / "src"))
 
+if hasattr(sys.stdout, "reconfigure"):   # console cp1252 nao suporta °, ×, ≤
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 import cv2 as cv  # noqa: E402
 import numpy as np  # noqa: E402
 
@@ -106,7 +109,7 @@ def dividir(X: np.ndarray, y: np.ndarray, fracao_teste: float, semente: int):
 def grafico_matriz(mc: list[list[int]], titulo: str, destino: Path) -> None:
     """Matriz de confusao em PNG, fundo branco, para o banner."""
     sys.path.insert(0, str(RAIZ / "scripts"))
-    from banner_diagramas import AZUL, BRANCO, CINZA, CINZA_CLARO, PRETO, Lona
+    from banner_diagramas import AZUL, CINZA, CINZA_CLARO, PRETO, Lona
 
     n = mod_cal.N_CLASSES
     cel, m_esq, m_topo = 62, 150, 112

@@ -36,8 +36,8 @@ Amostras: **150** execuções consecutivas, 1 rosto, após aquecimento.
 
 ## Testes automatizados
 
-- Total executado: **119**
-- Aprovados: **119**
+- Total executado: **142**
+- Aprovados: **142**
 - Reprovados: **0**
 - Ignorados: 0
 - Duração: 19.0 s

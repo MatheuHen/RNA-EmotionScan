@@ -41,8 +41,11 @@ mantém a aplicação responsiva e impede o acúmulo de quadros em memória.
 ## Declaração obrigatória
 
 Os dois modelos são **pré-treinados por terceiros** (OpenCV Zoo, licença Apache
-2.0). **Não houve treinamento, ajuste fino ou alteração de pesos neste
-trabalho.** A contribuição do acadêmico é a engenharia completa da aplicação:
+2.0) e permanecem **congelados**: nenhum peso foi alterado e **não houve
+ajuste fino (*fine-tuning*)**. Houve treinamento próprio de uma **camada de
+calibração supervisionada de 56 parâmetros** sobre as saídas do classificador,
+com 210 amostras rotuladas coletadas pelo autor (154 treino / 56 teste, 400
+épocas), elevando a acurácia no conjunto de teste de 67,9% para 94,6%. A contribuição do acadêmico é a engenharia completa da aplicação:
 arquitetura, pipeline de visão computacional, implementação fiel do
 pré-processamento, interpretação das saídas, estabilidade temporal, interface,
 tratamento de falhas, verificação de integridade dos modelos, suíte de testes

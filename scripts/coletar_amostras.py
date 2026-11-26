@@ -30,7 +30,6 @@ import cv2 as cv  # noqa: E402
 import numpy as np  # noqa: E402
 from PIL import Image, ImageTk  # noqa: E402
 
-from expressao_neural import config  # noqa: E402
 from expressao_neural.core.alinhamento import ErroAlinhamento, alinhar_rosto  # noqa: E402
 from expressao_neural.core.camera import ErroCamera, _abrir  # noqa: E402
 from expressao_neural.core.detector import DetectorFacial, ErroModelo  # noqa: E402
