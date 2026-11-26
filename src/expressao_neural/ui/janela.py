@@ -21,7 +21,7 @@ from ..core.camera import TrabalhadorCamera, listar_cameras
 from ..core.detector import ErroModelo
 from ..core.pipeline import PipelineExpressao, ResultadoQuadro
 from ..utils import ambiente
-from . import componentes, desenho, sobre, tema
+from . import componentes, desenho, icone, sobre, tema
 
 INTERVALO_TICK_MS = 25
 LARGURA_PAINEL = 352
@@ -38,6 +38,7 @@ class JanelaPrincipal(tk.Tk):
         self.protocol("WM_DELETE_WINDOW", self.encerrar)
 
         self.fontes = tema.aplicar(self)
+        icone.aplicar(self)
 
         self._pipeline: PipelineExpressao | None = None
         self._trabalhador: TrabalhadorCamera | None = None
@@ -1009,6 +1010,9 @@ class JanelaPrincipal(tk.Tk):
 def executar() -> int:
     """Ponto de entrada da interface. Devolve o codigo de saida do processo."""
     tema.ativar_consciencia_dpi()
+    # Precisa vir ANTES da janela: a barra de tarefas do Windows decide o
+    # ícone pela identidade do processo, não pela janela.
+    icone.preparar()
     janela = JanelaPrincipal()
     try:
         janela.mainloop()

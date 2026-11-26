@@ -33,7 +33,7 @@ from PIL import Image, ImageTk  # noqa: E402
 from expressao_neural.core.alinhamento import ErroAlinhamento, alinhar_rosto  # noqa: E402
 from expressao_neural.core.camera import ErroCamera, _abrir  # noqa: E402
 from expressao_neural.core.detector import DetectorFacial, ErroModelo  # noqa: E402
-from expressao_neural.ui import tema  # noqa: E402
+from expressao_neural.ui import icone, tema  # noqa: E402
 
 DESTINO = RAIZ / "dados" / "amostras"
 
@@ -292,6 +292,7 @@ def main() -> int:
     print("\n ESPAÇO inicia/pausa a coleta · ESC encerra\n")
 
     tema.ativar_consciencia_dpi()
+    icone.preparar()
     try:
         app = Coletor(args.por_classe, args.camera)
     except (ErroCamera, ErroModelo) as exc:

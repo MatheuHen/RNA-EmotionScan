@@ -32,7 +32,7 @@ os.environ["EXPRESSAO_NEURAL_SEM_PERSISTENCIA"] = "1"
 from PIL import ImageGrab  # noqa: E402
 
 from expressao_neural import config  # noqa: E402
-from expressao_neural.ui import sobre, tema  # noqa: E402
+from expressao_neural.ui import icone, sobre, tema  # noqa: E402
 from expressao_neural.ui.janela import JanelaPrincipal  # noqa: E402
 
 DESTINO = RAIZ / "docs" / "banner" / "02_capturas"
@@ -180,6 +180,7 @@ def main() -> int:  # noqa: C901
     print("Em cada figura, ajuste-se e pressione ENTER na janela 'Roteiro'.\n")
 
     tema.ativar_consciencia_dpi()
+    icone.preparar()
     janela = JanelaPrincipal()
     janela.geometry(f"{LARGURA}x{ALTURA}+0+0")
     janela.update()

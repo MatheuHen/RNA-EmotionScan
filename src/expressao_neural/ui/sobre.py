@@ -12,7 +12,7 @@ from tkinter import ttk
 
 from .. import config
 from ..core import modelos
-from . import tema
+from . import icone, tema
 
 
 def _objetivo() -> str:
@@ -293,6 +293,7 @@ def abrir(pai: tk.Misc, fontes) -> tk.Toplevel:
     janela.geometry("980x700")
     janela.minsize(640, 480)
     janela.transient(pai)
+    icone.aplicar(janela)
 
     # ---------------------------------------------------------------- cabecalho
     topo = tk.Frame(janela, bg=tema.SUPERFICIE)
