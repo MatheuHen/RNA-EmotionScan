@@ -61,3 +61,4 @@ desktop.ini
 
 # Material do banner empacotado (derivado; regenerar com Compress-Archive)
 docs/banner/*.zip
+docs/banner/02_capturas/_anteriores/

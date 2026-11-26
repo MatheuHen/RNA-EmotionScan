@@ -189,75 +189,65 @@ vem de CDN: fontes são do sistema, ícones e logotipo são desenhados em Canvas
 
 ## 2.1 Situação
 
-| Figura | Conteúdo | Situação |
-|---|---|---|
-| 01 | Tela principal completa | **pendente — depende de você** |
-| 02 | Reconhecendo ALEGRIA | **pendente — depende de você** |
-| 03 | Reconhecendo SURPRESA | **pendente — depende de você** |
-| 04 | Reconhecendo NEUTRA | **pendente — depende de você** |
-| 05 | Painel de classificação e pontuações | **pendente — depende de você** |
-| 06 | Janela "Sobre o Projeto" | **pendente — depende de você** |
-| 07 | Execução dos testes automatizados | **PRONTA** |
-| 08 | Evidências de desempenho | **PRONTA** |
+**Todas as 8 figuras estão PRONTAS.** Capturadas em 25/11/2026, em modo
+apresentação (1920×1080, sem barra de tarefas), com o rosto do próprio autor e
+**resultado produzido pela inferência da rede neural** — nenhuma montagem.
 
-## 2.2 Por que 01–06 dependem de você
+| Figura | Arquivo | Resolução | Resultado real registrado |
+|---|---|---|---|
+| 01 | `02_capturas/figura_01_tela_principal.png` | 1920×1080 | tela completa em operação |
+| 02 | `02_capturas/figura_02_alegria.png` | 1920×1080 | **Alegria 100,0%** · 30,2 FPS · inferência 3,5 ms |
+| 03 | `02_capturas/figura_03_surpresa.png` | 1920×1080 | **Surpresa 55,1%** (Neutra 33,3% · Alegria 9,3%) · 30,2 FPS · inferência 3,2 ms |
+| 04 | `02_capturas/figura_04_neutra.png` | 1920×1080 | **Neutra 89,9%** (Alegria 8,5%) · 30,1 FPS · inferência 3,2 ms |
+| 05 | `02_capturas/figura_05_painel_classificacao.png` | 400×924 | recorte do painel das 7 pontuações |
+| 06 | `02_capturas/figura_06_sobre_o_projeto.png` | 1100×760 | janela "Sobre o Projeto" |
+| 07 | `05_evidencias/figura_07b_resumo_testes.png` | 2280×690 | 119 aprovados · 0 reprovados |
+| 08 | `05_evidencias/figura_08_desempenho.png` | 3040×1680 | tempos medidos por etapa |
 
-Duas razões, ambas intransponíveis por automação:
+### Desempenho observado com webcam real
 
-1. **Elas precisam de um rosto humano real.** As figuras 02, 03 e 04 exigem
-   expressões reproduzidas diante da webcam.
-2. **Não posso usar rosto de terceiros.** A imagem usada internamente nos testes
-   (`lena.jpg`) é de terceiros e historicamente controversa quanto a
-   licenciamento — **não deve ser usada em banner acadêmico impresso**.
+As capturas registram o sistema **em operação com a webcam**, e não apenas sobre
+imagem estática: **30,1 a 30,2 FPS**, detecção entre **15,2 e 18,4 ms** e
+inferência entre **3,2 e 3,5 ms** por quadro. Os tempos com webcam ficaram
+**menores** que os medidos sobre a imagem de referência 512×512, porque o quadro
+da câmera (640×480) é menor — o custo da detecção acompanha a área da imagem.
 
-Além disso, acionar sua webcam exige sua autorização explícita.
+### Observação sobre a Figura 03 (Surpresa)
 
-## 2.3 Como obter as seis figuras — roteiro assistido
+A captura registra Surpresa com **55,1%**, tendo Neutra em 33,3%. Esse é um
+exemplo **didático e honesto** da incerteza do modelo: a classe vencedora está
+correta, mas a distribuição mostra que a decisão não foi trivial. É precisamente
+o comportamento que justifica exibir as sete pontuações em vez de um rótulo
+isolado — vale a pena usar essa figura no banner junto da Figura 02 (Alegria
+100%), para contrastar alta e baixa confiança.
 
-Foi criada uma ferramenta que abre a aplicação real em **1920×1080**, acompanha
-a classificação ao vivo e salva a tela quando você confirmar. **Nada é montado:
-o que é salvo é exatamente o que está na tela.**
+### Qualidade para impressão
+
+| Figura | Largura máxima recomendada no banner |
+|---|---|
+| 01, 02, 03, 04 | até **16 cm** (≈300 dpi) — são as figuras principais |
+| 06 | até **9 cm** |
+| 05 | até **6 cm** — tem apenas 400 px de largura; acima disso perde nitidez. Alternativa: recortar o painel direto da Figura 01 no Canva, que está em resolução maior |
+| 07, 08 | qualquer tamanho (geradas em alta resolução) |
+
+## 2.2 Como as figuras foram obtidas
+
+Pelo roteiro assistido `scripts/capturar_banner.py`, que abre a aplicação real
+em modo apresentação, acompanha a classificação ao vivo e salva a tela quando o
+autor confirma. **O que foi salvo é exatamente o que estava na tela.** Para
+repetir qualquer figura:
 
 ```bat
-cd C:\ProjetosIA\Projetos\ExpressaoNeural
 .venv\Scripts\python.exe scripts\capturar_banner.py
 ```
 
-O que acontece:
+As capturas anteriores são preservadas automaticamente em
+`02_capturas/_anteriores/`.
 
-1. A aplicação abre em 1920×1080 e uma janela **"Roteiro de captura"** aparece
-   no canto superior esquerdo.
-2. Clique em **"Iniciar câmera"** na aplicação.
-3. Para cada figura, o roteiro mostra a instrução e, em tempo real, **o que a
-   rede está classificando no momento**:
-   - `PRONTO  Alegria 87%` em verde → está no alvo, pode capturar;
-   - `ajuste  Neutra 61%` em âmbar → ainda não está no alvo.
-4. Pressione **ENTER** para capturar, **P** para pular, **ESC** para encerrar.
-5. A janela do roteiro se esconde automaticamente antes de cada captura.
-
-### Instruções por figura
-
-| Figura | O que fazer |
-|---|---|
-| **01 — Tela principal** | Posicione-se normalmente, rosto enquadrado e centralizado. Capture com a câmera ativa e um rosto detectado. |
-| **02 — ALEGRIA** | Sorria abertamente, **mostrando os dentes**, olhando para a câmera. Aguarde o indicador ficar verde. |
-| **03 — SURPRESA** | **Arregale os olhos**, abra a boca e levante bem as sobrancelhas. É a expressão que o modelo reconhece com mais facilidade depois de Alegria. |
-| **04 — NEUTRA** | Relaxe o rosto por completo: sem sorrir, sem franzir a testa, boca fechada e relaxada. |
-| **05 — Painel** | Mantenha o rosto enquadrado; será salvo um recorte do painel lateral com as 7 pontuações. |
-| **06 — Sobre** | A janela abre sozinha e é capturada automaticamente. |
-
-### Recomendações de qualidade para impressão
-
-- **Iluminação frontal**, evitando janela ou luz forte atrás de você.
-- Fundo limpo e sem pessoas ao fundo.
-- Rosto ocupando cerca de **um terço da altura** da área de vídeo.
-- Ligue o notebook **na tomada** (em bateria a CPU reduz a frequência e o FPS
-  exibido fica menor que o real).
-- Feche navegador e outros aplicativos pesados antes de capturar.
-- Se a primeira tentativa não ficar boa, basta rodar o script de novo.
-
-> **Importante:** capture apenas o **seu próprio rosto**. Não inclua terceiros
-> sem autorização por escrito.
+> **Nenhuma imagem de terceiros foi utilizada.** A imagem `lena.jpg`, usada
+> internamente nos testes automatizados, é de terceiros e historicamente
+> controversa quanto a licenciamento — por isso **não** aparece em nenhum
+> material do banner.
 
 ## 2.4 Figuras já prontas
 
@@ -574,7 +564,6 @@ Todo o material é regenerável:
 
 | # | Item | Depende de |
 |---|---|---|
-| 1 | **Figuras 01 a 06** | você, diante da webcam — `scripts\capturar_banner.py` |
 | 2 | **Teste offline** com a rede desligada | você — `docs/checklist_validacao.md` seção B |
 | 3 | Acurácia, precisão, recall, F1, matriz de confusão | voluntários com consentimento — opcional |
 | 4 | Remedição de desempenho com a máquina ociosa | você — recomendado antes de fechar o banner |
