@@ -19,6 +19,7 @@ import numpy as np
 from .. import config
 from . import modelos
 from .alinhamento import ErroAlinhamento, alinhar_rosto
+from .calibracao import Calibracao
 from .detector import ErroModelo
 
 
@@ -60,7 +61,10 @@ class Predicao:
 class ClassificadorExpressao:
     """Encapsula a rede MobileFaceNet/Progressive Teacher via `cv2.dnn`."""
 
-    def __init__(self) -> None:
+    def __init__(self, calibracao: Calibracao | None = None) -> None:
+        # Camada de calibracao propria, treinada sobre os logits deste modelo.
+        # None -> nenhuma calibracao: a saida e exatamente a do modelo base.
+        self.calibracao = calibracao
         info = modelos.CLASSIFICADOR
         if not info.caminho.is_file():
             raise ErroModelo(modelos.verificar(info, conferir_hash=False).mensagem)
@@ -120,6 +124,8 @@ class ClassificadorExpressao:
                 f"Saida inesperada do modelo: {logits.size} valores, "
                 f"esperado {len(config.CLASSES_MODELO)}."
             )
+        if self.calibracao is not None:
+            logits = self.calibracao.aplicar(logits)
         probs = softmax(logits) if config.FER_SAIDA_E_LOGIT else logits
         return Predicao(int(np.argmax(probs)), probs, tempo_ms)
 

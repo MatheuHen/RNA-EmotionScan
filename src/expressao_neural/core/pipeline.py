@@ -79,7 +79,12 @@ class PipelineExpressao:
             limiar_nms=self.ajustes.limiar_nms,
             max_rostos=self.ajustes.max_rostos if self.ajustes.multiplos_rostos else 1,
         )
-        self.classificador = ClassificadorExpressao()
+        cal = None
+        if self.ajustes.usar_calibracao:
+            from .calibracao import Calibracao
+
+            cal = Calibracao.carregar()
+        self.classificador = ClassificadorExpressao(calibracao=cal)
         self.suavizador = SuavizadorTemporal(alfa=self.ajustes.suavizacao_alfa)
         self._ms_aquecimento = self.classificador.aquecer()
 

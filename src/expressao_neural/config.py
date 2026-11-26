@@ -116,6 +116,10 @@ class Ajustes:
     # com 0,40 uma expressao sutil levava varios quadros para aparecer.
     suavizacao_alfa: float = 0.55
     espelhar_imagem: bool = True
+    # Aplica a camada de calibracao treinada (models/calibracao_pessoal.npz),
+    # quando existir. Desligado por padrao: o sistema entrega a saida do modelo
+    # pre-treinado a menos que voce opte conscientemente pela calibracao.
+    usar_calibracao: bool = False
 
     def salvar(self, caminho: Path = ARQ_CONFIG_USUARIO) -> None:
         # Testes e geracao de evidencias nao devem alterar as preferencias reais.

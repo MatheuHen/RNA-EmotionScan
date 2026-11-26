@@ -62,3 +62,8 @@ desktop.ini
 # Material do banner empacotado (derivado; regenerar com Compress-Archive)
 docs/banner/*.zip
 docs/banner/02_capturas/_anteriores/
+
+# Amostras faciais coletadas para o treinamento da calibracao.
+# Contem rosto humano: NUNCA versionar.
+dados/
+models/calibracao_pessoal.npz
