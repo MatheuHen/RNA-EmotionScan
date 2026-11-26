@@ -90,8 +90,11 @@ class Ajustes:
     largura_captura: int = 640
     altura_captura: int = 480
     fps_alvo: int = 30
-    # Executa a inferencia a cada N quadros capturados (1 = todos os quadros)
-    inferir_a_cada: int = 2
+    # Executa a inferencia a cada N quadros capturados (1 = todos os quadros).
+    # 1 por padrao: o ciclo completo medido (~26 ms) cabe no intervalo de 33 ms
+    # de uma camera a 30 FPS, entao nao ha motivo para pular quadros. Pular
+    # introduzia atraso perceptivel em expressoes rapidas.
+    inferir_a_cada: int = 1
     # 0,35 em vez de 0,50: expressoes NATURAIS (sorriso leve, surpresa discreta)
     # costumam vencer com 35-55% de confianca. Com o limiar em 0,50 a previsao
     # correta do modelo era rotulada "Indefinida", obrigando o usuario a exagerar
@@ -102,6 +105,11 @@ class Ajustes:
     limiar_nms: float = 0.30
     max_rostos: int = 5
     multiplos_rostos: bool = True
+    # Sempre exibir a classe prevista, mesmo abaixo do limiar, sinalizando a
+    # baixa confianca em vez de esconder o resultado atras de "Indefinida".
+    # Expressoes sutis sao previsoes legitimas do modelo; oculta-las dava a
+    # impressao de que o sistema nao estava funcionando.
+    sempre_exibir_previsao: bool = True
     suavizacao_ativa: bool = True
     # Peso do quadro novo na media exponencial (1.0 = sem suavizacao).
     # 0,55 responde mais rapido a mudanca de expressao sem voltar a oscilar:

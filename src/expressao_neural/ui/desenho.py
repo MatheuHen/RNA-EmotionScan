@@ -49,6 +49,7 @@ def anotar(
     resultado: ResultadoQuadro,
     limiar: float,
     mostrar_pontos: bool = True,
+    sempre_exibir: bool = True,
 ) -> np.ndarray:
     """Devolve uma COPIA do quadro com as marcacoes dos rostos detectados."""
     if quadro is None or quadro.size == 0:
@@ -67,9 +68,14 @@ def anotar(
             continue
 
         confiavel = item.confiavel(limiar)
-        cor = (
-            tema.hex_para_bgr(config.CORES_CLASSES[item.indice]) if confiavel else _CINZA
-        )
+        # Previsao sutil continua visivel sobre o video, em ambar, em vez de
+        # virar uma caixa cinza sem rotulo.
+        if confiavel:
+            cor = tema.hex_para_bgr(config.CORES_CLASSES[item.indice])
+        elif sempre_exibir:
+            cor = tema.hex_para_bgr(tema.ALERTA)
+        else:
+            cor = _CINZA
 
         _cantos(img, x1, y1, x2, y2, cor, 2, max(14, (x2 - x1) // 6))
         cv.rectangle(img, (x1, y1), (x2, y2), cor, 1, cv.LINE_AA)
@@ -79,9 +85,12 @@ def anotar(
                 if 0 <= px < largura and 0 <= py < altura:
                     cv.circle(img, (int(px), int(py)), 2, cor, -1, cv.LINE_AA)
 
-        rotulo = _texto_seguro(item.rotulo_exibicao(limiar))
-        if confiavel:
-            rotulo = f"{rotulo} {item.confianca * 100:.0f}%"
+        if confiavel or sempre_exibir:
+            rotulo = f"{_texto_seguro(item.rotulo)} {item.confianca * 100:.0f}%"
+            if not confiavel:
+                rotulo += "?"
+        else:
+            rotulo = _texto_seguro(item.rotulo_exibicao(limiar))
         (tw, th), base = cv.getTextSize(rotulo, _FONTE, escala_texto, 1)
 
         # Faixa do rotulo acima da caixa; abaixo quando nao houver espaco.

@@ -56,6 +56,9 @@ class JanelaPrincipal(tk.Tk):
         self._cor_status = tema.TEXTO_SECUNDARIO
 
         self._var_limiar = tk.DoubleVar(value=self.ajustes.limiar_confianca)
+        self._var_sempre_exibir = tk.BooleanVar(
+            value=self.ajustes.sempre_exibir_previsao
+        )
         self._var_suavizar = tk.BooleanVar(value=self.ajustes.suavizacao_ativa)
         self._var_espelhar = tk.BooleanVar(value=self.ajustes.espelhar_imagem)
         self._var_multiplos = tk.BooleanVar(value=self.ajustes.multiplos_rostos)
@@ -304,6 +307,10 @@ class JanelaPrincipal(tk.Tk):
             ca, from_=0.10, to=0.95, variable=self._var_limiar, command=self._ao_mudar_limiar
         ).pack(fill="x", pady=(2, 8))
 
+        ttk.Checkbutton(
+            ca, text="Exibir previsão mesmo com confiança baixa",
+            variable=self._var_sempre_exibir, command=self._ao_mudar_ajuste,
+        ).pack(fill="x")
         ttk.Checkbutton(
             ca, text="Estabilidade temporal (suavização)", variable=self._var_suavizar,
             command=self._ao_mudar_ajuste,
@@ -699,6 +706,7 @@ class JanelaPrincipal(tk.Tk):
             self._atualizar_paineis(self._ultimo_resultado)
 
     def _ao_mudar_ajuste(self) -> None:
+        self.ajustes.sempre_exibir_previsao = bool(self._var_sempre_exibir.get())
         self.ajustes.suavizacao_ativa = bool(self._var_suavizar.get())
         self.ajustes.espelhar_imagem = bool(self._var_espelhar.get())
         self.ajustes.multiplos_rostos = bool(self._var_multiplos.get())
@@ -769,7 +777,10 @@ class JanelaPrincipal(tk.Tk):
             return
         largura = max(self._canvas.winfo_width(), 160)
         altura = max(self._canvas.winfo_height(), 120)
-        anotado = desenho.anotar(quadro, resultado, self.ajustes.limiar_confianca)
+        anotado = desenho.anotar(
+            quadro, resultado, self.ajustes.limiar_confianca,
+            sempre_exibir=self.ajustes.sempre_exibir_previsao,
+        )
         ajustado = desenho.ajustar_para_area(anotado, largura, altura)
         rgb = cv.cvtColor(ajustado, cv.COLOR_BGR2RGB)
         self._foto = ImageTk.PhotoImage(Image.fromarray(rgb))
@@ -812,20 +823,26 @@ class JanelaPrincipal(tk.Tk):
 
         indice = alvo.indice
         confiavel = alvo.confiavel(limiar)
-        cor = config.CORES_CLASSES[indice] if confiavel else tema.NEUTRO
+        # Expressões sutis vencem com confiança modesta. Escondê-las atrás de
+        # "Indefinida" dava a impressão de sistema parado; agora a previsão é
+        # sempre exibida e a baixa confiança é SINALIZADA, não ocultada.
+        exibir = confiavel or self.ajustes.sempre_exibir_previsao
+        cor = config.CORES_CLASSES[indice] if confiavel else tema.ALERTA
 
-        self._icone.definir(indice if confiavel else None)
+        self._icone.definir(indice if exibir else None)
         self._lbl_expressao.configure(
-            text=alvo.rotulo if confiavel else "Indefinida", fg=cor
+            text=alvo.rotulo if exibir else "Indefinida", fg=cor if exibir else tema.NEUTRO
         )
+        sufixo = "" if confiavel else "  · confiança baixa"
         self._lbl_confianca.configure(
-            text=f"confiança {alvo.confianca * 100:.1f}%".replace(".", ",")
+            text=f"confiança {alvo.confianca * 100:.1f}%".replace(".", ",") + sufixo,
+            fg=tema.TEXTO_FRACO if confiavel else tema.ALERTA,
         )
         self._medidor.atualizar(alvo.confianca, limiar)
         self._lbl_aviso_conf.configure(
             text="" if confiavel else config.MSG_BAIXA_CONFIANCA
         )
-        self._grafico.atualizar(alvo.probabilidades, indice if confiavel else -1)
+        self._grafico.atualizar(alvo.probabilidades, indice if exibir else -1)
         self._ind["estabilidade"].definir(
             f"{alvo.estabilidade * 100:.0f}%" if self.ajustes.suavizacao_ativa else "desligada",
             tema.SUCESSO if alvo.estabilidade > 0.7 else tema.ALERTA,
