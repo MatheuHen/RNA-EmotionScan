@@ -12,7 +12,7 @@ validação presencial foram executadas, inclusive o teste offline.
 | Item | Valor | Fonte |
 |---|---|---|
 | Testes automatizados | **154 aprovados** | `testar.bat` |
-| Ciclo completo | **19,77 ms** | `06_metricas/metricas.json` |
+| Ciclo completo | **21,86 ms** | `06_metricas/metricas.json` |
 | Detecção / classificação | 15,44 ms / 3,39 ms | idem |
 | Inferências por segundo | 51 | benchmark |
 | FPS da webcam | **30,2** | medido com câmera real |

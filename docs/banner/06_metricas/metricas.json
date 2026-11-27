@@ -1,10 +1,10 @@
 {
-  "gerado_em": "2026-11-26T14:43:01",
+  "gerado_em": "2026-11-26T21:24:10",
   "hardware_de_teste": {
     "processador": "AMD Ryzen 7 7435HS",
     "clock_atual_mhz": 3100,
     "clock_maximo_mhz": 3100,
-    "carga_percent": 6,
+    "carga_percent": 12,
     "nucleos_logicos": 16,
     "memoria_total_gb": 7.8,
     "gpu_utilizada": "nenhuma — inferência somente em CPU (DNN_TARGET_CPU)",
@@ -60,15 +60,15 @@
     ]
   },
   "inicializacao": {
-    "carregamento_dos_modelos_ms": 65.2,
-    "aquecimento_da_rede_ms": 48.42
+    "carregamento_dos_modelos_ms": 71.3,
+    "aquecimento_da_rede_ms": 53.93
   },
   "testes_automatizados": {
-    "total": 154,
-    "aprovados": 154,
+    "total": 159,
+    "aprovados": 159,
     "reprovados": 0,
     "ignorados": 0,
-    "duracao_s": 21.1,
+    "duracao_s": 36.62,
     "codigo_saida": 0,
     "por_arquivo": [
       {
@@ -117,6 +117,11 @@
         "cobre": "dependências, integridade SHA-256, carregamento"
       },
       {
+        "arquivo": "test_captura_desacoplada.py",
+        "quantidade": 5,
+        "cobre": ""
+      },
+      {
         "arquivo": "test_reiniciar_camera.py",
         "quantidade": 5,
         "cobre": ""
@@ -127,32 +132,32 @@
   },
   "desempenho": {
     "ciclo_completo": {
-      "media_ms": 19.77,
-      "mediana_ms": 19.79,
-      "minimo_ms": 16.57,
-      "maximo_ms": 25.66,
-      "desvio_padrao_ms": 1.5,
+      "media_ms": 21.86,
+      "mediana_ms": 21.31,
+      "minimo_ms": 16.15,
+      "maximo_ms": 39.25,
+      "desvio_padrao_ms": 3.88,
       "amostras": 150
     },
     "deteccao": {
-      "media_ms": 15.44,
-      "mediana_ms": 15.41,
-      "minimo_ms": 13.0,
-      "maximo_ms": 19.68,
-      "desvio_padrao_ms": 1.21,
+      "media_ms": 16.97,
+      "mediana_ms": 16.33,
+      "minimo_ms": 12.58,
+      "maximo_ms": 32.93,
+      "desvio_padrao_ms": 2.93,
       "amostras": 150
     },
     "classificacao": {
-      "media_ms": 3.39,
-      "mediana_ms": 3.4,
-      "minimo_ms": 2.48,
-      "maximo_ms": 4.46,
-      "desvio_padrao_ms": 0.33,
+      "media_ms": 3.81,
+      "mediana_ms": 3.65,
+      "minimo_ms": 2.53,
+      "maximo_ms": 9.09,
+      "desvio_padrao_ms": 1.01,
       "amostras": 150
     },
-    "fps_equivalente_1_rosto": 50.6
+    "fps_equivalente_1_rosto": 45.8
   },
-  "memoria_processo_mb": 78.3,
+  "memoria_processo_mb": 80.1,
   "condicoes": [
     {
       "condicao": "Iluminação muito reduzida",
@@ -290,7 +295,12 @@
     "chamadas_de_rede_em_src": 0,
     "verificado_por": "auditoria de código (grep por urllib/requests/socket/http)",
     "modelos_locais": true,
-    "teste_com_rede_desligada": "NÃO EXECUTADO — depende de validação manual"
+    "teste_com_rede_desligada": {
+      "executado": true,
+      "resultado": "APROVADO",
+      "executado_em": "26/11/2026 às 16:17:51",
+      "evidencia": "evidencias/teste_offline.md"
+    }
   },
   "metricas_de_classificacao": {
     "avaliada": true,

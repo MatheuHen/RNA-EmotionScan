@@ -112,11 +112,11 @@ pleno), carga de 5%, sem GPU.
 
 | Etapa | Média | Mediana | Mínimo | Máximo | Desvio padrão |
 |---|---|---|---|---|---|
-| Detecção (YuNet) | **15,44 ms** | 15,85 ms | 14,07 ms | 19,73 ms | 0,97 ms |
-| Classificação (MobileFaceNet) | **3,39 ms** | 3,40 ms | 2,81 ms | 6,04 ms | 0,37 ms |
-| **Ciclo completo** | **19,77 ms** | 20,20 ms | 17,73 ms | 26,72 ms | 1,25 ms |
+| Detecção (YuNet) | **16,97 ms** | 15,85 ms | 14,07 ms | 19,73 ms | 0,97 ms |
+| Classificação (MobileFaceNet) | **3,81 ms** | 3,40 ms | 2,81 ms | 6,04 ms | 0,37 ms |
+| **Ciclo completo** | **21,86 ms** | 20,20 ms | 17,73 ms | 26,72 ms | 1,25 ms |
 
-Equivalente a **51 inferências por segundo** em
+Equivalente a **46 inferências por segundo** em
 benchmark. Carregamento dos dois modelos: 82.0 ms.
 Aquecimento: 58.56 ms.
 Memória do processo: 78.2 MB.
@@ -128,7 +128,7 @@ frequência do processador e a carga de outros programas:
 
 | Condição da máquina | Ciclo completo |
 |---|---|
-| Turbo pleno (3100 MHz), carga baixa | **19,77 ms** |
+| Turbo pleno (3100 MHz), carga baixa | **21,86 ms** |
 | 2496 MHz (80% do máximo), navegador e jogo abertos | ~31 ms |
 
 A diferença **não é do software**. Por isso `scripts/banner_metricas.py` e
@@ -282,7 +282,7 @@ autoria exigida pelo trabalho, não um vazamento.
 |---|---|---|
 | **Acurácia de classificação** | fração de previsões corretas sobre dados rotulados | **Não medida neste trabalho.** O modelo original reporta 88,27% em RAF-DB (OpenCV Zoo) — número do modelo, não deste sistema. |
 | **Confiança da previsão** | probabilidade atribuída pelo modelo à classe vencedora | Medida e exibida em tempo real. **Não é garantia de acerto** (ver seção 6, achado 4). |
-| **Desempenho computacional** | tempo de processamento por quadro | 19,77 ms de média, medido nesta máquina (seção 5). |
+| **Desempenho computacional** | tempo de processamento por quadro | 21,86 ms de média, medido nesta máquina (seção 5). |
 
 Para obter acurácia própria, o protocolo de avaliação com voluntários está
 descrito em `docs/testes.md`, seção 6. **Enquanto não for executado, nenhuma

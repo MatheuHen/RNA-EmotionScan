@@ -323,6 +323,27 @@ def _memoria_total_gb() -> float | None:
 
 
 # ------------------------------------------------- 4. execucao prolongada
+def ler_teste_offline() -> dict:
+    log = RAIZ / "evidencias" / "teste_offline.md"
+    base = {
+        "executado": False,
+        "resultado": "NÃO EXECUTADO — depende de validação manual com a rede desligada",
+    }
+    if not log.is_file():
+        return base
+    txt = log.read_text(encoding="utf-8", errors="ignore")
+    m_resultado = re.search(r"\*\*Resultado:\s*(\w+)\*\*", txt)
+    m_data = re.search(r"Executado em:\s*([\d/]+\s*às\s*[\d:]+)", txt)
+    if not m_resultado:
+        return base
+    return {
+        "executado": True,
+        "resultado": m_resultado.group(1),
+        "executado_em": m_data.group(1) if m_data else None,
+        "evidencia": "evidencias/teste_offline.md",
+    }
+
+
 def ler_execucao_prolongada() -> dict:
     log = RAIZ / "evidencias" / "execucao_prolongada.log"
     base = {
@@ -418,7 +439,7 @@ def main() -> int:
             "chamadas_de_rede_em_src": 0,
             "verificado_por": "auditoria de código (grep por urllib/requests/socket/http)",
             "modelos_locais": True,
-            "teste_com_rede_desligada": "NÃO EXECUTADO — depende de validação manual",
+            "teste_com_rede_desligada": ler_teste_offline(),
         },
         "metricas_de_classificacao": {
             **_metricas_de_classificacao(),
@@ -443,6 +464,14 @@ def main() -> int:
     print(" Coleta de métricas concluída.")
     print("=" * 72)
     return 0
+
+
+def _offline_resumo(d: dict) -> str:
+    teste = d["funcionamento_offline"]["teste_com_rede_desligada"]
+    if not teste.get("executado"):
+        return teste["resultado"]
+    quando = f" em {teste['executado_em']}" if teste.get("executado_em") else ""
+    return f"{teste['resultado']}{quando}"
 
 
 def _escrever_markdown(d: dict) -> None:
@@ -607,7 +636,7 @@ def _escrever_markdown(d: dict) -> None:
         "|---|---|",
         "| Chamadas de rede em `src/` | **0** (auditoria de código) |",
         "| Modelos disponíveis localmente | sim |",
-        "| Teste com a rede desligada | **NÃO EXECUTADO** — depende de validação manual |",
+        f"| Teste com a rede desligada | **{_offline_resumo(d)}** |",
         "",
     ]
     (DESTINO / "metricas.md").write_text("\n".join(L), encoding="utf-8")

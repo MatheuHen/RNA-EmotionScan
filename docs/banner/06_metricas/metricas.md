@@ -1,6 +1,6 @@
 # Métricas reais — EmotionScan
 
-Coletadas em 2026-11-26T14:43:01 por `scripts/banner_metricas.py`.
+Coletadas em 2026-11-26T21:24:10 por `scripts/banner_metricas.py`.
 **Todos os números vêm de execução real. Nada é estimado ou simulado.**
 
 ## Hardware e condições do teste
@@ -10,7 +10,7 @@ Coletadas em 2026-11-26T14:43:01 por `scripts/banner_metricas.py`.
 | Processador | AMD Ryzen 7 7435HS |
 | Núcleos lógicos | 16 |
 | Frequência na medição | 3100 MHz de 3100 MHz máximos |
-| Carga da CPU | 6% |
+| Carga da CPU | 12% |
 | Memória RAM total | 7.8 GB |
 | GPU | nenhuma — inferência somente em CPU (DNN_TARGET_CPU) |
 | Sistema | Windows 10 |
@@ -25,22 +25,22 @@ Amostras: **150** execuções consecutivas, 1 rosto, após aquecimento.
 
 | Etapa | Média | Mediana | Mínimo | Máximo | Desvio padrão |
 |---|---|---|---|---|---|
-| Detecção (YuNet) | 15.44 ms | 15.41 ms | 13.0 ms | 19.68 ms | 1.21 ms |
-| Classificação (MobileFaceNet) | 3.39 ms | 3.4 ms | 2.48 ms | 4.46 ms | 0.33 ms |
-| Ciclo completo | 19.77 ms | 19.79 ms | 16.57 ms | 25.66 ms | 1.5 ms |
+| Detecção (YuNet) | 16.97 ms | 16.33 ms | 12.58 ms | 32.93 ms | 2.93 ms |
+| Classificação (MobileFaceNet) | 3.81 ms | 3.65 ms | 2.53 ms | 9.09 ms | 1.01 ms |
+| Ciclo completo | 21.86 ms | 21.31 ms | 16.15 ms | 39.25 ms | 3.88 ms |
 
-- **FPS equivalente de inferência:** 50.6 por segundo (1 rosto).
-- **Tempo de inicialização:** 65.2 ms para carregar os dois modelos + 48.42 ms de aquecimento.
-- **Memória do processo:** 78.3 MB.
+- **FPS equivalente de inferência:** 45.8 por segundo (1 rosto).
+- **Tempo de inicialização:** 71.3 ms para carregar os dois modelos + 53.93 ms de aquecimento.
+- **Memória do processo:** 80.1 MB.
 - **Classes reconhecidas:** 7.
 
 ## Testes automatizados
 
-- Total executado: **154**
-- Aprovados: **154**
+- Total executado: **159**
+- Aprovados: **159**
 - Reprovados: **0**
 - Ignorados: 0
-- Duração: 21.1 s
+- Duração: 36.6 s
 
 | Arquivo | Testes | Cobre |
 |---|---|---|
@@ -53,6 +53,7 @@ Amostras: **150** execuções consecutivas, 1 rosto, após aquecimento.
 | `test_camera.py` | 11 | ciclo de vida da captura e liberação de recursos |
 | `test_interface.py` | 11 | tema, componentes, janela e encerramento |
 | `test_modelos.py` | 11 | dependências, integridade SHA-256, carregamento |
+| `test_captura_desacoplada.py` | 5 |  |
 | `test_reiniciar_camera.py` | 5 |  |
 
 > Mocks são usados apenas no ciclo de vida da câmera; toda inferência nos testes usa os modelos ONNX reais.
@@ -118,4 +119,4 @@ Matriz de confusão em `docs/banner/04_graficos/matriz_confusao.png`.
 |---|---|
 | Chamadas de rede em `src/` | **0** (auditoria de código) |
 | Modelos disponíveis localmente | sim |
-| Teste com a rede desligada | **NÃO EXECUTADO** — depende de validação manual |
+| Teste com a rede desligada | **APROVADO em 26/11/2026 às 16:17:51** |
